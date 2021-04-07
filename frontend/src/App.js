@@ -4,7 +4,7 @@ import StoreHistory from './Page/Store/StoreHistory';
 import StoreSetting from './Page/Store/StoreSetting';
 import StoreAddCase from './Page/Store/StoreAddCase';
 import StoreBrowseCase from './Page/Store/StoreBrowseCase';
-import Nav from './Component/Nav';
+import Nav from './Container/Nav';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
