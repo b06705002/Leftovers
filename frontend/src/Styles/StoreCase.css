@@ -1,0 +1,63 @@
+.Container {
+    display: flex;
+    height: 100%;
+}
+
+.View {
+
+}
+
+.cases-View {
+    border-style:solid;
+    border-width: 0px 1px 0px 0px;
+    border-color: black;
+    flex: 1;
+    /* background-color: red; */
+}
+
+.cases-View div {
+    background-color: skyblue;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cases-View h2 {
+    margin: 0;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+    height: 95%;
+    overflow: scroll;
+}
+
+li {
+    list-style: none;
+    height: 150px;
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    border-color: black;
+    /* position:relative; */
+}
+
+li h3 {
+    margin: 0px;
+}
+
+li:first-child {
+    border-width: 1px 0px;
+}
+
+li:hover {
+    background-color: rgb(245, 245, 245);
+    /* border-width: 1px 0px; */
+    /* top: -5px; */
+}
+
+
+.detail-View {
+    flex: 1.5;
+}
