@@ -16,7 +16,7 @@
 }
 
 .cases-View div {
-    background-color: skyblue;
+    background-color: rgb(235, 235, 235);
     height: 5%;
     display: flex;
     justify-content: center;
@@ -32,6 +32,10 @@ ul {
     padding: 0px;
     height: 95%;
     overflow: scroll;
+}
+
+ul .clicked {
+    background-color: rgb(194, 248, 255);
 }
 
 li {
@@ -51,12 +55,11 @@ li:first-child {
     border-width: 1px 0px;
 }
 
-li:hover {
+li:not(.clicked):hover {
     background-color: rgb(245, 245, 245);
     /* border-width: 1px 0px; */
     /* top: -5px; */
 }
-
 
 .detail-View {
     flex: 1.5;

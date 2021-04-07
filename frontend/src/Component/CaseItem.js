@@ -6,7 +6,7 @@ class CaseItem extends Component {
     }
     render() {
         return (
-            <li onClick={this.props.onClick}>
+            <li className={this.props.class} onClick={() => this.props.onClick(this.props.index)}>
                 <h3>{this.props.store}</h3>
                 <p>{this.props.item}</p>
                 <p>{this.props.time}</p>
