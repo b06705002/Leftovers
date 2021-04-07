@@ -1,0 +1,36 @@
+.pageLink {
+    text-decoration: none;
+}
+
+.pageLink:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+.pageLink:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.pageLink:focus {
+    text-decoration: none;
+    color: inherit;
+}
+
+.pageLink:link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.pageLink:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navContainer {
+    width: 10%;
+    height: 100%;
+    border-style: solid;
+    border-width: 0px 1px 0px 0px;
+    border-color: black;
+}

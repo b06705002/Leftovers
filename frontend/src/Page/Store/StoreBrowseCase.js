@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import "../Styles/StoreCase.css";
-import CaseItem from "../Component/CaseItem";
+import "../../Styles/StoreCase.css";
+import CaseItem from "../../Component/CaseItem";
 
-class StoreCase extends Component {
+class StoreCaseBrowse extends Component {
     f
     /*
     This is Store Case Page, should implement:
@@ -64,4 +64,4 @@ class StoreCase extends Component {
 }
 
 
-export default StoreCase;
+export default StoreCaseBrowse;
