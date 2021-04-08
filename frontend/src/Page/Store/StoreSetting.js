@@ -3,7 +3,9 @@ import "../../Styles/StoreSetting.css";
 
 class StoreSetting extends Component {
     /*
-    This is StoreSetting Page, should implement:
+    This is StoreSetting Page, user should be able to:
+        1. change account information
+        2. change store information
     */
     render() {
         return (

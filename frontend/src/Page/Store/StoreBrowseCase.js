@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import "../../Styles/StoreBrowseCase.css";
 import CaseItem from "../../Component/CaseItem";
 
-class StoreCaseBrowse extends Component {
-    f
+class StoreBrowseCase extends Component {
     /*
-    This is Store Case Page, should implement:
-        1. Store Add Case Page
-            itme, amount
-        2. Store Browser Case Page
-            2.1 Store Case Details Page
+    This is Store Browse Case Page, user should be able to:
+        1. browse a list of issued, on going cases
+        2. view detail of a case when click on the case
     */
     constructor(props) {
         super(props);
@@ -65,4 +62,4 @@ class StoreCaseBrowse extends Component {
 }
 
 
-export default StoreCaseBrowse;
+export default StoreBrowseCase;

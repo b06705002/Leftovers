@@ -1,13 +1,15 @@
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+
+/*
+Simple component in navigation bar using NavLink from react-router-dom
+*/
 
 export default (props) => {
     return (
-        <Link to={props.path} class="navItem">
-            <div onClick={props.onClick}>
-                <div>
-                    {props.text}
-                </div>
+        <NavLink to={props.path} className="navItem" activeClassName="clicked" exact>
+            <div>
+                <div>{props.text}</div>
             </div>
-        </Link>
+        </NavLink>
     );
 }
