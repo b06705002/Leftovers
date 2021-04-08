@@ -1,7 +1,8 @@
-.Container {
+.Container.browseCase {
     display: flex;
     height: 100%;
     width: 90%;
+    flex-direction: row;
 }
 
 .View {

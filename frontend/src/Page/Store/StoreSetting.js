@@ -7,7 +7,7 @@ class StoreSetting extends Component {
     */
     render() {
         return (
-            <div className="Container">
+            <div className="Container setting">
                 <h1>StoreSetting Page</h1>
                 <div className="formContainer">
                     <form className="formBlock">

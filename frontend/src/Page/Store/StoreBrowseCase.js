@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "../../Styles/StoreCase.css";
+import "../../Styles/StoreBrowseCase.css";
 import CaseItem from "../../Component/CaseItem";
 
 class StoreCaseBrowse extends Component {
@@ -39,7 +39,8 @@ class StoreCaseBrowse extends Component {
     }
     render() {
         return (
-            <div className="Container">
+            <div className="Container browseCase">
+                {/* <div>jfeowjf</div> */}
                 <div className="View cases-View">
                     <div>
                         <h2>Store Case</h2>
