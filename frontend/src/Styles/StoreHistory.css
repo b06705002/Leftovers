@@ -3,7 +3,7 @@
     width: 90%;
 }
 
-.browseCase {
+.history {
     display: flex;
     flex-direction: row;
 }
