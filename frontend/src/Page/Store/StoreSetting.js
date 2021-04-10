@@ -10,27 +10,30 @@ class StoreSetting extends Component {
     render() {
         return (
             <div className="Container setting">
-                <h1>StoreSetting Page</h1>
+                <h1>店家基本資料設定</h1>
                 <div className="formContainer">
-                    <form className="formBlock">
-                        <label>Store Name</label>
-                        <input type="text" />
-                    </form>
-                    <form className="formBlock">
-                        <label>Phone</label>
-                        <input type="text" />
-                    </form>
-                    <form className="formBlock">
-                        <label>Mail Address</label>
-                        <input type="text" />
-                    </form>
-                    <form className="formBlock">
-                        <label>Address</label>
-                        <input type="text" />
-                    </form>
-                    <form className="formBlock">
-                        <label>Other</label>
-                        <input type="text" />
+                    <form>
+                        <div className="formBlock">
+                            <label>店名</label>
+                            <input type="text" />
+                        </div>
+                        <div className="formBlock">
+                            <label>連絡電話</label>
+                            <input type="text" />
+                        </div>
+                        <div className="formBlock">
+                            <label>電子郵件</label>
+                            <input type="text" />
+                        </div>
+                        <div className="formBlock">
+                            <label>地址</label>
+                            <input type="text" />
+                        </div>
+                        <div className="formBlock">
+                            <label>其他</label>
+                            <input type="text" />
+                        </div>
+                        <button type="button">送出</button>
                     </form>
                 </div>
             </div>

@@ -16,11 +16,11 @@ class Nav extends Component {
     render() {
         return (
             <div className="navContainer">
-                <NavItem path={"/"} text="Home"/>
-                <NavItem path={"/store-setting"} text="Setting"/>
-                <NavItem path={"/store-history"} text="History"/>
-                <NavItem path={"/store-browse-case"} text="Browse Case"/>
-                <NavItem path={"/store-add-case"} text="Add Case"/>
+                <NavItem path={"/"} text="主畫面"/>
+                <NavItem path={"/store-setting"} text="基本資料設定"/>
+                <NavItem path={"/store-history"} text="過去媒合資訊"/>
+                <NavItem path={"/store-browse-case"} text="公開媒合資訊"/>
+                <NavItem path={"/store-add-case"} text="新增媒合資訊"/>
             </div>
         );
     }

@@ -71,7 +71,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="signin">
+            <div className="login">
                 <nav className="navbar navbar-expand-lg navbar-light fixed-top">
                     <div className="container">
                         <a className="navbar-brand" href="#">剩杰食堂</a>
@@ -112,18 +112,18 @@ class Login extends Component {
                         </div>
 
                         <div className="carousel-item active">
-                            <img className="d-block w-100" src="https://pic1.zhimg.com/80/v2-d39939d18dadc9da1b5afb6f1e64d3cb_qhd.jpg" alt="First slide" />
+                            <img className="d-block w-100" src="https://asiasociety.org/sites/default/files/styles/1200w/public/2019-05/190523_junzibing_asiablog.jpg" alt="First slide" />
                             <div className="carousel-caption d-none d-md-block">
                             </div>
                         </div>
-                        {/* <div className="carousel-item">
-                            <img className="d-block w-100" src="https://pic1.zhimg.com/80/v2-d39939d18dadc9da1b5afb6f1e64d3cb_qhd.jpg" alt="Second slide" />
+                        <div className="carousel-item">
+                            <img className="d-block w-100" src="https://media-exp1.licdn.com/dms/image/C561BAQHsGu0_rbX2JQ/company-background_10000/0/1592190729149?e=2159024400&v=beta&t=duTt56eUqyz3JCxqdwPD1pZdKerPf6faMkkGR4Rd7UQ" alt="Second slide" />
                             <div className="carousel-caption d-none d-md-block"></div>
                         </div>
                         <div className="carousel-item">
-                            <img className="d-block w-100" src="https://pic1.zhimg.com/80/v2-d39939d18dadc9da1b5afb6f1e64d3cb_qhd.jpg" alt="Third slide" />
+                            <img className="d-block w-100" src="https://www.shamrockfoodservice.com/wp-content/uploads/2020/08/CM_Kitchentelligence-Live-Image-1400x780_0820.jpg" alt="Third slide" />
                             <div className="carousel-caption d-none d-md-block"></div>
-                        </div> */}
+                        </div>
 
                         <div className="user_login_page">
                             <div id="container1-user">
@@ -208,6 +208,7 @@ class Login extends Component {
                             </div>
                         </div>
 
+                         {/* what are these ?*/}
                         <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span className="sr-only">Previous</span>

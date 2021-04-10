@@ -31,14 +31,14 @@
     margin: 0;
 }
 
-ul {
+.browseCase ul {
     margin: 0px;
     padding: 0px;
     height: 95%;
     overflow: scroll;
 }
 
-ul .clicked {
+.browseCase ul .clicked {
     background-color: rgb(194, 248, 255);
 }
 

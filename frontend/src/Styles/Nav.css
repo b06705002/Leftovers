@@ -34,15 +34,16 @@
     align-items: center;
     justify-content: center;
     border-style: solid;
-    border-width: 0px 0px 2px 0px;
+    border-width: 0px 0px 1px 0px;
+    border-color: rgb(201, 201, 201);
 }
 
 .clicked > div {
-    background-color: rgb(199, 150, 255);
+    background-color: rgb(239, 225, 255);
 }
 
 .navItem:not(.clicked) > div:hover {
-    background-color: rgb(255, 215, 215);
+    background-color: rgb(255, 236, 236);
     animation-name: hoverAnimate;
     animation-duration: 0.5s;
 }
@@ -51,10 +52,15 @@
     width: 10%;
     height: 100%;
     border-style: solid;
-    border-width: 0px 1px 0px 0px;
-    border-color: black;
+    border-width: 0px 0.5px 0px 0px;
+    border-color: rgb(201, 201, 201);
     display: flex;
     flex-direction: column;
+}
+
+.navItem div {
+    font-size: 1rem;
+    color: rgb(102, 102, 102);
 }
 
 @keyframes hoverAnimate {
@@ -62,6 +68,6 @@
         background-color: inherit;
     }
     to {
-        background-color: rgb(255, 215, 215);
+        background-color: rgb(255, 236, 236);
     }
 }
