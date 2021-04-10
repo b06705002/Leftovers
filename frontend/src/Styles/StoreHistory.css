@@ -42,7 +42,7 @@ ul .clicked {
     background-color: rgb(194, 248, 255);
 }
 
-li {
+.history li {
     list-style: none;
     height: 150px;
     border-style: solid;
@@ -59,7 +59,7 @@ li:first-child {
     border-width: 1px 0px;
 }
 
-li:not(.clicked):hover {
+.history li:not(.clicked):hover {
     background-color: rgb(245, 245, 245);
     /* border-width: 1px 0px; */
     /* top: -5px; */

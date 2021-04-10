@@ -15,7 +15,7 @@ class Nav extends Component {
     }
     render() {
         return (
-            <div class="navContainer">
+            <div className="navContainer">
                 <NavItem path={"/"} text="Home"/>
                 <NavItem path={"/store-setting"} text="Setting"/>
                 <NavItem path={"/store-history"} text="History"/>

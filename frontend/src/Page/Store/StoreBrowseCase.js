@@ -16,7 +16,7 @@ class StoreBrowseCase extends Component {
     componentDidMount() {
         var list = this.state.caseList;
         for(let i=0; i<10; i++) {
-            list.push({store: `store${i}`, item: `item${i}`, time: `time${i}`, onClick: this.handleClick, class: ""});
+            list.push({store: `case${i}`, item: `item${i}`, time: `time${i}`, onClick: this.handleClick, class: ""});
         }
         this.setState({caseList: list});
     }

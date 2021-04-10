@@ -24,7 +24,7 @@ class StoreAddCase extends Component {
     }
     render() {
         return (
-            <div class="Container addCase">
+            <div className="Container addCase">
                 <h1>ADD A NEW CASE FOR YOUR STORE</h1>
                 <div className="formContainer">
                     <form>
