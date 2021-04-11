@@ -16,7 +16,7 @@ class StoreBrowseCase extends Component {
     componentDidMount() {
         var list = this.state.caseList;
         for(let i=0; i<10; i++) {
-            list.push({store: `case${i}`, item: `item${i}`, time: `time${i}`, onClick: this.handleClick, class: ""});
+            list.push({store: `資訊${i}`, item: `食物${i}`, time: `時間${i}`, onClick: this.handleClick, class: ""});
         }
         this.setState({caseList: list});
     }
@@ -40,7 +40,7 @@ class StoreBrowseCase extends Component {
                 {/* <div>jfeowjf</div> */}
                 <div className="View cases-View">
                     <div>
-                        <h2>Store Case</h2>
+                        <h2>公開媒合資訊</h2>
                     </div>
                     <ul>
                         {this.state.caseList.map((item, index) => {
@@ -49,7 +49,7 @@ class StoreBrowseCase extends Component {
                     </ul>
                 </div>
                 <div className="View detail-View">
-                    <h2>Case Detail</h2>
+                    <h2>媒合資訊詳細資料</h2>
                     <div>
                         <h3>{this.state.detail.store}</h3>
                         <p>{this.state.detail.item}</p>

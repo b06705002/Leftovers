@@ -10,6 +10,10 @@
     /* background-color: blue; */
 }
 
+.addCase h1 {
+    margin-top: 3%;
+}
+
 .addCase .formContainer {
     /* background-color: pink; */
     width: 80%;

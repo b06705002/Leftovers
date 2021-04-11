@@ -1,6 +1,6 @@
 .Container {
-    height: 100%;
-    width: 90%;
+    height: 90%;
+    width: 100%;
 }
 
 .history {
@@ -13,7 +13,7 @@
 
 .cases-View {
     border-style: solid;
-    border-width: 0px 1px 0px 0px;
+    border-width: 0px 0.5px 0px 0px;
     border-color: black;
     flex: 1;
     /* background-color: red; */
@@ -46,7 +46,7 @@
     list-style: none;
     height: 150px;
     border-style: solid;
-    border-width: 0px 0px 1px 0px;
+    border-width: 0px 0px 0.5px 0px;
     border-color: black;
     /* position:relative; */
 }
@@ -56,7 +56,7 @@ li h3 {
 }
 
 li:first-child {
-    border-width: 1px 0px;
+    border-width: 0.5px 0px;
 }
 
 .history li:not(.clicked):hover {

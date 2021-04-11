@@ -25,13 +25,13 @@ class StoreAddCase extends Component {
     render() {
         return (
             <div className="Container addCase">
-                <h1>ADD A NEW CASE FOR YOUR STORE</h1>
+                <h1>新增一筆媒合資訊</h1>
                 <div className="formContainer">
                     <form>
                         {this.state.formCaseItems.map((item, index) => {
                             return item;
                         })}
-                        <button type="button" onClick={this.handleAdd}>Add</button>
+                        <button type="button" onClick={this.handleAdd}>新增食物</button>
                         <input type="submit"/>
                     </form>
                 </div>

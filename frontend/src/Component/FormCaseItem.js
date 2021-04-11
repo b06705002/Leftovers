@@ -7,9 +7,9 @@ class FormCaseItem extends Component {
     render() {
         return (
             <div className="formCaseItem">
-                <label>Item</label>
+                <label>食物</label>
                 <input type="text"/>
-                <label>Amount</label>
+                <label>數量</label>
                 <input type="number" step="1" min="1" />
             </div>
         )

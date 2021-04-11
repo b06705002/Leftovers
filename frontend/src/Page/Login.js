@@ -107,9 +107,9 @@ class Login extends Component {
                     </ol>
 
                     <div className="carousel-inner">
-                        <div className="system_name">
+                        {/* <div className="system_name">
                             <h2>蝦米碗糕 <br /> 剩杰食堂老師居然很愛</h2>
-                        </div>
+                        </div> */}
 
                         <div className="carousel-item active">
                             <img className="d-block w-100" src="https://asiasociety.org/sites/default/files/styles/1200w/public/2019-05/190523_junzibing_asiablog.jpg" alt="First slide" />
