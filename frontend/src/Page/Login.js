@@ -7,6 +7,24 @@ class Login extends Component {
         super(props);
     }
 
+    login() {
+        var mail = document.getElementById("username_store").value;
+        var pwd = document.getElementById("password_store").value;
+        console.log(mail, pwd);
+        fetch('/api', {
+            method: 'POST', 
+            headers: { 
+                'Accept': 'application/json', 
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({mail: mail, pwd: pwd})
+        }).then(response => {
+            if (response.ok){
+                return response.json()
+            }
+        }).then(data => console.log(data.msg))
+    }
+
     show_hide_user() {
         console.log("user");
         var login_user = document.getElementById("container1-user");
@@ -135,7 +153,7 @@ class Login extends Component {
                                         <div className="tab"></div>
                                         <input type="text" id="password_user" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
-                                        <input type="submit" value="登入" className="submit-user" onClick={this.props.handleLogin} />
+                                        <input type="button" value="登入" className="submit-user" onClick={this.login} />
                                     </form>  
                                     <h6 onClick={this.show_hide_user}>註冊帳號 <br/> 來成為一般使用者吧❤</h6>
                                 </div>
@@ -151,7 +169,7 @@ class Login extends Component {
                                     <div className="tab"></div>
                                     <input type="text" id="password_store" name="password" placeholder="密碼" required />
                                     <div className="tab"></div>
-                                    <input type="submit" value="登入" className="submit-store" onClick={this.props.handleLogin} />
+                                    <input type="button" value="登入" className="submit-store" onClick={this.login} />
                                 </form>  
                                 <h6 onClick={this.show_hide_store}>註冊帳號 <br/> 來成為合作店家吧❤</h6>
                                 </div>
