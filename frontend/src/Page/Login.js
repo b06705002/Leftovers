@@ -69,6 +69,18 @@ class Login extends Component {
         }
     }
 
+    handleLoginSubmit = () => {
+        fetch('/api', {
+            method: "POST",
+            body: JSON.stringify({
+                content: "backendTst"
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(response => console.log(response))
+    }
+
     render() {
         return (
             <div className="login">
@@ -130,12 +142,12 @@ class Login extends Component {
                                 <div className="login">  
                                     <h3 className="user_login_color">一般使用者 登入 Login</h3>
 
-                                    <form action="用戶管理.php">
+                                    <form onSubmit={this.handleLoginSubmit}>
                                         <input type="text" id="username_user" name="username" placeholder="信箱帳號" required />
                                         <div className="tab"></div>
                                         <input type="text" id="password_user" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
-                                        <input type="submit" value="登入" className="submit-user" onClick={this.props.handleLogin} />
+                                        <input type="submit" value="登入" className="submit-user"/>
                                     </form>  
                                     <h6 onClick={this.show_hide_user}>註冊帳號 <br/> 來成為一般使用者吧❤</h6>
                                 </div>
