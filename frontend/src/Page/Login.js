@@ -6,12 +6,44 @@ class Login extends Component {
     constructor(props) {
         super(props);
     }
+    storeRegister() {
+        var store = document.getElementById("fullname_store").value;
+        var name = document.getElementById("username2_store").value;
+        var pwd = document.getElementById("password2_store").value;
+        var conpwd = document.getElementById("comfirm_password_store").value;
+        var address = document.getElementById("address_store").value;
+        var phone = document.getElementById("phoneNo_store").value;
+        var mail = document.getElementById("email_store").value;
+        // console.log(mail, pwd);
+        if (pwd === conpwd){
+            fetch('/api/store/register', {
+                method: 'POST', 
+                headers: { 
+                    'Accept': 'application/json', 
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({store: store, mail: mail, pwd: pwd, address: address, phone: phone, name: name})
+            }).then(response => {
+                if (response.ok){
+                    return response.json()
+                }
+            }).then(data => {
+                if (data.msg == 'success'){
+                    console.log('success')
+                    // this.
+                }
+                else{
+                    console.log('failed')
+                }
+            })
+        }
+    }
 
-    login() {
+    storeLogin() {
         var mail = document.getElementById("username_store").value;
         var pwd = document.getElementById("password_store").value;
         console.log(mail, pwd);
-        fetch('/api', {
+        fetch('/api/store/login', {
             method: 'POST', 
             headers: { 
                 'Accept': 'application/json', 
@@ -22,7 +54,11 @@ class Login extends Component {
             if (response.ok){
                 return response.json()
             }
-        }).then(data => console.log(data.msg))
+        }).then(data => {
+            if (data.msg == 'you had login'){
+                this.props.handleLogin();
+            }
+        })
     }
 
     show_hide_user() {
@@ -165,7 +201,7 @@ class Login extends Component {
                                         <div className="tab"></div>
                                         <input type="text" id="password_user" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
-                                        <input type="button" value="登入" className="submit-user" onClick={this.login} />
+                                        <input type="button" value="登入" className="submit-user" onClick={() => this.userLogin()} />
                                     </form>  
                                     <h6 onClick={this.show_hide_user}>註冊帳號 <br/> 來成為一般使用者吧❤</h6>
                                 </div>
@@ -181,7 +217,7 @@ class Login extends Component {
                                     <div className="tab"></div>
                                     <input type="text" id="password_store" name="password" placeholder="密碼" required />
                                     <div className="tab"></div>
-                                    <input type="button" value="登入" className="submit-store" onClick={this.login} />
+                                    <input type="button" value="登入" className="submit-store" onClick={() => this.storeLogin()} />
                                 </form>  
                                 <h6 onClick={this.show_hide_store}>註冊帳號 <br/> 來成為合作店家吧❤</h6>
                                 </div>
@@ -231,7 +267,7 @@ class Login extends Component {
                                         <div className="tab"></div>
                                         <input type="email" id="email_store" name="email" placeholder="信箱帳號" required />
                                         <div className="tab"></div>            
-                                        <input type="submit" value="註冊" className="submit-store" />
+                                        <input type="button" value="註冊" className="submit-store" onClick={() => this.storeRegister()}/>
                                     </form>  
                                     <h6 onClick={this.show_hide_store}>登入 <u>一般使用者/合作店家</u> 帳號</h6>
                                 </div>
