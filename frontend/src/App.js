@@ -18,7 +18,6 @@ class App extends Component {
 
     handleLogin() {
         this.setState({authenticated: true});
-        console.log(this.props.history);
     }
 
     render() {

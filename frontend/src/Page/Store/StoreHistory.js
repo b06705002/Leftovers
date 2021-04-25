@@ -30,7 +30,7 @@ class StoryHistory extends Component {
         var list = this.state.caseList;
         var selected;
         for(let i=0; i<list.length; i++) {
-            if(i != index) {
+            if(i !== index) {
                 list[i].class = "";
             }
             else {

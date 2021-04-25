@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import "../Styles/Login.css";
+import { serverConn } from '../utils';
 
 class Login extends Component {
 
     constructor(props) {
         super(props);
     }
-    storeRegister() {
+    storeRegister = async() => {
         var store = document.getElementById("fullname_store").value;
         var name = document.getElementById("username2_store").value;
         var pwd = document.getElementById("password2_store").value;
@@ -14,51 +15,68 @@ class Login extends Component {
         var address = document.getElementById("address_store").value;
         var phone = document.getElementById("phoneNo_store").value;
         var mail = document.getElementById("email_store").value;
-        // console.log(mail, pwd);
         if (pwd === conpwd){
-            fetch('/api/store/register', {
-                method: 'POST', 
-                headers: { 
-                    'Accept': 'application/json', 
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({store: store, mail: mail, pwd: pwd, address: address, phone: phone, name: name})
-            }).then(response => {
-                if (response.ok){
-                    return response.json()
-                }
-            }).then(data => {
-                if (data.msg == 'success'){
-                    console.log('success')
-                    // this.
-                }
-                else{
-                    console.log('failed')
-                }
-            })
+            let data = {store: store, mail: mail, pwd: pwd, address: address, phone: phone, name: name};
+            let response = await serverConn('/api/store/register', data);
+            if(response.msg === 'success') {
+                console.log('success');
+                this.props.handleLogin();
+            }
+            else {
+                console.log('failed');
+            }
         }
     }
 
-    storeLogin() {
+    storeLogin = async() => {
         var mail = document.getElementById("username_store").value;
         var pwd = document.getElementById("password_store").value;
-        console.log(mail, pwd);
-        fetch('/api/store/login', {
-            method: 'POST', 
-            headers: { 
-                'Accept': 'application/json', 
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({mail: mail, pwd: pwd})
-        }).then(response => {
-            if (response.ok){
-                return response.json()
-            }
-        }).then(data => {
-            if (data.msg == 'you had login'){
+        let data = {mail: mail, pwd: pwd};
+
+        let response = await serverConn('api/store/login', data);
+        if(response.msg === 'you had login') {
+            console.log('success');
+            this.props.handleLogin();
+        }
+        else {
+            console.log('failed');
+        }
+    }
+
+    userRegister = async() => {
+        var store = document.getElementById("fullname_user").value;
+        var name = document.getElementById("username2_user").value;
+        var pwd = document.getElementById("password2_user").value;
+        var conpwd = document.getElementById("comfirm_password_user").value;
+        var address = document.getElementById("address_user").value;
+        var phone = document.getElementById("phoneNo_user").value;
+        var mail = document.getElementById("email_user").value;
+        if (pwd === conpwd){
+            let data = {store: store, mail: mail, pwd: pwd, address: address, phone: phone, name: name};
+            let response = await serverConn('/api/user/register', data);
+            if(response.msg === 'success') {
+                console.log('success');
                 this.props.handleLogin();
             }
-        })
+            else {
+                console.log('failed');
+            }
+        }
+    }
+
+    userLogin = async() => {
+        var mail = document.getElementById("username_user").value;
+        var pwd = document.getElementById("password_user").value;
+        let data = {mail: mail, pwd: pwd};
+
+        let response = await serverConn('api/user/login', data);
+        if(response.msg === 'you had login') {
+            console.log('success');
+            this.props.handleLogin();
+        }
+        else {
+            console.log('failed');
+        }
     }
 
     show_hide_user() {
@@ -196,7 +214,7 @@ class Login extends Component {
                                 <div className="login">  
                                     <h3 className="user_login_color">一般使用者 登入 Login</h3>
 
-                                    <form onSubmit={this.handleLoginSubmit}>
+                                    <form>
                                         <input type="text" id="username_user" name="username" placeholder="信箱帳號" required />
                                         <div className="tab"></div>
                                         <input type="text" id="password_user" name="password" placeholder="密碼" required />
@@ -241,7 +259,7 @@ class Login extends Component {
                                         <div className="tab"></div>
                                         <input type="email" id="email_user" name="email" placeholder="信箱帳號" required />
                                         <div className="tab"></div>
-                                        <input type="submit" value="註冊" className="submit-user" />
+                                        <input type="button" value="註冊" className="submit-user" onClick={() => this.userRegister()}/>
                                     </form>  
                                     <h6 onClick={this.show_hide_user}>登入 <u>一般使用者/合作店家</u> 帳號</h6>
                                 </div>

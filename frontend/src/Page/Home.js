@@ -13,9 +13,12 @@ class Home extends Component {
             5.1 Store sign up
             5.2 Customer sign up
     */
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
-            <div class="Container home">
+            <div className="Container home">
                 <h1>主畫面</h1>
             </div>
         );
