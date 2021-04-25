@@ -1,0 +1,94 @@
+.Container {
+    height: 100%;
+    width: 90%;
+}
+
+.addCase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: blue; */
+}
+
+.addCase h1 {
+    margin-top: 3%;
+}
+
+.addCase .formContainer {
+    /* background-color: pink; */
+    width: 80%;
+}
+
+.addCase form {
+    width: 100%;
+    /* background-color: green; */
+}
+
+.formCaseItem {
+    margin: 30px 0px;
+}
+
+.formCaseItem input[type="text"],
+.formCaseItem input[type="number"] {
+    width: 25%;
+    font-size: 24px;
+    padding: 10px 10px;
+    border: none;
+    border-bottom: solid 2px rgb(210, 210, 210);
+}
+
+.formCaseItem input[type="text"]:focus,
+.formCaseItem input[type="number"]:focus {
+    outline: none;
+    border-bottom: solid 2px rgb(255, 190, 190);
+    animation-name: inputFocus;
+    animation-duration: 0.3s;
+}
+
+.formCaseItem input::-webkit-outer-spin-button,
+.formCaseItem input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.formCaseItem label {
+    color: rgb(100, 100, 100);
+    margin: 0px 30px 0px 80px;
+}
+
+.formCaseItem label:first-child {
+    margin: 0px 30px 0px 0px;
+}
+
+.addCase button,
+.addCase input[type="submit"] {
+    width: 100px;
+    height: 50px;
+    margin: 20px;
+    background-color: white;
+    border: solid 1px rgb(210, 210, 210);
+}
+
+.addCase button:hover,
+.addCase input[type="submit"]:hover {
+    background-color: rgb(241, 241, 241);
+}
+
+.addCase button:active,
+.addCase input[type="submit"]:active {
+    background-color: rgb(231, 231, 231);
+}
+
+.addCase button:focus,
+.addCase input[type="submit"]:focus {
+    outline: none;
+}
+
+@keyframes inputFocus {
+    from {
+        border-bottom-color: rgb(210, 210, 210);
+    }
+    to {
+        border-bottom-color: rgb(255, 190, 190);
+    }
+}
