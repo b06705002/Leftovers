@@ -8,16 +8,55 @@ import Login from './Page/Login';
 import Nav from './Container/Nav';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Component } from 'react';
+import Cookies from 'universal-cookie';
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {authenticated: false};
+        this.authenticated = 0;
         this.handleLogin = this.handleLogin.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
+        this.cookies = new Cookies();
+        console.log('inside APP', this.cookies.get('mail'));
+        if(this.cookies.get('mail') != undefined) {
+            this.authenticated = 1
+        }
+        this.state = {authenticated: this.authenticated};
     }
 
-    handleLogin() {
-        this.setState({authenticated: true});
+    handleLogin(type) {
+        if(type == 'store') {
+            this.setState({authenticated: 1}, function() {
+                console.log('authenticated now is ', this.state.authenticated);
+            });
+        }
+        else {
+            this.setState({authenticated: 2}, function() {
+                console.log('authenticated now is ', this.state.authenticated);
+            });
+        }
+    }
+
+    handleLogout() {
+        this.setState({authenticated: 0});
+    }
+
+    setCookies(obj) {
+        var cookies = new Cookies();
+        for(let prop in obj) {
+            // console.log(prop, obj[prop]);
+            if(prop != 'msg') {
+                cookies.set(String(prop), obj[prop]);
+            }
+        }
+    }
+
+    clearCookies(obj) {
+        var cookies = new Cookies();
+        var obj = cookies.getAll();
+        for(let prop in obj) {
+            cookies.remove(String(prop), obj[prop]);
+        }
     }
 
     render() {
@@ -25,12 +64,15 @@ class App extends Component {
             <Router>
                 <div className="App">
                     {!this.state.authenticated ? 
-                    <Login handleLogin={this.handleLogin}/> 
+                    <Login handleLogin={this.handleLogin} setCookies={this.setCookies}/> 
                     :
                     <>
                         <Nav />
                         <Switch>
-                            <Route path="/" exact component={Home}/>
+                            {/* <Route path="/" exact foo={this.handleLogout} component={Home}/> */}
+                            <Route path="/" exact>
+                                <Home handleLogout={this.handleLogout} clearCookies={this.clearCookies}/>
+                            </Route>
                             <Route path="/store-history" component={StoreHistory}/>
                             <Route path="/store-setting" component={StoreSetting}/>
                             <Route path="/store-add-case" component={StoreAddCase}/>

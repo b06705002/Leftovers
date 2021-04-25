@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import Cookies from 'universal-cookie';
 import "../Styles/Login.css";
 import { serverConn } from '../utils';
 
 class Login extends Component {
-
     constructor(props) {
         super(props);
+        this.cookies = new Cookies();
     }
     storeRegister = async() => {
         var store = document.getElementById("fullname_store").value;
@@ -18,12 +19,17 @@ class Login extends Component {
         if (pwd === conpwd){
             let data = {store: store, mail: mail, pwd: pwd, address: address, phone: phone, name: name};
             let response = await serverConn('/api/store/register', data);
-            if(response.msg === 'success') {
-                console.log('success');
-                this.props.handleLogin();
+            console.log('response', response);
+            if(response.msg === 'duplicated') {
+                console.log('duplicated');
+            }
+            else if(response.msg === 'fail') {
+                console.log('fail');
             }
             else {
-                console.log('failed');
+                console.log('success');
+                this.props.setCookies(response);
+                this.props.handleLogin('store');
             }
         }
     }
@@ -34,12 +40,13 @@ class Login extends Component {
         let data = {mail: mail, pwd: pwd};
 
         let response = await serverConn('api/store/login', data);
-        if(response.msg === 'you had login') {
+        if(response.msg === 'success') {
             console.log('success');
-            this.props.handleLogin();
+            this.props.setCookies(response);
+            this.props.handleLogin("store");
         }
         else {
-            console.log('failed');
+            console.log('fail');
         }
     }
 
@@ -54,12 +61,16 @@ class Login extends Component {
         if (pwd === conpwd){
             let data = {store: store, mail: mail, pwd: pwd, address: address, phone: phone, name: name};
             let response = await serverConn('/api/user/register', data);
-            if(response.msg === 'success') {
-                console.log('success');
-                this.props.handleLogin();
+            if(response.msg === 'duplicated') {
+                console.log('duplicated');
+            }
+            else if(response.msg === 'fail') {
+                console.log('fail');
             }
             else {
-                console.log('failed');
+                console.log('success');
+                this.props.setCookies(response);
+                this.props.handleLogin('user');
             }
         }
     }
@@ -72,10 +83,11 @@ class Login extends Component {
         let response = await serverConn('api/user/login', data);
         if(response.msg === 'you had login') {
             console.log('success');
-            this.props.handleLogin();
+            this.props.setCookies(response);
+            this.props.handleLogin("user");
         }
         else {
-            console.log('failed');
+            console.log('fail');
         }
     }
 
