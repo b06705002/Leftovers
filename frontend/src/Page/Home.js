@@ -17,16 +17,14 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.cookies = new Cookies();
-        console.log('at home', this.cookies.getAll());
+        this.name = this.cookies.get('name');
+        // console.log('at home', this.cookies.getAll());
     }
     render() {
         return (
             <div className="Container home">
                 <h1>主畫面</h1>
-                <button onClick={() => {
-                    this.props.clearCookies();
-                    this.props.handleLogout();
-                }}>clear cookies</button>
+                <h2>歡迎回來{this.name}</h2>
             </div>
         );
     }

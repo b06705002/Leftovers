@@ -38,6 +38,9 @@ class App extends Component {
     }
 
     handleLogout() {
+        // var cookies = new Cookies();
+        // var allCookies = cookies.getAll();
+        this.clearCookies();
         this.setState({authenticated: 0});
     }
 
@@ -51,7 +54,7 @@ class App extends Component {
         }
     }
 
-    clearCookies(obj) {
+    clearCookies() {
         var cookies = new Cookies();
         var obj = cookies.getAll();
         for(let prop in obj) {
@@ -67,11 +70,11 @@ class App extends Component {
                     <Login handleLogin={this.handleLogin} setCookies={this.setCookies}/> 
                     :
                     <>
-                        <Nav />
+                        <Nav handleLogout={this.handleLogout}/>
                         <Switch>
                             {/* <Route path="/" exact foo={this.handleLogout} component={Home}/> */}
                             <Route path="/" exact>
-                                <Home handleLogout={this.handleLogout} clearCookies={this.clearCookies}/>
+                                <Home/>
                             </Route>
                             <Route path="/store-history" component={StoreHistory}/>
                             <Route path="/store-setting" component={StoreSetting}/>
