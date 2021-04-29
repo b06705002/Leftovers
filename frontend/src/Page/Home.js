@@ -18,7 +18,7 @@ class Home extends Component {
         super(props);
         this.cookies = new Cookies();
         this.name = this.cookies.get('name');
-        // console.log('at home', this.cookies.getAll());
+        console.log('at home', this.cookies.getAll());
     }
     render() {
         return (

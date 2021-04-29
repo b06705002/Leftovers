@@ -18,14 +18,14 @@ class App extends Component {
         this.handleLogout = this.handleLogout.bind(this);
         this.cookies = new Cookies();
         console.log('inside APP', this.cookies.get('mail'));
-        if(this.cookies.get('mail') != undefined) {
+        if(this.cookies.get('mail') !== undefined) {
             this.authenticated = 1
         }
         this.state = {authenticated: this.authenticated};
     }
 
     handleLogin(type) {
-        if(type == 'store') {
+        if(type === 'store') {
             this.setState({authenticated: 1}, function() {
                 console.log('authenticated now is ', this.state.authenticated);
             });
@@ -48,7 +48,7 @@ class App extends Component {
         var cookies = new Cookies();
         for(let prop in obj) {
             // console.log(prop, obj[prop]);
-            if(prop != 'msg') {
+            if(prop !== 'msg') {
                 cookies.set(String(prop), obj[prop]);
             }
         }

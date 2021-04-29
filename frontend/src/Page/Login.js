@@ -2,22 +2,47 @@ import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import "../Styles/Login.css";
 import { serverConn } from '../utils';
+import { GoogleMap, LoadScript, StandaloneSearchBox, InfoWindow } from '@react-google-maps/api';;
+
+const libraries = ['places'];
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.cookies = new Cookies();
+        
+        this.center = {
+            lng: 121.5654177,
+            lat: 25.0329694
+        }
+        this.onLoad = ref => this.searchBox = ref;
+        this.state = {API_lat: null
+                    , API_lng: null
+                    , API_placeID: null
+                    , API_address: null
+                    , API_name: null
+                    , mapVisible: false
+                    , store: ''
+                    , address: ''
+                    , placeID: null
+                    , LaL: null};
+        this.containerStyle = {
+            width: '100%',
+            height: '800px',
+        }
+        this.show_hide_store = this.show_hide_store.bind(this);
+        this.show_hide_user = this.show_hide_user.bind(this);
     }
     storeRegister = async() => {
-        var store = document.getElementById("fullname_store").value;
-        var name = document.getElementById("username2_store").value;
+        console.log('press!!!');
+        // var store = document.getElementById("fullname_store").value;
         var pwd = document.getElementById("password2_store").value;
         var conpwd = document.getElementById("comfirm_password_store").value;
-        var address = document.getElementById("address_store").value;
+        // var address = document.getElementById("address_store").value;
         var phone = document.getElementById("phoneNo_store").value;
         var mail = document.getElementById("email_store").value;
         if (pwd === conpwd){
-            let data = {store: store, mail: mail, pwd: pwd, address: address, phone: phone, name: name};
+            let data = {store: this.state.store, mail: mail, pwd: pwd, address: this.state.address, phone: phone, apid: this.state.placeID, LaL: this.state.LaL};
             let response = await serverConn('/api/store/register', data);
             console.log('response', response);
             if(response.msg === 'duplicated') {
@@ -51,15 +76,13 @@ class Login extends Component {
     }
 
     userRegister = async() => {
-        var store = document.getElementById("fullname_user").value;
-        var name = document.getElementById("username2_user").value;
+        var fullname = document.getElementById("fullname_user").value;
         var pwd = document.getElementById("password2_user").value;
         var conpwd = document.getElementById("comfirm_password_user").value;
-        var address = document.getElementById("address_user").value;
         var phone = document.getElementById("phoneNo_user").value;
         var mail = document.getElementById("email_user").value;
         if (pwd === conpwd){
-            let data = {store: store, mail: mail, pwd: pwd, address: address, phone: phone, name: name};
+            let data = {mail: mail, pwd: pwd, phone: phone, name: fullname};
             let response = await serverConn('/api/user/register', data);
             if(response.msg === 'duplicated') {
                 console.log('duplicated');
@@ -106,6 +129,7 @@ class Login extends Component {
             document.getElementById("password_user").value="";
             signup_user.style.display = "none";  //signup消失
             signup_store.style.display = "none";  //signup消失
+            this.setState({mapVisible: false});
         } 
 
         // 登入切換到註冊
@@ -116,9 +140,9 @@ class Login extends Component {
             signup_user.style.visibility="visible";
          
             document.getElementById("fullname_user").value="";
-            document.getElementById("username2_user").value="";
             document.getElementById("password2_user").value="";
             document.getElementById("comfirm_password_user").value="";
+            this.setState({mapVisible: true});
         }
     }
 
@@ -137,6 +161,7 @@ class Login extends Component {
             document.getElementById("password_store").value="";
             signup_user.style.display = "none";  //signup消失
             signup_store.style.display = "none";  //signup消失
+            this.setState({mapVisible: false});
         } 
 
         // 登入切換到註冊
@@ -147,9 +172,9 @@ class Login extends Component {
             signup_store.style.visibility="visible";
          
             document.getElementById("fullname_store").value="";
-            document.getElementById("username2_store").value="";
             document.getElementById("password2_store").value="";
             document.getElementById("comfirm_password_store").value="";
+            this.setState({mapVisible: true});
         }
     }
 
@@ -163,6 +188,20 @@ class Login extends Component {
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then(response => console.log(response))
+    }
+
+    onPlacesChanged = () => {
+        console.log(this.searchBox.getPlaces());
+        var place = this.searchBox.getPlaces()[0];
+        console.log(place.geometry.location.lng());
+        console.log(place.geometry.location.lat());
+        this.setState({API_lng: place.geometry.location.lng(), API_lat: place.geometry.location.lat(), API_name: place.name, API_placeID: place.place_id, API_address: place.formatted_address});
+    }
+
+    confirmPlace = () => {
+        this.setState({store: this.state.API_name, address: this.state.API_address, placeID: this.state.API_placeID, LaL: {lat: this.state.API_lat, lng: this.state.API_lng}}, function() {
+            this.setState({API_lat: null, API_lng: null, API_address: null, API_name: null, API_placeID: null});
+        });
     }
 
     render() {
@@ -261,8 +300,6 @@ class Login extends Component {
                                     <form action="用戶管理.php">
                                         <input type="text" id="fullname_user" name="fullname" placeholder="使用者全名" required />
                                         <div className="tab"></div>
-                                        <input type="text" id="username2_user" name="username" placeholder="帳號" required />
-                                        <div className="tab"></div>
                                         <input type="text" id="password2_user" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
                                         <input type="text" id="comfirm_password_user" name="comfirm_password" placeholder="確認密碼" required />
@@ -283,15 +320,13 @@ class Login extends Component {
                                 <div className="signup">  
                                     <h3 className="store_signup_color">註冊成為合作店家</h3>
                                     <form action="用戶管理.php">
-                                        <input type="text" id="fullname_store" name="fullname" placeholder="店家全名" required />
-                                        <div className="tab"></div>
-                                        <input type="text" id="username2_store" name="username" placeholder="帳號" required />
+                                        <input type="text" id="fullname_store" name="fullname" placeholder="店家全名" value={this.state.store} required disabled/>
                                         <div className="tab"></div>
                                         <input type="text" id="password2_store" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
                                         <input type="text" id="comfirm_password_store" name="comfirm_password" placeholder="確認密碼" required />
                                         <div className="tab"></div>
-                                        <input type="text" id="address_store" name="address" placeholder="店家地址" required />
+                                        <input type="text" id="address_store" name="address" placeholder="店家地址" value={this.state.address} required disabled/>
                                         <div className="tab"></div>
                                         <input type="tel" id="phoneNo_store" name="phone_number" placeholder="手機號碼" required />
                                         <div className="tab"></div>
@@ -314,6 +349,72 @@ class Login extends Component {
                             <span className="sr-only">Next</span>
                         </a>
                     </div>
+                    <div style={{display: 'none'}}>
+                        <input
+                            id="pac-input"
+                            class="controls"
+                            type="text"
+                            placeholder="Enter a location"
+                        />
+                    </div>
+                    {this.state.mapVisible ? 
+                    <LoadScript
+                        googleMapsApiKey="AIzaSyCpvN91mgQHeKaaQHjfKw1prGDzzdA7cO0"
+                        libraries={libraries}
+                    >
+                        <GoogleMap
+                        mapContainerStyle={this.containerStyle}
+                        center={this.state.API_lat ? {lat: this.state.API_lat, lng: this.state.API_lng} : {lat: 25.0329694, lng: 121.5654177}}
+                        zoom={this.state.API_lat ? 17 : 13}
+                        >
+                            <StandaloneSearchBox
+                                onLoad={this.onLoad}
+                                onPlacesChanged={
+                                    this.onPlacesChanged
+                                }
+                                >
+                                <input
+                                    type="text"
+                                    placeholder="Customized your placeholder"
+                                    style={{
+                                    boxSizing: `border-box`,
+                                    border: `1px solid transparent`,
+                                    width: `360px`,
+                                    height: `48px`,
+                                    padding: `0 12px`,
+                                    borderRadius: `3px`,
+                                    boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+                                    fontSize: `14px`,
+                                    outline: `none`,
+                                    textOverflow: `ellipses`,
+                                    position: "absolute",
+                                    left: "50%",
+                                    marginLeft: "-120px"
+                                    }}
+                                />
+                            </StandaloneSearchBox>
+                            {this.state.API_lat ?
+                            <InfoWindow
+                                position={{lat: this.state.API_lat, lng: this.state.API_lng}}
+                                >
+                                <>
+                                    <div>名稱 ： {this.state.API_name}</div>
+                                    <div>Place ID : {this.state.API_placeID}</div>
+                                    <div>Address : {this.state.API_address}</div>
+                                    <div>(Lat, Lng) : ({this.state.API_lat}, {this.state.API_lng})</div>
+                                    <button type="button" onClick={this.confirmPlace}>確認</button>
+                                </>
+                            </InfoWindow>
+                            :
+                            <></>
+                            }
+                        <></>
+                        </GoogleMap>
+                    </LoadScript>
+                    :
+                    <></>
+                    }
+                    
                 </div>
             </div>
         );

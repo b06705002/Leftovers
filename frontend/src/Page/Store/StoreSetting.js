@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Cookies from 'universal-cookie';
+import { serverConn } from '../../utils';
 import "../../Styles/StoreSetting.css";
 
 class StoreSetting extends Component {
@@ -7,6 +9,14 @@ class StoreSetting extends Component {
         1. change account information
         2. change store information
     */
+    constructor(props) {
+        super(props);
+        this.cookies = new Cookies();
+        this.allCookies = this.cookies.getAll();
+        this.state = {store: this.allCookies['store'], name: this.allCookies['name'], phone: this.allCookies['phone'], address: this.allCookies['address'], pwd: this.allCookies['pwd']};
+    }
+    handleSubmit() {
+    }
     render() {
         return (
             <div className="Container setting">
@@ -15,25 +25,25 @@ class StoreSetting extends Component {
                     <form>
                         <div className="formBlock">
                             <label>店名</label>
-                            <input type="text" />
+                            <input type="text" value={this.state.store} onChange={(event) => this.setState({store: event.target.value})}/>
+                        </div>
+                        <div className="formBlock">
+                            <label>名字</label>
+                            <input type="text" value={this.state.name} onChange={(event) => this.setState({name: event.target.value})}/>
                         </div>
                         <div className="formBlock">
                             <label>連絡電話</label>
-                            <input type="text" />
-                        </div>
-                        <div className="formBlock">
-                            <label>電子郵件</label>
-                            <input type="text" />
+                            <input type="text" value={this.state.phone} onChange={(event) => this.setState({phone: event.target.value})}/>
                         </div>
                         <div className="formBlock">
                             <label>地址</label>
-                            <input type="text" />
+                            <input type="text" value={this.state.address} onChange={(event) => this.setState({address: event.target.value})}/>
                         </div>
                         <div className="formBlock">
-                            <label>其他</label>
-                            <input type="text" />
+                            <label>密碼</label>
+                            <input type="text" value={this.state.pwd} onChange={(event) => this.setState({pwd: event.target.value})}/>
                         </div>
-                        <button type="button">送出</button>
+                        <button type="button" onClick={this.handleSubmit}>送出</button>
                     </form>
                 </div>
             </div>
