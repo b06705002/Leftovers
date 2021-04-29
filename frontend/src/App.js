@@ -5,10 +5,15 @@ import StoreSetting from './Page/Store/StoreSetting';
 import StoreAddCase from './Page/Store/StoreAddCase';
 import StoreBrowseCase from './Page/Store/StoreBrowseCase';
 import Login from './Page/Login';
-import Nav from './Container/Nav';
+import StoreNav from './Container/StoreNav';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { Component } from 'react';
 import Cookies from 'universal-cookie';
+import UserNav from './Container/UserNav';
+import UserHistory from './Page/User/UserHistory';
+import UserSetting from './Page/User/UserSetting';
+import UserAddCase from './Page/User/UserSetting';
+import UserBrowseCase from './Page/User/UserBrowseCase';
 
 class App extends Component {
     constructor(props) {
@@ -19,18 +24,26 @@ class App extends Component {
         this.cookies = new Cookies();
         console.log('inside APP', this.cookies.get('mail'));
         if(this.cookies.get('mail') !== undefined) {
-            this.authenticated = 1
+            if(this.cookies.get('type') === 'store') {
+                this.authenticated = 1
+            }
+            else {
+                this.authenticated = 2;
+            }
         }
         this.state = {authenticated: this.authenticated};
     }
 
     handleLogin(type) {
+        let cookies = new Cookies();
         if(type === 'store') {
+            cookies.set('type', 'store');
             this.setState({authenticated: 1}, function() {
                 console.log('authenticated now is ', this.state.authenticated);
             });
         }
         else {
+            cookies.set('type', 'user');
             this.setState({authenticated: 2}, function() {
                 console.log('authenticated now is ', this.state.authenticated);
             });
@@ -70,17 +83,38 @@ class App extends Component {
                     <Login handleLogin={this.handleLogin} setCookies={this.setCookies}/> 
                     :
                     <>
-                        <Nav handleLogout={this.handleLogout}/>
-                        <Switch>
-                            {/* <Route path="/" exact foo={this.handleLogout} component={Home}/> */}
-                            <Route path="/" exact>
-                                <Home/>
-                            </Route>
-                            <Route path="/store-history" component={StoreHistory}/>
-                            <Route path="/store-setting" component={StoreSetting}/>
-                            <Route path="/store-add-case" component={StoreAddCase}/>
-                            <Route path="/store-browse-case" component={StoreBrowseCase}/>
-                        </Switch>
+                        {this.state.authenticated === 1 ?
+                            <>
+                                <StoreNav handleLogout={this.handleLogout}/>
+                                <Switch>
+                                    {/* <Route path="/" exact foo={this.handleLogout} component={Home}/> */}
+                                    <Route path="/" exact>
+                                        <Home/>
+                                    </Route>
+                                    <Route path="/store-history" component={StoreHistory}/>
+                                    <Route path="/store-setting">
+                                        <StoreSetting setCookies={this.setCookies}/>
+                                    </Route>
+                                    <Route path="/store-add-case" component={StoreAddCase}/>
+                                    <Route path="/store-browse-case" component={StoreBrowseCase}/>
+                                </Switch>
+                            </>
+                            :
+                            <>
+                                <UserNav handleLogout={this.handleLogout} />
+                                <Switch>
+                                    <Route path="/" exact>
+                                        <Home />
+                                    </Route>
+                                    <Route path="/user-history" component={UserHistory}/>
+                                    <Route path="/user-setting">
+                                        <UserSetting setCookies={this.setCookies}/>
+                                    </Route>
+                                    <Route path="/user-add-case" component={UserAddCase}/>
+                                    <Route path="/user-browse-case" component={UserBrowseCase}/>
+                                </Switch>
+                            </>
+                        }
                     </>
                     }
                 </div>

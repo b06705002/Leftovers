@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../Styles/Nav.css";
+import "../Styles/StoreNav.css";
 import NavItem from "../Component/NavItem";
 
 /*

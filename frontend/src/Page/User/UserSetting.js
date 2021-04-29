@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 import { serverConn } from '../../utils';
 import "../../Styles/StoreSetting.css";
 
-class StoreSetting extends Component {
+class UserSetting extends Component {
     /*
     This is StoreSetting Page, user should be able to:
         1. change account information
@@ -69,4 +69,4 @@ class StoreSetting extends Component {
     }
 }
 
-export default StoreSetting;
+export default UserSetting;

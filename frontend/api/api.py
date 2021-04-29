@@ -65,12 +65,7 @@ def store_settings():
     db = client.get_database(db_name)
     store = db.Store
     query = {'mail': request.json['mail']}
-    new_store = {'$set': {'pwd': request.json['pwd'],
-                            'LaL': request.json['LaL'],
-                            'store': request.json['store'],
-                            'address': request.json['address'],
-                            'phone': request.json['phone'],
-                            'apid': request.json['apid']}}
+    new_store = {'$set': {'pwd': request.json['pwd'], 'phone': request.json['phone']}}
     try:
         # Succeed to Change Settings
         store.update_one(query, new_store)

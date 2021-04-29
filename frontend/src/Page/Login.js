@@ -104,7 +104,7 @@ class Login extends Component {
         let data = {mail: mail, pwd: pwd};
 
         let response = await serverConn('api/user/login', data);
-        if(response.msg === 'you had login') {
+        if(response.msg === 'success') {
             console.log('success');
             this.props.setCookies(response);
             this.props.handleLogin("user");
