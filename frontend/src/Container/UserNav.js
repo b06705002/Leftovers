@@ -21,11 +21,12 @@ class Nav extends Component {
                 <NavItem path={"/user-history"} text="過去媒合資訊"/>
                 <NavItem path={"/user-browse-case"} text="公開媒合資訊"/>
                 <NavItem path={"/user-add-case"} text="新增媒合資訊"/>
-                <button className="navItem" onClick={this.props.handleLogout}>
+                {/* <button className="navItem" onClick={this.props.handleLogout}>
                     <div>
                         <div>登出</div>
                     </div>
-                </button>
+                </button> */}
+                <NavItem path={"/logout"} text="登出" handleLogout={this.props.handleLogout} />
                 {/* <button onClick={this.props.handleLogout}>登出</button> */}
             </div>
         );

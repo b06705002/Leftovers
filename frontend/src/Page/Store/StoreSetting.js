@@ -46,7 +46,7 @@ class StoreSetting extends Component {
                         </div>
                         <div className="formBlock">
                             <label>電子郵件</label>
-                            <input type="text" value={this.state.mail} onChange={(event) => this.setState({name: event.target.value})} disabled/>
+                            <input type="text" value={this.state.mail} onChange={(event) => this.setState({mail: event.target.value})} disabled/>
                         </div>
                         <div className="formBlock">
                             <label>連絡電話</label>

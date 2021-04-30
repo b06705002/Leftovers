@@ -47,6 +47,11 @@
     animation-duration: 0.2s;
 }
 
+.setting input:disabled {
+    background-color: inherit;
+    color: gray;
+}
+
 .setting button {
     background-color: white;
     margin-top: 10vh;

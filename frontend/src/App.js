@@ -6,7 +6,7 @@ import StoreAddCase from './Page/Store/StoreAddCase';
 import StoreBrowseCase from './Page/Store/StoreBrowseCase';
 import Login from './Page/Login';
 import StoreNav from './Container/StoreNav';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import { Component } from 'react';
 import Cookies from 'universal-cookie';
 import UserNav from './Container/UserNav';
@@ -80,7 +80,10 @@ class App extends Component {
             <Router>
                 <div className="App">
                     {!this.state.authenticated ? 
-                    <Login handleLogin={this.handleLogin} setCookies={this.setCookies}/> 
+                    <>
+                        <Login handleLogin={this.handleLogin} setCookies={this.setCookies}/>
+                        <Redirect from="/logout" to="/"/>
+                    </>
                     :
                     <>
                         {this.state.authenticated === 1 ?
@@ -97,6 +100,7 @@ class App extends Component {
                                     </Route>
                                     <Route path="/store-add-case" component={StoreAddCase}/>
                                     <Route path="/store-browse-case" component={StoreBrowseCase}/>
+                                    <Redirect from="/logout" to="/"/>
                                 </Switch>
                             </>
                             :
@@ -112,10 +116,17 @@ class App extends Component {
                                     </Route>
                                     <Route path="/user-add-case" component={UserAddCase}/>
                                     <Route path="/user-browse-case" component={UserBrowseCase}/>
+                                    <Redirect from="/logout" to="/"/>
                                 </Switch>
                             </>
                         }
                     </>
+                    }
+                    {
+                        this.authenticated ?
+                        <></>
+                        :
+                        <Redirect to="/" />
                     }
                 </div>
             </Router>
