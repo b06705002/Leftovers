@@ -18,9 +18,9 @@ class Nav extends Component {
             <div className="navContainer">
                 <NavItem path={"/"} text="主畫面"/>
                 <NavItem path={"/user-setting"} text="基本資料設定"/>
+                <NavItem path={"/user-search-case"} text="搜尋媒合店家"/>
                 <NavItem path={"/user-history"} text="過去媒合資訊"/>
-                <NavItem path={"/user-browse-case"} text="公開媒合資訊"/>
-                <NavItem path={"/user-add-case"} text="新增媒合資訊"/>
+                {/* <NavItem path={"/user-add-case"} text="新增媒合資訊"/> */}
                 {/* <button className="navItem" onClick={this.props.handleLogout}>
                     <div>
                         <div>登出</div>
