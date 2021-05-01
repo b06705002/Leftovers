@@ -27,6 +27,7 @@ class UserHistory extends Component {
         this.setState({caseList: list});
     }
     handleClick(index) {
+        console.log('trigger on click', index);
         var list = this.state.caseList;
         var selected;
         for(let i=0; i<list.length; i++) {
@@ -49,7 +50,7 @@ class UserHistory extends Component {
                     </div>
                     <ul>
                         {this.state.caseList.map((item, index) => {
-                            return <CaseItem store={item.store} item={item.item} time={item.time} onClick={item.onClick} class={item.class} key={index} index={index}/>;
+                            return <CaseItem caseInfo={item} onClick={item.onClick} class={item.class} key={index} index={index}/>;
                         })}
                     </ul>
                 </div>

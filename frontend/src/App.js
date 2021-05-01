@@ -1,10 +1,10 @@
 import './App.css';
-import Home from './Page/Home';
+import Home from './Page/Common/Home';
 import StoreHistory from './Page/Store/StoreHistory';
 import StoreSetting from './Page/Store/StoreSetting';
 import StoreAddCase from './Page/Store/StoreAddCase';
 import StoreBrowseCase from './Page/Store/StoreBrowseCase';
-import Login from './Page/Login';
+import Login from './Page/Common/Login';
 import StoreNav from './Container/StoreNav';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import { Component } from 'react';
@@ -14,6 +14,7 @@ import UserHistory from './Page/User/UserHistory';
 import UserSetting from './Page/User/UserSetting';
 import UserAddCase from './Page/User/UserSetting';
 import UserSearchCase from './Page/User/UserSearchCase';
+import UserMatchCase from './Page/User/UserMatchCase';
 
 class App extends Component {
     constructor(props) {
@@ -115,7 +116,8 @@ class App extends Component {
                                         <UserSetting setCookies={this.setCookies}/>
                                     </Route>
                                     {/* <Route path="/user-add-case" component={UserAddCase}/> */}
-                                    <Route path="/user-search-case" component={UserSearchCase}/>
+                                    <Route path="/user-search-case" component={UserSearchCase} exact/>
+                                    <Route path="/user-search-case/:id?" component={UserMatchCase}/>
                                     <Redirect from="/logout" to="/"/>
                                 </Switch>
                             </>

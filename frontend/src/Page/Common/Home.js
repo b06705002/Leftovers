@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
-import "../Styles/StoreHome.css";
+import "../../Styles/StoreHome.css";
 
 class Home extends Component {
     /*
@@ -18,13 +18,14 @@ class Home extends Component {
         super(props);
         this.cookies = new Cookies();
         this.store = this.cookies.get('store');
+        this.name = this.cookies.get('name');
         console.log('at home', this.cookies.getAll());
     }
     render() {
         return (
             <div className="Container home">
                 <h1>主畫面</h1>
-                <h2>歡迎回來{this.store}</h2>
+                <h2>歡迎回來 {this.store ? this.store : this.name}</h2>
             </div>
         );
     }
