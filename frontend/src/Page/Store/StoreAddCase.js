@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "../../Styles/StoreAddCase.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import FormCaseItem from "../../Component/FormCaseItem";
 import { serverConn } from '../../utils';
 import Cookies from 'universal-cookie';

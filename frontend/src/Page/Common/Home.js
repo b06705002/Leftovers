@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import "../../Styles/StoreHome.css";
 
+
+
 class Home extends Component {
     /*
     This is Home Page, should implement:

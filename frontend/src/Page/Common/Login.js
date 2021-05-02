@@ -247,16 +247,16 @@ class Login extends Component {
                         </div> */}
 
                         <div className="carousel-item active">
-                            <img className="d-block w-100" src="https://asiasociety.org/sites/default/files/styles/1200w/public/2019-05/190523_junzibing_asiablog.jpg" alt="First slide" />
+                            <img className="d-block w-100" src="https://i.postimg.cc/CL1SMd7L/1.jpg" alt="First slide" />
                             <div className="carousel-caption d-none d-md-block">
                             </div>
                         </div>
                         <div className="carousel-item">
-                            <img className="d-block w-100" src="https://media-exp1.licdn.com/dms/image/C561BAQHsGu0_rbX2JQ/company-background_10000/0/1592190729149?e=2159024400&v=beta&t=duTt56eUqyz3JCxqdwPD1pZdKerPf6faMkkGR4Rd7UQ" alt="Second slide" />
+                            <img className="d-block w-100" src="https://i.postimg.cc/HLth79sG/2.jpg" alt="Second slide" />
                             <div className="carousel-caption d-none d-md-block"></div>
                         </div>
                         <div className="carousel-item">
-                            <img className="d-block w-100" src="https://www.shamrockfoodservice.com/wp-content/uploads/2020/08/CM_Kitchentelligence-Live-Image-1400x780_0820.jpg" alt="Third slide" />
+                            <img className="d-block w-100" src="https://i.postimg.cc/XJmmV7YX/3.jpg" alt="Third slide" />
                             <div className="carousel-caption d-none d-md-block"></div>
                         </div>
 
@@ -331,7 +331,9 @@ class Login extends Component {
                                         <input type="tel" id="phoneNo_store" name="phone_number" placeholder="手機號碼" required />
                                         <div className="tab"></div>
                                         <input type="email" id="email_store" name="email" placeholder="信箱帳號" required />
-                                        <div className="tab"></div>            
+                                        <div className="tab"></div> 
+                                        <input type="text" id="address_store" name="address" placeholder="店家地址" required />
+                                        <div className="tab"></div>           
                                         <input type="button" value="註冊" className="submit-store" onClick={() => this.storeRegister()}/>
                                     </form>  
                                     <h6 onClick={this.show_hide_store}>登入 <u>一般使用者/合作店家</u> 帳號</h6>
