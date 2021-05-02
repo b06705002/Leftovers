@@ -13,6 +13,18 @@ body {
 .login input {
     font-size: 12px;
 }
+.user_login_page{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+.store_login_page{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
 
 #username_user,
 #password_user,
@@ -169,6 +181,9 @@ h6:hover {
 #container2-store {
     visibility: hidden; /*剛開始消失*/
     display: none;
+    position: absolute;
+    top: 20%;
+    right: 60%;
     height: 500px;
     text-align: center;
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import "../Styles/StoreHome.css";
 
+
+
 class Home extends Component {
     /*
     This is Home Page, should implement:
@@ -16,7 +18,7 @@ class Home extends Component {
     render() {
         return (
             <div class="Container home">
-                <h1>主畫面</h1>
+                <h1>Hello, User</h1>
             </div>
         );
     }
