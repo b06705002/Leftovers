@@ -1,0 +1,51 @@
+.Container {
+    height: 90%;
+    width: 100%;
+}
+
+.searchCase {
+    display: flex;
+    flex-direction: row;
+}
+
+.map-View {
+    flex: 2;
+}
+
+.cases-View {
+    flex: 1;
+}
+
+.searchCase ul {
+    margin: 0px;
+    padding: 0px;
+    height: 95%;
+    overflow: scroll;
+}
+
+.searchCase ul .clicked {
+    background-color: rgb(194, 248, 255);
+}
+
+.searchCase li {
+    list-style: none;
+    height: 150px;
+    border-style: solid;
+    border-width: 0px 0px 0.5px 0px;
+    border-color: black;
+    /* position:relative; */
+}
+
+li h3 {
+    margin: 0px;
+}
+
+li:first-child {
+    border-width: 0.5px 0px;
+}
+
+.searchCase li:not(.clicked):hover {
+    background-color: rgb(245, 245, 245);
+    /* border-width: 1px 0px; */
+    /* top: -5px; */
+}

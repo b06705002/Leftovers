@@ -185,4 +185,7 @@ nav{
     }
 }
 
-
+button.navItem {
+    padding: 0px;
+    border-width: 0px 0px;
+}

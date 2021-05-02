@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 import { serverConn } from '../../utils';
 import "../../Styles/StoreSetting.css";
 
-class StoreSetting extends Component {
+class UserSetting extends Component {
     /*
     This is StoreSetting Page, user should be able to:
         1. change account information
@@ -13,16 +13,15 @@ class StoreSetting extends Component {
         super(props);
         this.cookies = new Cookies();
         this.allCookies = this.cookies.getAll();
-        this.state = {store: this.allCookies['store']
+        this.state = {name: this.allCookies['name']
                     , mail: this.allCookies['mail']
                     , phone: this.allCookies['phone']
-                    , address: this.allCookies['address']
                     , pwd: this.allCookies['pwd']
                     , errMsg: ''};
     }
     handleSubmit = async() => {
         let data = {mail: this.state.mail, pwd: this.state.pwd, phone: this.state.phone};
-        let response = await serverConn('api/store/settings', data);
+        let response = await serverConn('api/user/settings', data);
         if(response.msg === 'success') {
             console.log('success');
             this.props.setCookies({phone: this.state.phone, pwd: this.state.pwd, errMsg: ''});
@@ -37,12 +36,12 @@ class StoreSetting extends Component {
     render() {
         return (
             <div className="Container setting">
-                <h1>店家基本資料設定</h1>
+                <h1>使用者基本資料設定</h1>
                 <div className="formContainer">
                     <form>
                         <div className="formBlock">
-                            <label>店名</label>
-                            <input type="text" value={this.state.store} onChange={(event) => this.setState({store: event.target.value})} disabled/>
+                            <label>名字</label>
+                            <input type="text" value={this.state.name} onChange={(event) => this.setState({name: event.target.value})} disabled/>
                         </div>
                         <div className="formBlock">
                             <label>電子郵件</label>
@@ -51,10 +50,6 @@ class StoreSetting extends Component {
                         <div className="formBlock">
                             <label>連絡電話</label>
                             <input type="text" value={this.state.phone} onChange={(event) => this.setState({phone: event.target.value})}/>
-                        </div>
-                        <div className="formBlock">
-                            <label>地址</label>
-                            <input type="text" value={this.state.address} onChange={(event) => this.setState({address: event.target.value})} disabled/>
                         </div>
                         <div className="formBlock">
                             <label>密碼</label>
@@ -69,4 +64,4 @@ class StoreSetting extends Component {
     }
 }
 
-export default StoreSetting;
+export default UserSetting;

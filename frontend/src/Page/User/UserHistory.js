@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import "../../Styles/StoreBrowseCase.css";
 import CaseItem from "../../Component/CaseItem";
+import "../../Styles/StoreHistory.css";
 
-
-class StoreBrowseCase extends Component {
+class UserHistory extends Component {
     /*
-    This is Store Browse Case Page, user should be able to:
-        1. browse a list of issued, on going cases
-        2. view detail of a case when click on the case
+    This is StoryHistory Page, should implement:
+        1. Purpose (text)
+        2. Guiadance (text)
+        3. Developer intro (text)
+        4. Sing in (feature)
+            mail, password
+        5. Sign up (feature)
+            5.1 Store sign up
+            5.2 Customer sign up
     */
     constructor(props) {
         super(props);
@@ -22,6 +27,7 @@ class StoreBrowseCase extends Component {
         this.setState({caseList: list});
     }
     handleClick(index) {
+        console.log('trigger on click', index);
         var list = this.state.caseList;
         var selected;
         for(let i=0; i<list.length; i++) {
@@ -37,34 +43,28 @@ class StoreBrowseCase extends Component {
     }
     render() {
         return (
-            <div className="Container browseCase">
+            <div className="Container history">
                 <div className="View cases-View">
-                    <div className="title">
-                        <h2><br />Current Order</h2>
+                    <div>
+                        <h2>過去媒合資訊</h2>
                     </div>
                     <ul>
                         {this.state.caseList.map((item, index) => {
-                            return <CaseItem caseInfo={item} onClick={item.onClick} key={index} index={index}/>;
+                            return <CaseItem caseInfo={item} onClick={item.onClick} class={item.class} key={index} index={index}/>;
                         })}
                     </ul>
-                    {/* <div>
-                        {this.state.caseList.map((item, index) => {
-                            return <CaseItem store={item.store} item={item.item} time={item.time} onClick={item.onClick} class={item.class} key={index} index={index}/>;
-                        })}
-                    </div> */}
                 </div>
-                {/* <div className="View detail-View">
+                <div className="View detail-View">
                     <h2>媒合資訊詳細資料</h2>
                     <div>
                         <h3>{this.state.detail.store}</h3>
                         <p>{this.state.detail.item}</p>
                         <p>{this.state.detail.time}</p>
                     </div>
-                </div> */}
+                </div>
             </div>
         );
     }
 }
 
-
-export default StoreBrowseCase;
+export default UserHistory;

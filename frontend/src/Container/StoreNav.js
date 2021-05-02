@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import "../Styles/Nav.css";
-
+import "../Styles/StoreNav.css";
 import NavItem from "../Component/NavItem";
 
 
@@ -24,6 +23,7 @@ class Nav extends Component {
 
     render() {
         return (
+<<<<<<< HEAD:frontend/src/Container/Nav.js
             <nav className="navContainer">
                 <div class="leftover">
                     <h3>剩杰食堂</h3>
@@ -41,6 +41,22 @@ class Nav extends Component {
                     <div class="line3"></div>
                 </div>
             </nav>
+=======
+            <div className="navContainer">
+                <NavItem path={"/"} text="主畫面"/>
+                <NavItem path={"/store-setting"} text="基本資料設定"/>
+                <NavItem path={"/store-history"} text="過去媒合資訊"/>
+                <NavItem path={"/store-browse-case"} text="公開媒合資訊"/>
+                <NavItem path={"/store-add-case"} text="新增媒合資訊"/>
+                {/* <button className="navItem" onClick={this.props.handleLogout}>
+                    <div>
+                        <div>登出</div>
+                    </div>
+                </button> */}
+                <NavItem path={"/logout"} text="登出" handleLogout={this.props.handleLogout} />
+                {/* <button onClick={this.props.handleLogout}>登出</button> */}
+            </div>
+>>>>>>> demo2Frontend:frontend/src/Container/StoreNav.js
         );
     }
 }
