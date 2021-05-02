@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, jsonify
 from pymongo import MongoClient
 import json
+import datetime
 
 app = Flask(__name__)
 client = MongoClient('mongodb+srv://SDMproject:SDMGROUP2@cluster0.w0fzh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
@@ -173,6 +174,28 @@ def store_add_goods():
         return jsonify({'msg': 'success'})
     except:
         # Failed to Add Goods
+        return jsonify({'msg': 'fail'})
+
+@app.route('/api/user/showGoods', methods=['POST'])
+def store_show_goods():
+
+    db = client.get_database(db_name)
+    goods = db.Goods
+    time_range = datetime.timedelta(hours = 8)
+    try:
+        # Succeed to Show Goods
+        all_list = list()
+        for document in goods.find():
+            all_list.append({'id': str(document.get('_id')),
+                            'time': (document.get('_id').generation_time + time_range).strftime("%m/%d/%Y%H:%M:%S"),
+                            'store': document['store'],
+                            'item': document['item'],
+                            'amount': document['amount'],
+                            'price': document['price'],
+                            'LaL': document['LaL']})
+        return jsonify(all_list)
+    except:
+        # Failed to Show Goods
         return jsonify({'msg': 'fail'})
 
 if __name__ == '__main__':

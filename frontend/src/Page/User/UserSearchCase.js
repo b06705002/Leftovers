@@ -3,6 +3,8 @@ import { GoogleMap, LoadScript, StandaloneSearchBox, Marker } from '@react-googl
 import "../../Styles/UserSearchCase.css";
 import CaseItem from "../../Component/CaseItem";
 import { serverConn } from '../../utils';
+import GPS from "../../assets/icon/gps.png";
+import { FaBeer } from 'react-icons/fa';
 
 const libraries = ['places'];
 
@@ -93,7 +95,7 @@ class UserBrowseCase extends Component {
                             <></>
                             {
                                 this.state.center_lat ?
-                                <Marker position={{lat: this.state.center_lat, lng: this.state.center_lng}} title="user"/>
+                                <Marker position={{lat: this.state.center_lat, lng: this.state.center_lng}} icon={{url: GPS, scaledSize: new window.google.maps.Size(40, 40), fillColor: '#FF0000'}}/>
                                 :
                                 <></>
                             }
