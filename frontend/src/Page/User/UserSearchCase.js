@@ -2,6 +2,7 @@ import React, { Component, useRef } from 'react';
 import { GoogleMap, LoadScript, StandaloneSearchBox, Marker } from '@react-google-maps/api';
 import "../../Styles/UserSearchCase.css";
 import CaseItem from "../../Component/CaseItem";
+import { serverConn } from '../../utils';
 
 const libraries = ['places'];
 
@@ -71,6 +72,10 @@ class UserBrowseCase extends Component {
         this.state.caseList[index].ref.current.scrollIntoView();
         this.handleClick(index);
         this.setState({center_lat: this.user_lat + (index + 1) * 0.001, center_lng: this.user_lng + (index + 1) * 0.001})
+    }
+
+    retrieveCases = async() => {
+        let resposne = await serverConn("", {});
     }
     render() {
         return (

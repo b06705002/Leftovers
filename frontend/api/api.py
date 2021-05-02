@@ -155,5 +155,25 @@ def user_settings():
         # Failed to Change Settings
         return jsonify({'msg': 'fail'})
 
+@app.route('/api/store/addGoods', methods=['POST'])
+def store_add_goods():
+
+    db = client.get_database(db_name)
+    goods = db.Goods
+    new_goods = {
+        'store': request.json['store'],
+        'item': request.json['item'],
+        'ammount': request.json['amount'],
+        'price': request.json['price'],
+        'LaL': request.json['LaL']
+    }
+    try:
+        # Succeed to Add Goods
+        goods.insert_one(new_goods)
+        return jsonify({'msg': 'success'})
+    except:
+        # Failed to Add Goods
+        return jsonify({'msg': 'fail'})
+
 if __name__ == '__main__':
     app.run(debug=True)
