@@ -42,7 +42,7 @@
 
 .setting input[type="text"]:focus {
     outline: none;
-    border-bottom-color: rgb(255, 190, 190);
+    border-bottom-color: black;
     animation-name: textFocus;
     animation-duration: 0.2s;
 }
@@ -73,6 +73,6 @@
         border-bottom-color: rgb(210, 210, 210);
     }
     to {
-        border-bottom-color: rgb(255, 190, 190);
+        border-bottom-color: black;
     }
 }

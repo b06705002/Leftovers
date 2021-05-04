@@ -54,14 +54,14 @@ class UserHistory extends Component {
                         })}
                     </ul>
                 </div>
-                <div className="View detail-View">
+                {/* <div className="View detail-View">
                     <h2>媒合資訊詳細資料</h2>
                     <div>
                         <h3>{this.state.detail.store}</h3>
                         <p>{this.state.detail.item}</p>
                         <p>{this.state.detail.time}</p>
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }

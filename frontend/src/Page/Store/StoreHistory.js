@@ -46,7 +46,7 @@ class StoryHistory extends Component {
             <div className="Container history">
                 <div className="View cases-View">
                     <div>
-                        <h2>過去媒合資訊</h2>
+                        <h2><br />History Info</h2>
                     </div>
                     <ul>
                         {this.state.caseList.map((item, index) => {
@@ -54,14 +54,14 @@ class StoryHistory extends Component {
                         })}
                     </ul>
                 </div>
-                <div className="View detail-View">
+                {/* <div className="View detail-View">
                     <h2>媒合資訊詳細資料</h2>
                     <div>
                         <h3>{this.state.detail.store}</h3>
                         <p>{this.state.detail.item}</p>
                         <p>{this.state.detail.time}</p>
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }

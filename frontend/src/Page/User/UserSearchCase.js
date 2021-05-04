@@ -95,7 +95,7 @@ class UserBrowseCase extends Component {
                             <></>
                             {
                                 this.state.center_lat ?
-                                <Marker position={{lat: this.state.center_lat, lng: this.state.center_lng}} icon={{url: GPS, scaledSize: new window.google.maps.Size(40, 40), fillColor: '#FF0000'}}/>
+                                <Marker position={{lat: this.user_lat, lng: this.user_lng}} icon={{url: GPS, scaledSize: {height: 40, width: 40}, fillColor: '#FF0000'}}/>
                                 :
                                 <></>
                             }
