@@ -248,16 +248,15 @@ class Login extends Component {
 
                         <div className="carousel-item active">
                             <img className="d-block w-100" src="https://i.postimg.cc/CL1SMd7L/1.jpg" alt="First slide" />
-                            <div className="carousel-caption d-none d-md-block">
-                            </div>
+                            {/* <div className="carousel-caption d-none d-md-block"></div> */}
                         </div>
                         <div className="carousel-item">
                             <img className="d-block w-100" src="https://i.postimg.cc/HLth79sG/2.jpg" alt="Second slide" />
-                            <div className="carousel-caption d-none d-md-block"></div>
+                            {/* <div className="carousel-caption d-none d-md-block"></div> */}
                         </div>
                         <div className="carousel-item">
                             <img className="d-block w-100" src="https://i.postimg.cc/XJmmV7YX/3.jpg" alt="Third slide" />
-                            <div className="carousel-caption d-none d-md-block"></div>
+                            {/* <div className="carousel-caption d-none d-md-block"></div> */}
                         </div>
 
                         <div className="user_login_page">
@@ -280,15 +279,15 @@ class Login extends Component {
                         <div className="store_login_page">
                             <div id="container1-store">
                                 <div className="login">  
-                                <h3 className="store_login_color">合作店家 登入 Login</h3>
-                                <form action="用戶管理.php">
-                                    <input type="text" id="username_store" name="username" placeholder="信箱帳號" required />
-                                    <div className="tab"></div>
-                                    <input type="text" id="password_store" name="password" placeholder="密碼" required />
-                                    <div className="tab"></div>
-                                    <input type="button" value="登入" className="submit-store" onClick={() => this.storeLogin()} />
-                                </form>  
-                                <h6 onClick={this.show_hide_store}>註冊帳號 <br/> 來成為合作店家吧❤</h6>
+                                    <h3 className="store_login_color">合作店家 登入 Login</h3>
+                                    <form action="用戶管理.php">
+                                        <input type="text" id="username_store" name="username" placeholder="信箱帳號" required />
+                                        <div className="tab"></div>
+                                        <input type="text" id="password_store" name="password" placeholder="密碼" required />
+                                        <div className="tab"></div>
+                                        <input type="button" value="登入" className="submit-store" onClick={() => this.storeLogin()} />
+                                    </form>  
+                                    <h6 onClick={this.show_hide_store}>註冊帳號 <br/> 來成為合作店家吧❤</h6>
                                 </div>
                             </div>
                         </div>
@@ -331,9 +330,7 @@ class Login extends Component {
                                         <input type="tel" id="phoneNo_store" name="phone_number" placeholder="手機號碼" required />
                                         <div className="tab"></div>
                                         <input type="email" id="email_store" name="email" placeholder="信箱帳號" required />
-                                        <div className="tab"></div> 
-                                        <input type="text" id="address_store" name="address" placeholder="店家地址" required />
-                                        <div className="tab"></div>           
+                                        <div className="tab"></div>          
                                         <input type="button" value="註冊" className="submit-store" onClick={() => this.storeRegister()}/>
                                     </form>  
                                     <h6 onClick={this.show_hide_store}>登入 <u>一般使用者/合作店家</u> 帳號</h6>
