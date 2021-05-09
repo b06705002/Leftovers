@@ -87,7 +87,8 @@ def store_add_goods():
         'amount': request.json['amount'],
         'price': request.json['price'],
         'LaL': request.json['LaL'],
-        'due': request.json['due']
+        'due': request.json['due'],
+        'apid': request.json['apid']
     }
     try:
         # Succeed to Add Goods
@@ -161,7 +162,7 @@ def user_settings():
         return jsonify({'msg': 'fail'})
 
 @app.route('/api/user/showGoods', methods=['POST'])
-def store_show_goods():
+def user_show_goods():
 
     db = client.get_database(db_name)
     goods = db.Goods
@@ -176,14 +177,16 @@ def store_show_goods():
                             'item': document['item'],
                             'amount': document['amount'],
                             'price': document['price'],
-                            'LaL': document['LaL']})
+                            'LaL': document['LaL'],
+                            'due': document['due'],
+                            'apid': document['apid']})
         return jsonify({'msg': 'success', 'data': all_list})
     except:
         # Failed to Show Goods
         return jsonify({'msg': 'fail'})
 
 @app.route('/api/user/checkStore', methods=['POST'])
-def store_check_store():
+def user_check_store():
 
     db = client.get_database(db_name)
     store = db.Store
@@ -193,6 +196,44 @@ def store_check_store():
         return jsonify({'msg': 'success',
                         'comment': post['comment']})
     # Failed to Check Store
+    return jsonify({'msg': 'fail'})
+
+@app.route('/api/user/order', methods=['POST'])
+def store_order():
+
+    db = client.get_database(db_name)
+    goods = db.Goods
+    post = goods.find_one({'_id': ObjectId(request.json['gid'])})
+    if post:
+        if request.json['amount'] <= post['amount']:
+            try:
+                db.Case.insert_one({'mail': request.json['mail'],
+                                    'item': post['item'],
+                                    'amount': post['amount'],
+                                    'price': post['price'],
+                                    'apid': request.json['apid']})
+                if request.json['amount'] == post['amount']:
+                    try:
+                        goods.delete_one({'_id': ObjectId(request.json['gid'])})
+                    except:
+                        # Failed to Order
+                        return jsonify({'msg': 'fail'})
+                else:
+                    try:
+                        query = {'_id': ObjectId(request.json['gid'])}
+                        new_goods = {'$set': {'amount': post['amount'] - request.json['amount']}}
+                        goods.update_one({'_id': ObjectId(request.json['gid'])})
+                    except:
+                        # Failed to Order
+                        return jsonify({'msg': 'fail'})
+            except:
+                # Failed to Order
+                return jsonify({'msg': 'fail'})
+            return jsonify({'msg': 'success'})
+        else:
+            # Goods Shortage
+            return jsonify({'msg': 'shortage'})
+    # Failed to Order
     return jsonify({'msg': 'fail'})
 
 if __name__ == '__main__':
