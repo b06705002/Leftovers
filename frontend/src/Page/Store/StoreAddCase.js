@@ -41,6 +41,7 @@ class StoreAddCase extends Component {
                     due: due,
                     store: cookies.get('store'),
                     LaL: cookies.get('LaL'), 
+                    apid: cookies.get('apid'),
                     pic: pic};
         let response = await serverConn('/api/store/addGoods', data);
         console.log('submit response', response);

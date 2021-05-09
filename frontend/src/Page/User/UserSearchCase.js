@@ -5,6 +5,7 @@ import CaseItem from "../../Component/CaseItem";
 import { serverConn } from '../../utils';
 import GPS from "../../assets/icon/gps.png";
 import Modal from 'react-modal';
+import Cookies from 'universal-cookie';
 
 const libraries = ['places'];
 
@@ -21,7 +22,8 @@ class UserBrowseCase extends Component {
                     , caseList: []
                     , clicked: -1
                     , modalOpen: false
-                    , selectedCase: {}};
+                    , selectedCase: {}
+                    , errMsg: ""};
         this.onLoad = ref => this.searchBox = ref;
         this.containerStyle = {
             width: '100%',
@@ -87,13 +89,44 @@ class UserBrowseCase extends Component {
                     list[i].class = '';
                     list[i].ref = React.createRef();
                 }
-                this.setState({caseList: list});
+                this.setState({caseList: list}, function() {
+                    console.log(this.state.caseList);
+                });
             });
         }
         else {
             console.log('failed to retrieve information')
         }
     }
+
+    retrieveStoreInfo = async() => {
+        let response = await serverConn("/api/user/checkStore", {apid: this.state.selectedCase.apid});
+        if(response.msg === 'success') {
+            let store = this.state.selectedCase;
+            store['comment'] = response.comment;
+            this.setState({selectedCase: store});
+        }
+        else {
+            console.log('failed to retrievead store information')
+        }
+    }
+    submitOrderForm = async() => {
+        let cookies = new Cookies();
+        let amount = document.getElementById('order_amount').value;
+        let gid = this.state.selectedCase.id;
+        let mail = cookies.get('mail');
+        let apid = this.state.selectedCase.apid;
+        // console.log(amount, gid, mail, apid);
+        let response = await serverConn("/api/user/order", {amount: amount, gid: gid, mail: mail, apid: apid});
+        if(response.msg === 'success') {
+            this.setState({errMsg: "送出成功"});
+        }
+        else {
+            console.log('fail to order');
+            this.setState({errMsg: "送出失敗"})
+        }
+    }
+
     render() {
         return (
             <div className="Container searchCase">
@@ -109,14 +142,24 @@ class UserBrowseCase extends Component {
                         >
                             <></>
                             <Modal
-                                isOpen={this.state.modalOpen}>
-                                <h1>this is modal</h1>
-                                <h2>{this.state.selectedCase.store}</h2>
-                                <h2>{this.state.selectedCase.item}</h2>
-                                <h2>{this.state.selectedCase.amount}</h2>
-                                <h2>{this.state.selectedCase.price}</h2>
-                                <h2>{this.state.selectedCase.time}</h2>
-                                <button onClick={() => this.setState({modalOpen: false})}>close</button>
+                                isOpen={this.state.modalOpen}
+                                onAfterOpen={this.retrieveStoreInfo}
+                                ariaHideApp={false}>
+                                <h2>店家 ： {this.state.selectedCase.store}</h2>
+                                <h2>食品 ： {this.state.selectedCase.item}</h2>
+                                <h2>數量 ： {this.state.selectedCase.amount}</h2>
+                                <h2>單位價格 ： {this.state.selectedCase.price}</h2>
+                                <h2>截止時間 ： {this.state.selectedCase.due}</h2>
+                                <div>店家評價 ： {(this.state.selectedCase.comment && this.state.selectedCase.comment.length) ? this.state.selectedCase.comment.map((item, index) => {
+                                    return <p key={index}>{item.stars}{item.text}</p>
+                                }) : <p>no comment</p>}</div>
+                                <form>
+                                    <label>數量</label>
+                                    <input type="number" min="1" max={this.state.selectedCase.amount} id="order_amount"></input>
+                                    <p>{this.state.errMsg}</p>
+                                    <button type="button" onClick={this.submitOrderForm}>送出</button>
+                                </form>
+                                <button onClick={() => this.setState({modalOpen: false, errMsg: ""})}>close</button>
                             </Modal>
                             {
                                 this.state.center_lat ?
@@ -127,7 +170,7 @@ class UserBrowseCase extends Component {
                             {
                                 this.state.caseList.length ?
                                 this.state.caseList.map((item, index) => {
-                                    return <Marker position={{lat: this.user_lat + (index + 1) * 0.001, lng: this.user_lng + (index + 1) * 0.001}} onClick={() => this.handleClickMarker(index)}/>
+                                    return <Marker position={{lat: this.user_lat + (index + 1) * 0.001, lng: this.user_lng + (index + 1) * 0.001}} onClick={() => this.handleClickMarker(index)} key={index}/>
                                 })
                                 :
                                 <></>

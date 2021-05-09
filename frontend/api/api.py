@@ -43,7 +43,8 @@ def store_register():
         'store': request.json['store'],
         'address': request.json['address'],
         'phone': request.json['phone'],
-        'apid': request.json['apid']
+        'apid': request.json['apid'],
+        'comment': []
     }
     try:
         # Succeed to Register
@@ -75,23 +76,27 @@ def store_settings():
         # Failed to Change Settings
         return jsonify({'msg': 'fail'})
 
-# @app.route('/api/store/addCase', methods=['POST'])
-# def store_add_case():
+@app.route('/api/store/addGoods', methods=['POST'])
+def store_add_goods():
 
-#     db = client.get_database(db_name)
-#     case = db.Case
-#     new_case = {
-        # 'mail': request.json['mail'],
-        # 'pwd': request.json['pwd'],
-        # 'LaL': request.json['LaL']
-    # }
-    # try:
-    #     # Succeed to Register
-    #     case.insert_one(new_case)
-    #     return jsonify({'msg': 'success')
-    # except:
-    #     # Failed to Register
-    #     return jsonify({'msg': 'fail'})
+    db = client.get_database(db_name)
+    goods = db.Goods
+    new_goods = {
+        'store': request.json['store'],
+        'item': request.json['item'],
+        'amount': request.json['amount'],
+        'price': request.json['price'],
+        'LaL': request.json['LaL'],
+        'due': request.json['due'],
+        'apid': request.json['apid']
+    }
+    try:
+        # Succeed to Add Goods
+        goods.insert_one(new_goods)
+        return jsonify({'msg': 'success'})
+    except:
+        # Failed to Add Goods
+        return jsonify({'msg': 'fail'})
 
 # user
 @app.route('/api/user/login', methods=['POST'])
@@ -156,26 +161,6 @@ def user_settings():
         # Failed to Change Settings
         return jsonify({'msg': 'fail'})
 
-@app.route('/api/store/addGoods', methods=['POST'])
-def store_add_goods():
-
-    db = client.get_database(db_name)
-    goods = db.Goods
-    new_goods = {
-        'store': request.json['store'],
-        'item': request.json['item'],
-        'ammount': request.json['amount'],
-        'price': request.json['price'],
-        'LaL': request.json['LaL']
-    }
-    try:
-        # Succeed to Add Goods
-        goods.insert_one(new_goods)
-        return jsonify({'msg': 'success'})
-    except:
-        # Failed to Add Goods
-        return jsonify({'msg': 'fail'})
-
 @app.route('/api/user/showGoods', methods=['POST'])
 def store_show_goods():
 
@@ -192,11 +177,26 @@ def store_show_goods():
                             'item': document['item'],
                             'amount': document['amount'],
                             'price': document['price'],
-                            'LaL': document['LaL']})
-        return jsonify(all_list)
+                            'LaL': document['LaL'],
+                            'apid': document['apid'],
+                            'due': document['due']})
+        return jsonify({'msg': 'success', 'data': all_list})
     except:
         # Failed to Show Goods
         return jsonify({'msg': 'fail'})
+
+@app.route('/api/user/checkStore', methods=['POST'])
+def store_check_store():
+
+    db = client.get_database(db_name)
+    store = db.Store
+    post = store.find_one({'apid': request.json['apid']})
+    if post:
+        # Succeed to Check Store
+        return jsonify({'msg': 'success',
+                        'comment': post['comment']})
+    # Failed to Check Store
+    return jsonify({'msg': 'fail'})
 
 if __name__ == '__main__':
     app.run(debug=True)
