@@ -122,7 +122,7 @@ class UserBrowseCase extends Component {
             this.setState({errMsg: "送出成功"});
         }
         else {
-            console.log('fail to order');
+            console.log(response.msg);
             this.setState({errMsg: "送出失敗"})
         }
     }
