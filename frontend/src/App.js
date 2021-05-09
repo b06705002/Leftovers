@@ -12,7 +12,7 @@ import Cookies from 'universal-cookie';
 import UserNav from './Container/UserNav';
 import UserHistory from './Page/User/UserHistory';
 import UserSetting from './Page/User/UserSetting';
-// import UserAddCase from './Page/User/UserSetting';
+import UserBrowseCase from './Page/User/UserBrowseCase';
 import UserSearchCase from './Page/User/UserSearchCase';
 import UserMatchCase from './Page/User/UserMatchCase';
 
@@ -115,7 +115,7 @@ class App extends Component {
                                     <Route path="/user-setting">
                                         <UserSetting setCookies={this.setCookies}/>
                                     </Route>
-                                    {/* <Route path="/user-add-case" component={UserAddCase}/> */}
+                                    <Route path="/user-browse-case" component={UserBrowseCase}/>
                                     <Route path="/user-search-case" component={UserSearchCase} exact/>
                                     <Route path="/user-search-case/:id?" component={UserMatchCase}/>
                                     <Redirect from="/logout" to="/"/>
