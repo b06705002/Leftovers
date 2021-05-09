@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 Simple component in navigation bar using NavLink from react-router-dom
 */
 
-export default (props) => {
+const NavItem = (props) => {
     return (
         <NavLink to={props.path} className="navItem" activeClassName="clicked" exact strict>
             <div onClick={props.handleLogout}>
@@ -13,3 +13,5 @@ export default (props) => {
         </NavLink>
     );
 }
+
+export default NavItem;

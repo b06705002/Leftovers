@@ -12,7 +12,7 @@ import Cookies from 'universal-cookie';
 import UserNav from './Container/UserNav';
 import UserHistory from './Page/User/UserHistory';
 import UserSetting from './Page/User/UserSetting';
-import UserAddCase from './Page/User/UserSetting';
+// import UserAddCase from './Page/User/UserSetting';
 import UserSearchCase from './Page/User/UserSearchCase';
 import UserMatchCase from './Page/User/UserMatchCase';
 

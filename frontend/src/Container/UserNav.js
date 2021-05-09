@@ -16,7 +16,7 @@ class Nav extends Component {
     render() {
         return (
             <nav className="navContainer">
-                <div class="leftover">
+                <div className="leftover">
                     <h3>剩杰食堂</h3>
                 </div>
                 <ul className="nav-links">
@@ -33,10 +33,10 @@ class Nav extends Component {
                     <NavItem path={"/logout"} text="登出" handleLogout={this.props.handleLogout} />
                 </ul>
                 {/* <button onClick={this.props.handleLogout}>登出</button> */}
-                <div class="burger">
-                    <div class="line1"></div>
-                    <div class="line2"></div>
-                    <div class="line3"></div>
+                <div className="burger">
+                    <div className="line1"></div>
+                    <div className="line2"></div>
+                    <div className="line3"></div>
                 </div>
             </nav>
         );

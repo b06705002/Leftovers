@@ -7,21 +7,24 @@ class FormCaseItem extends Component {
         this.loadFile = this.loadFile.bind(this);
     }
     loadFile(event) {
-        console.log(URL.createObjectURL(event.target.files[0]));
+        // console.log('load File', URL.createObjectURL(event.target.files[0]));
+        console.log('load File', event.target.files);
         this.setState({url: URL.createObjectURL(event.target.files[0])});
     }
     render() {
         return (
             <div className="formCaseItem">
                 <label>食物</label>
-                <input type="text" name="item" id="AC_item"/>
+                <input type="text" name="item" id="AC_item" required/>
                 <label>數量</label>
-                <input type="number" step="1" min="1" name="amount" id="AC_amount"/>
+                <input type="number" step="1" min="1" name="amount" id="AC_amount" required/>
                 <label>單價</label>
-                <input type="number" step="1" min="0" name="price" id="AC_price"/>
+                <input type="number" step="1" min="0" name="price" id="AC_price" required/>
+                <label>截止時間</label>
+                <input type="time" name="due" id="AC_due" required/>
                 <div>
                     <label>新增照片</label>
-                    <img src={this.state.url} width={this.state.url ? "50%" : "0%"}></img>
+                    <img src={this.state.url} width={this.state.url ? "50%" : "0%"} alt="uploaded"></img>
                     <input type="file" name="pic" id="AC_pic" accept="image/png, image/jpeg" onChange={this.loadFile}/>
                 </div>
             </div>

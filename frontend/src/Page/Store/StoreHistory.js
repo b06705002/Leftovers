@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+// import Cookies from 'universal-cookie';
 import CaseItem from "../../Component/CaseItem";
 import "../../Styles/StoreHistory.css";
+// import { serverConn } from '../../utils';
 
 class StoryHistory extends Component {
     /*
@@ -41,6 +43,12 @@ class StoryHistory extends Component {
         }
         this.setState({caseList: list, detail: selected});
     }
+    
+    retrieveCases() {
+        // let cookies = new Cookies();
+        // let email = cookies.get('email');
+    }
+
     render() {
         return (
             <div className="Container history">

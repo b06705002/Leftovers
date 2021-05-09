@@ -31,10 +31,17 @@ class StoreAddCase extends Component {
         let item = document.getElementById('AC_item').value;
         let amout = document.getElementById('AC_amount').value;
         let price = document.getElementById('AC_price').value;
-        let pic = document.getElementById('AC_pic').value
-        // console.log('submit', item, amout, price, pic);
+        let due = document.getElementById('AC_due').value;
+        let pic = document.getElementById('AC_pic').value;
         let cookies = new Cookies();
-        let data = {item: item, amount: parseInt(amout), price: parseInt(price), store: cookies.get('store'), LaL: cookies.get('LaL')};
+        console.log('due', due);
+        let data = {item: item, 
+                    amount: parseInt(amout), 
+                    price: parseInt(price),
+                    due: due,
+                    store: cookies.get('store'),
+                    LaL: cookies.get('LaL'), 
+                    pic: pic};
         let response = await serverConn('/api/store/addGoods', data);
         console.log('submit response', response);
         if(response.msg === "success") {
