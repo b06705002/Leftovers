@@ -4,7 +4,7 @@ import "../../Styles/UserSearchCase.css";
 import CaseItem from "../../Component/CaseItem";
 import { serverConn } from '../../utils';
 import GPS from "../../assets/icon/gps.png";
-import { FaBeer } from 'react-icons/fa';
+import Modal from 'react-modal';
 
 const libraries = ['places'];
 
@@ -19,7 +19,9 @@ class UserBrowseCase extends Component {
         this.state = {center_lat: null
                     , center_lng: null
                     , caseList: []
-                    , clicked: -1};
+                    , clicked: -1
+                    , modalOpen: false
+                    , selectedCase: {}};
         this.onLoad = ref => this.searchBox = ref;
         this.containerStyle = {
             width: '100%',
@@ -28,14 +30,11 @@ class UserBrowseCase extends Component {
         this.setPosition = this.setPosition.bind(this);
         this.positionError = this.positionError.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.retrieveCases = this.retrieveCases.bind(this);
     }
     componentDidMount() {
         console.log('try to get location');
-        var list = this.state.caseList;
-        for(let i=0; i<10; i++) {
-            list.push({store: `資訊${i}`, item: `食物${i}`, time: `時間${i}`, onClick: this.handleClick, class: "", ref: React.createRef()});
-        }
-        this.setState({caseList: list});
+        this.retrieveCases();
         navigator.geolocation.getCurrentPosition(this.setPosition, this.positionError, {enableHighAccuracy: true, maximumAge: 0});
     }
 
@@ -65,7 +64,8 @@ class UserBrowseCase extends Component {
                 selected = list[i];
             }
         }
-        this.setState({caseList: list, detail: selected});
+
+        this.setState({caseList: list, modalOpen: true, selectedCase: selected});
     }
 
     // when a case's marker is click, move the center of the map to the marker
@@ -76,8 +76,23 @@ class UserBrowseCase extends Component {
         this.setState({center_lat: this.user_lat + (index + 1) * 0.001, center_lng: this.user_lng + (index + 1) * 0.001})
     }
 
+    // retrieve all current cases from server
     retrieveCases = async() => {
-        let resposne = await serverConn("", {});
+        let response = await serverConn("/api/user/showGoods", {});
+        if(response.msg === 'success') {
+            this.setState({caseList: response.data}, function() {
+                let list = this.state.caseList;
+                for(let i=0; i<list.length; i++) {
+                    list[i].onClick = this.handleClick;
+                    list[i].class = '';
+                    list[i].ref = React.createRef();
+                }
+                this.setState({caseList: list});
+            });
+        }
+        else {
+            console.log('failed to retrieve information')
+        }
     }
     render() {
         return (
@@ -93,6 +108,16 @@ class UserBrowseCase extends Component {
                         zoom={this.state.center_lat ? 18 : 13}
                         >
                             <></>
+                            <Modal
+                                isOpen={this.state.modalOpen}>
+                                <h1>this is modal</h1>
+                                <h2>{this.state.selectedCase.store}</h2>
+                                <h2>{this.state.selectedCase.item}</h2>
+                                <h2>{this.state.selectedCase.amount}</h2>
+                                <h2>{this.state.selectedCase.price}</h2>
+                                <h2>{this.state.selectedCase.time}</h2>
+                                <button onClick={() => this.setState({modalOpen: false})}>close</button>
+                            </Modal>
                             {
                                 this.state.center_lat ?
                                 <Marker position={{lat: this.user_lat, lng: this.user_lng}} icon={{url: GPS, scaledSize: {height: 40, width: 40}, fillColor: '#FF0000'}}/>
