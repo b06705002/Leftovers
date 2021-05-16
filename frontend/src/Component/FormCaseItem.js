@@ -7,9 +7,11 @@ class FormCaseItem extends Component {
         this.loadFile = this.loadFile.bind(this);
     }
     loadFile(event) {
-        // console.log('load File', URL.createObjectURL(event.target.files[0]));
-        console.log('load File', event.target.files);
-        this.setState({url: URL.createObjectURL(event.target.files[0])});
+        var reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = () => {
+            this.setState({url: reader.result});
+        }
     }
     render() {
         return (

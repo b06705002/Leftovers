@@ -20,11 +20,20 @@ class StoreAddCase extends Component {
         list.push(<FormCaseItem />);
         this.setState({formCaseItems: list});
     }
-    // handleAdd() {
-    //     var list = this.state.formCaseItems;
-    //     list.push(<FormCaseItem />);
-    //     this.setState({formCaseItems: list});
-    // }
+    load_pic = async() => {
+        const reader = new FileReader();
+        const file = document.getElementById('AC_pic').files[0];
+        return new Promise((resolve, reject) => {
+            reader.onload = () => {
+                resolve(reader.result);
+            }
+            reader.onerror = () => {
+                reader.abort();
+                reject(new Error('Error when loading file'));
+            }
+            reader.readAsDataURL(file);
+        })
+    }
 
     // submit form data to server
     handleSubmit = async() => {
@@ -32,9 +41,9 @@ class StoreAddCase extends Component {
         let amout = document.getElementById('AC_amount').value;
         let price = document.getElementById('AC_price').value;
         let due = document.getElementById('AC_due').value;
-        let pic = document.getElementById('AC_pic').value;
+        // let pic = document.getElementById('AC_pic').files[0];
+        let pic = await this.load_pic();
         let cookies = new Cookies();
-        console.log('due', due);
         let data = {item: item, 
                     amount: parseInt(amout), 
                     price: parseInt(price),
