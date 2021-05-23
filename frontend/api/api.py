@@ -77,6 +77,28 @@ def store_settings():
         # Failed to Change Settings
         return jsonify({'msg': 'fail'})
 
+# @app.route('/api/store/addGoods', methods=['POST'])
+# def store_add_goods():
+
+#     db = client.get_database(db_name)
+#     goods = db.Goods
+#     new_goods = {
+#         'store': request.json['store'],
+#         'item': request.json['item'],
+#         'amount': request.json['amount'],
+#         'price': request.json['price'],
+#         'LaL': request.json['LaL'],
+#         'due': request.json['due'],
+#         'apid': request.json['apid']
+#     }
+#     try:
+#         # Succeed to Add Goods
+#         goods.insert_one(new_goods)
+#         return jsonify({'msg': 'success'})
+#     except:
+#         # Failed to Add Goods
+#         return jsonify({'msg': 'fail'})
+
 @app.route('/api/store/addGoods', methods=['POST'])
 def store_add_goods():
 
@@ -89,7 +111,8 @@ def store_add_goods():
         'price': request.json['price'],
         'LaL': request.json['LaL'],
         'due': request.json['due'],
-        'apid': request.json['apid']
+        'apid': request.json['apid'],
+        'pic': request.json['pic']
     }
     try:
         # Succeed to Add Goods
@@ -180,11 +203,13 @@ def user_show_goods():
                             'price': document['price'],
                             'LaL': document['LaL'],
                             'due': document['due'],
-                            'apid': document['apid']})
+                            'apid': document['apid'],
+                            'pic': document['pic']})
         return jsonify({'msg': 'success', 'data': all_list})
     except:
         # Failed to Show Goods
         return jsonify({'msg': 'fail'})
+
 
 @app.route('/api/user/checkStore', methods=['POST'])
 def user_check_store():
@@ -200,7 +225,7 @@ def user_check_store():
     return jsonify({'msg': 'fail'})
 
 @app.route('/api/user/order', methods=['POST'])
-def store_order():
+def user_order():
 
     db = client.get_database(db_name)
     goods = db.Goods
@@ -212,7 +237,9 @@ def store_order():
                                     'item': post['item'],
                                     'amount': int(request.json['amount']),
                                     'price': post['price'],
-                                    'apid': request.json['apid']})
+                                    'apid': request.json['apid'],
+                                    'history': False,
+                                    'pic': post['pic']})
                 if int(request.json['amount']) == post['amount']:
                     try:
                         goods.delete_one({'_id': ObjectId(request.json['gid'])})
@@ -236,6 +263,131 @@ def store_order():
             return jsonify({'msg': 'shortage fourth'})
     # Failed to Order
     return jsonify({'msg': 'fail fifth'})
+
+@app.route('/api/user/showCase', methods=['POST'])
+def user_show_case():
+
+    db = client.get_database(db_name)
+    case = db.Case
+    try:
+        # Succeed to Show Goods
+        all_list = list()
+        for document in case.find({'mail': request.json['mail']}):
+            if document['history'] == False:
+                all_list.append({'id': str(document.get('_id')),
+                                'mail': document['mail'],
+                                'item': document['item'],
+                                'amount': document['amount'],
+                                'price': document['price'],
+                                'apid': document['apid'],
+                                'pic': document['pic']})
+        return jsonify({'msg': 'success', 'data': all_list})
+    except:
+        # Failed to Show Goods
+        return jsonify({'msg': 'fail'})
+
+@app.route('/api/user/caseToHistory', methods=['POST'])
+def user_case_to_history():
+
+    db = client.get_database(db_name)
+    case = db.Case
+    print(request.json['id'])
+    query = {'_id': ObjectId(request.json['id'])}
+    new_case = {'$set': {'history': True}}
+    try:
+        # Succeed to Change Settings
+        case.update_one(query, new_case)
+        return jsonify({'msg': 'success'})
+    except: 
+        # Failed to Change Settings
+        return jsonify({'msg': 'fail'})
+
+@app.route('/api/user/showHistoryCase', methods=['POST'])
+def user_show_history_case():
+
+    db = client.get_database(db_name)
+    case = db.Case
+    try:
+        # Succeed to Show Goods
+        all_list = list()
+        for document in case.find({'mail': request.json['mail']}):
+            if document['history'] == True:
+                all_list.append({'id': str(document.get('_id')),
+                                'mail': document['mail'],
+                                'item': document['item'],
+                                'amount': document['amount'],
+                                'price': document['price'],
+                                'apid': document['apid'],
+                                'pic': document['pic']})
+        return jsonify({'msg': 'success', 'data': all_list})
+    except:
+        # Failed to Show Goods
+        return jsonify({'msg': 'fail'})
+
+@app.route('/api/store/showCase', methods=['POST'])
+def store_show_case():
+
+    db = client.get_database(db_name)
+    case = db.Case
+    try:
+        # Succeed to Show Case
+        all_list = list()
+        for document in case.find({'apid': request.json['apid']}):
+            if document['history'] == False:
+                all_list.append({'id': str(document.get('_id')),
+                                'mail': document['mail'],
+                                'item': document['item'],
+                                'amount': document['amount'],
+                                'price': document['price'],
+                                'apid': document['apid'],
+                                'pic': document['pic']})
+        return jsonify({'msg': 'success', 'data': all_list})
+    except:
+        # Failed to Show Case
+        return jsonify({'msg': 'fail'})
+
+@app.route('/api/store/showHistoryCase', methods=['POST'])
+def store_show_history_case():
+
+    db = client.get_database(db_name)
+    case = db.Case
+    try:
+        # Succeed to Show Goods
+        all_list = list()
+        for document in case.find({'apid': request.json['apid']}):
+            if document['history'] == True:
+                all_list.append({'id': str(document.get('_id')),
+                                'mail': document['mail'],
+                                'item': document['item'],
+                                'amount': document['amount'],
+                                'price': document['price'],
+                                'apid': document['apid'],
+                                'pic': document['pic']})
+        return jsonify({'msg': 'success', 'data': all_list})
+    except:
+        # Failed to Show Goods
+        return jsonify({'msg': 'fail'})
+
+@app.route('/api/store/showGoods', methods=['POST'])
+def store_show_goods():
+
+    db = client.get_database(db_name)
+    goods = db.Goods
+    try:
+        # Succeed to Show Goods
+        all_list = list()
+        for document in goods.find({'apid': request.json['apid']}):
+            all_list.append({'id': str(document.get('_id')),
+                            'item': document['item'],
+                            'amount': document['amount'],
+                            'price': document['price'],
+                            'apid': document['apid'],
+                            'pic': document['pic'],
+                            'due': document['due']})
+        return jsonify({'msg': 'success', 'data': all_list})
+    except:
+        # Failed to Show Goods
+        return jsonify({'msg': 'fail'})
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,20 +1,27 @@
 import './App.css';
 import Home from './Page/Common/Home';
+import Login from './Page/Common/Login';
+import SearchCase from './Page/Common/SearchCase';
+
 import StoreHistory from './Page/Store/StoreHistory';
 import StoreSetting from './Page/Store/StoreSetting';
 import StoreAddCase from './Page/Store/StoreAddCase';
 import StoreBrowseCase from './Page/Store/StoreBrowseCase';
-import Login from './Page/Common/Login';
+import StoreBrowseGood from './Page/Store/StoreBrowseGood';
+
 import StoreNav from './Container/StoreNav';
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
-import { Component } from 'react';
-import Cookies from 'universal-cookie';
 import UserNav from './Container/UserNav';
+import Nav from './Container/Nav';
+
 import UserHistory from './Page/User/UserHistory';
 import UserSetting from './Page/User/UserSetting';
 import UserBrowseCase from './Page/User/UserBrowseCase';
 import UserSearchCase from './Page/User/UserSearchCase';
 import UserMatchCase from './Page/User/UserMatchCase';
+
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import { Component } from 'react';
+import Cookies from 'universal-cookie';
 
 class App extends Component {
     constructor(props) {
@@ -82,7 +89,15 @@ class App extends Component {
                 <div className="App">
                     {!this.state.authenticated ? 
                     <>
-                        <Login handleLogin={this.handleLogin} setCookies={this.setCookies}/>
+                        <Nav />
+                        <Switch>
+                            <Route path="/" exact>
+                                <SearchCase />
+                            </Route>
+                            <Route path="/login">
+                                <Login handleLogin={this.handleLogin} setCookies={this.setCookies}/>
+                            </Route>
+                        </Switch>
                         <Redirect from="/logout" to="/"/>
                     </>
                     :
@@ -101,7 +116,9 @@ class App extends Component {
                                     </Route>
                                     <Route path="/store-add-case" component={StoreAddCase}/>
                                     <Route path="/store-browse-case" component={StoreBrowseCase}/>
+                                    <Route path="/store-browse-good" component={StoreBrowseGood} />
                                     <Redirect from="/logout" to="/"/>
+                                    <Redirect from="/login" to="/" />
                                 </Switch>
                             </>
                             :
@@ -119,6 +136,7 @@ class App extends Component {
                                     <Route path="/user-search-case" component={UserSearchCase} exact/>
                                     <Route path="/user-search-case/:id?" component={UserMatchCase}/>
                                     <Redirect from="/logout" to="/"/>
+                                    <Redirect from="/login" to="/" />
                                 </Switch>
                             </>
                         }

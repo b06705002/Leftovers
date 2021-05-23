@@ -53,7 +53,8 @@ class StoreAddCase extends Component {
                     apid: cookies.get('apid'),
                     pic: pic};
         let response = await serverConn('/api/store/addGoods', data);
-        console.log('submit response', response);
+        // console.log('submit response', response);
+        
         if(response.msg === "success") {
             let element = document.getElementsByClassName("errMsg")[0];
             element.classList = "errMsg success";

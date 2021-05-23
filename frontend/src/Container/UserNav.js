@@ -8,7 +8,7 @@ There links in the navigation bar that allow users to navigate between
 different page.
 */
 
-class Nav extends Component {
+class UserNav extends Component {
     constructor(props) {
         super(props);
         this.state = {clicked: 0};
@@ -44,4 +44,4 @@ class Nav extends Component {
     }
 }
 
-export default Nav;
+export default UserNav;

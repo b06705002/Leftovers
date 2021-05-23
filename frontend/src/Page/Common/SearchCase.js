@@ -9,7 +9,7 @@ import Cookies from 'universal-cookie';
 
 const libraries = ['places'];
 
-class UserBrowseCase extends Component {
+class BrowseCase extends Component {
     /*
     This is Store Browse Case Page, user should be able to:
         1. browse a list of issued, on going cases
@@ -66,7 +66,7 @@ class UserBrowseCase extends Component {
                 selected = list[i];
             }
         }
-
+        console.log('index', index)
         this.setState({caseList: list, modalOpen: true, selectedCase: selected, center_lat: this.state.caseList[index].LaL.lat, center_lng: this.state.caseList[index].LaL.lng});
     }
 
@@ -85,12 +85,12 @@ class UserBrowseCase extends Component {
             this.setState({caseList: response.data}, function() {
                 let list = this.state.caseList;
                 for(let i=0; i<list.length; i++) {
-                    list[i].onClick = this.handleClick;
+                    list[i].onClick = () => this.handleClick(i);
                     list[i].class = '';
                     list[i].ref = React.createRef();
                 }
                 this.setState({caseList: list}, function() {
-                    console.log(this.state.caseList);
+                    console.log('caseList', this.state.caseList);
                 });
             });
         }
@@ -155,12 +155,6 @@ class UserBrowseCase extends Component {
                                 <div>店家評價 ： {(this.state.selectedCase.comment && this.state.selectedCase.comment.length) ? this.state.selectedCase.comment.map((item, index) => {
                                     return <p key={index}>{item.stars}{item.text}</p>
                                 }) : <p>no comment</p>}</div>
-                                <form>
-                                    <label>數量</label>
-                                    <input type="number" min="1" max={this.state.selectedCase.amount} id="order_amount"></input>
-                                    <p>{this.state.errMsg}</p>
-                                    <button type="button" onClick={this.submitOrderForm}>送出</button>
-                                </form>
                                 <button onClick={() => this.setState({modalOpen: false, errMsg: ""})}>close</button>
                             </Modal>
                             {
@@ -194,4 +188,4 @@ class UserBrowseCase extends Component {
 }
 
 
-export default UserBrowseCase;
+export default BrowseCase;

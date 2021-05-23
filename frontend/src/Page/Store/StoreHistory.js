@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie';
 import CaseItem from "../../Component/CaseItem";
 import "../../Styles/StoreHistory.css";
-// import { serverConn } from '../../utils';
+import { serverConn } from '../../utils';
 
 class StoryHistory extends Component {
     /*
@@ -22,11 +22,12 @@ class StoryHistory extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount() {
-        var list = this.state.caseList;
-        for(let i=0; i<10; i++) {
-            list.push({store: `資訊${i}`, item: `食物${i}`, time: `時間${i}`, onClick: this.handleClick, class: ""});
-        }
-        this.setState({caseList: list});
+        // var list = this.state.caseList;
+        // for(let i=0; i<10; i++) {
+        //     list.push({store: `資訊${i}`, item: `食物${i}`, time: `時間${i}`, onClick: this.handleClick, class: ""});
+        // }
+        // this.setState({caseList: list});
+        this.retrieveCases();
     }
     handleClick(index) {
         console.log('trigger on click');
@@ -44,9 +45,19 @@ class StoryHistory extends Component {
         this.setState({caseList: list, detail: selected});
     }
     
-    retrieveCases() {
-        // let cookies = new Cookies();
-        // let email = cookies.get('email');
+    retrieveCases = async() => {
+        let cookies = new Cookies();
+        let apid = cookies.get('apid');
+        let response = await serverConn('/api/store/showHistoryCase', {apid: apid});
+        if(response.msg === 'success') {
+            this.setState({caseList: response.data}, function() {
+                let list = this.state.caseList;
+                for(let i=0; i<list.length; i++) {
+                    list.onClick = this.handleClick();
+                }
+                this.setState({caseList: list})
+            })
+        }
     }
 
     render() {

@@ -9,7 +9,7 @@ There links in the navigation bar that allow users to navigate between
 different page.
 */
 
-class StoreNav extends Component {
+class Nav extends Component {
     constructor(props) {
         super(props);
         this.state = {clicked: 0};
@@ -28,18 +28,8 @@ class StoreNav extends Component {
                     <h3>剩杰食堂</h3>
                 </div>
                 <ul className="nav-links">
-                    <NavItem path={"/"} text="主畫面"/>
-                    <NavItem path={"/store-setting"} text="基本資料設定"/>
-                    <NavItem path={"/store-history"} text="過去媒合資訊"/>
-                    <NavItem path={"/store-browse-case"} text="當前媒合資訊"/>
-                    <NavItem path={"/store-browse-good"} text="現有剩食資訊"/>
-                    <NavItem path={"/store-add-case"} text="新增媒合資訊"/>
-                    {/* <button className="navItem" onClick={this.props.handleLogout}>
-                        <div>
-                            <div>登出</div>
-                        </div>
-                    </button> */}
-                    <NavItem path={"/logout"} text="登出" handleLogout={this.props.handleLogout} />
+                    <NavItem path={"/"} text="看剩食"/>
+                    <NavItem path={"/login"} text="登入"/>
                 </ul>
                 <div className="burger">
                     <div className="line1"></div>
@@ -51,4 +41,4 @@ class StoreNav extends Component {
     }
 }
 
-export default StoreNav;
+export default Nav;
