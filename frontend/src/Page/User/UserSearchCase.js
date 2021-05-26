@@ -85,12 +85,12 @@ class UserBrowseCase extends Component {
             this.setState({caseList: response.data}, function() {
                 let list = this.state.caseList;
                 for(let i=0; i<list.length; i++) {
-                    list[i].onClick = this.handleClick;
+                    list[i].onClick = () => this.handleClick(i);
                     list[i].class = '';
                     list[i].ref = React.createRef();
                 }
                 this.setState({caseList: list}, function() {
-                    console.log(this.state.caseList);
+                    console.log('caseList', this.state.caseList);
                 });
             });
         }
