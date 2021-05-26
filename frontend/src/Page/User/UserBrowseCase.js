@@ -41,9 +41,9 @@ class UserBrowseCase extends Component {
     }
     handleChangeStatus = async(action, index) => {
         if(action === 'finish') {
-            console.log(this.state.caseList[index]);
+            // console.log(this.state.caseList[index]);
             let response = await serverConn('/api/user/caseToHistory', {id: this.state.caseList[index].id});
-            console.log(response);
+            // console.log(response);
             if(response.msg === 'success') {
                 let list = this.state.caseList;
                 list.splice(index, 1);
@@ -64,6 +64,7 @@ class UserBrowseCase extends Component {
                 for(let i=0; i<list.length; i++) {
                     list.onClick = this.handleClick();
                 }
+                // console.log(list);
                 this.setState({caseList: list})
             })
         }
