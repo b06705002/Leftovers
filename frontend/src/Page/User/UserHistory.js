@@ -30,7 +30,7 @@ class UserHistory extends Component {
         this.retrieveHistory();
     }
     handleClick(index) {
-        console.log('trigger on click', index);
+        // console.log('trigger on click', index);
         var list = this.state.caseList;
         var selected;
         for(let i=0; i<list.length; i++) {

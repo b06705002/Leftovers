@@ -43,7 +43,7 @@ class UserBrowseCase extends Component {
 
     // if user's position is successfully retrieved
     setPosition(pos) {
-        console.log('position', parseFloat(pos.coords.latitude), parseFloat(pos.coords.longitude));
+        // console.log('position', parseFloat(pos.coords.latitude), parseFloat(pos.coords.longitude));
         this.user_lat = parseFloat(pos.coords.latitude);
         this.user_lng = parseFloat(pos.coords.longitude);
         this.setState({center_lat: parseFloat(pos.coords.latitude), center_lng: parseFloat(pos.coords.longitude)});
@@ -89,7 +89,7 @@ class UserBrowseCase extends Component {
                     list[i].ref = React.createRef();
                 }
                 this.setState({caseList: list}, function() {
-                    console.log('caseList', this.state.caseList);
+                    // console.log('caseList', this.state.caseList);
                 });
             });
         }
@@ -121,7 +121,7 @@ class UserBrowseCase extends Component {
             this.setState({errMsg: "送出成功"});
         }
         else {
-            console.log(response.msg);
+            // console.log(response.msg);
             this.setState({errMsg: "送出失敗"})
         }
     }
@@ -172,7 +172,7 @@ class UserBrowseCase extends Component {
                             {
                                 this.state.caseList.length ?
                                 this.state.caseList.map((item, index) => {
-                                    console.log(item.LaL);
+                                    // console.log(item.LaL);
                                     return <Marker position={{lat: item.LaL.lat, lng: item.LaL.lng}} onClick={() => this.handleClickMarker(index)} key={index}/>
                                 })
                                 :
