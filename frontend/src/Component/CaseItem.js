@@ -15,7 +15,7 @@ class CaseItem extends Component {
                 {this.props.browse ? 
                     <>
                         <button onClick={()=>this.props.onChangeStatus('finish', this.props.index)}>確認</button>
-                        <button onClick={()=>this.props.onChangeStatus('cancel', this.props.index)}>取消</button>
+                        {/* <button onClick={()=>this.props.onChangeStatus('cancel', this.props.index)}>取消</button> */}
                     </>
                     :
                     <></>
