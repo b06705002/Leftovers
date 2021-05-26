@@ -8,6 +8,7 @@ import StoreSetting from './Page/Store/StoreSetting';
 import StoreAddCase from './Page/Store/StoreAddCase';
 import StoreBrowseCase from './Page/Store/StoreBrowseCase';
 import StoreBrowseGood from './Page/Store/StoreBrowseGood';
+import StoreHome from './Page/Store/StoreHome';
 
 import StoreNav from './Container/StoreNav';
 import UserNav from './Container/UserNav';
@@ -18,6 +19,7 @@ import UserSetting from './Page/User/UserSetting';
 import UserBrowseCase from './Page/User/UserBrowseCase';
 import UserSearchCase from './Page/User/UserSearchCase';
 import UserMatchCase from './Page/User/UserMatchCase';
+import UserHome from './Page/User/UserHome';
 
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import { Component } from 'react';
@@ -108,7 +110,7 @@ class App extends Component {
                                 <Switch>
                                     {/* <Route path="/" exact foo={this.handleLogout} component={Home}/> */}
                                     <Route path="/" exact>
-                                        <Home/>
+                                        <StoreHome/>
                                     </Route>
                                     <Route path="/store-history" component={StoreHistory}/>
                                     <Route path="/store-setting">
@@ -126,7 +128,7 @@ class App extends Component {
                                 <UserNav handleLogout={this.handleLogout} />
                                 <Switch>
                                     <Route path="/" exact>
-                                        <Home />
+                                        <UserHome />
                                     </Route>
                                     <Route path="/user-history" component={UserHistory}/>
                                     <Route path="/user-setting">
