@@ -1,5 +1,5 @@
 import React, { Component, useRef } from 'react';
-import { GoogleMap, LoadScript, StandaloneSearchBox, Marker } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, StandaloneSearchBox, Marker, InfoWindow } from '@react-google-maps/api';
 import "../../Styles/UserSearchCase.css";
 import CaseItem from "../../Component/CaseItem";
 import { serverConn } from '../../utils';
@@ -23,6 +23,7 @@ class UserBrowseCase extends Component {
                     , clicked: -1
                     , modalOpen: false
                     , selectedCase: {}
+                    , selectedMarker: null
                     , errMsg: ""};
         this.onLoad = ref => this.searchBox = ref;
         this.containerStyle = {
@@ -73,9 +74,7 @@ class UserBrowseCase extends Component {
     // when a case's marker is click, move the center of the map to the marker
     // and scroll the list on the right to the specific case
     handleClickMarker(index) {
-        this.state.caseList[index].ref.current.scrollIntoView();
-        this.handleClick(index);
-        this.setState({center_lat: this.state.caseList[index].LaL.lat, center_lng: this.state.caseList[index].LaL.lng})
+        this.setState({selectedMarker: this.state.caseList[index], center_lng: this.state.caseList[index].LaL.lat, center_lng: this.state.caseList[index].LaL.lng});
     }
 
     // retrieve all current cases from server
@@ -179,6 +178,19 @@ class UserBrowseCase extends Component {
                                 :
                                 <></>
                             }
+                            {this.state.selectedMarker ?
+                            <InfoWindow 
+                                position={{lat: this.state.selectedMarker.LaL.lat, lng: this.state.selectedMarker.LaL.lng}}
+                                onCloseClick={() => this.setState({selectedMarker: null})}
+                            >
+                                <>
+                                    <p>{this.state.selectedMarker.store}</p>
+                                    <p>電話：{this.state.selectedMarker.phone}</p>
+                                    <p>地址：{this.state.selectedMarker.address}</p>
+                                </>
+                            </InfoWindow>
+                            :
+                            <></>}
                         </GoogleMap>
                     </LoadScript>
                 </div>
