@@ -195,9 +195,12 @@ def user_show_goods():
         # Succeed to Show Goods
         all_list = list()
         for document in goods.find():
+            store = db.Store
+            post = store.find_one({'apid': document['apid']})
             all_list.append({'id': str(document.get('_id')),
                             'time': (document.get('_id').generation_time + time_range).strftime("%m/%d/%Y%H:%M:%S"),
                             'store': document['store'],
+                            'address': post['address'],
                             'item': document['item'],
                             'amount': document['amount'],
                             'price': document['price'],
@@ -274,7 +277,11 @@ def user_show_case():
         all_list = list()
         for document in case.find({'mail': request.json['mail']}):
             if document['history'] == False:
+                store = db.Store
+                post = store.find_one({'apid': document['apid']})
                 all_list.append({'id': str(document.get('_id')),
+                                'store': post['store'],
+                                'address': post['address'],
                                 'mail': document['mail'],
                                 'item': document['item'],
                                 'amount': document['amount'],
@@ -312,7 +319,11 @@ def user_show_history_case():
         all_list = list()
         for document in case.find({'mail': request.json['mail']}):
             if document['history'] == True:
+                store = db.Store
+                post = store.find_one({'apid': document['apid']})
                 all_list.append({'id': str(document.get('_id')),
+                                'store': post['store'],
+                                'address': post['address'],
                                 'mail': document['mail'],
                                 'item': document['item'],
                                 'amount': document['amount'],
