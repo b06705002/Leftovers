@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import FormCaseItem from "../../Component/FormCaseItem";
 import { serverConn } from '../../utils';
 import Cookies from 'universal-cookie';
+import {Redirect} from 'react-router-dom';
 
 class StoreAddCase extends Component {
     /*
@@ -12,7 +13,7 @@ class StoreAddCase extends Component {
     */
     constructor(props) {
         super(props);
-        this.state = {formCaseItems: [], errMsg: ""};
+        this.state = {formCaseItems: [], errMsg: "", redirect: false};
         // this.handleAdd = this.handleAdd.bind(this);
     }
     componentDidMount() {
@@ -56,17 +57,19 @@ class StoreAddCase extends Component {
         // console.log('submit response', response);
         
         if(response.msg === "success") {
-            let element = document.getElementsByClassName("errMsg")[0];
-            element.classList = "errMsg success";
-            this.setState({errMsg: "成功送出"});
+            alert('成功送出');
+            this.setState({redirect: true});
         }
         else {
-            let element = document.getElementsByClassName("errMsg")[0];
-            element.classList = "errMsg failed";
-            this.setState({errMsg: "請檢查您的資料然後再試一次"});
+            alert('請檢查您的資料然後再試一次');
+            this.setState({redirect: true});
+            window.history.replaceState({}, '', '/');
         }
     }
     render() {
+        if(this.state.redirect) {
+            return <Redirect to="/" />
+        }
         return (
             <div className="Container addCase">
                 <h1>新增一筆媒合資訊</h1>

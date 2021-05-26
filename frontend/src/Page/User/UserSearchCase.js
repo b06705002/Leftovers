@@ -148,6 +148,7 @@ class UserBrowseCase extends Component {
                                 onRequestClose={() => this.setState({modalOpen: false})}
                                 style={{content: {height: '80%', width: '80%', margin: 'auto'}}}>
                                 <h2>店家 ： {this.state.selectedCase.store}</h2>
+                                <h2>地址 ： {this.state.selectedCase.address}</h2>
                                 <h2>食品 ： {this.state.selectedCase.item}</h2>
                                 <h2>數量 ： {this.state.selectedCase.amount}</h2>
                                 <h2>單位價格 ： {this.state.selectedCase.price}</h2>

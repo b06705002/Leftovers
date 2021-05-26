@@ -41,13 +41,14 @@ class UserBrowseCase extends Component {
     }
     handleChangeStatus = async(action, index) => {
         if(action === 'finish') {
-            // console.log(this.state.caseList[index]);
-            let response = await serverConn('/api/user/caseToHistory', {id: this.state.caseList[index].id});
-            // console.log(response);
-            if(response.msg === 'success') {
-                let list = this.state.caseList;
-                list.splice(index, 1);
-                this.setState({caseList: list});
+            let result = window.confirm('要確認訂單嗎');
+            if(result) {
+                let response = await serverConn('/api/user/caseToHistory', {id: this.state.caseList[index].id});
+                if(response.msg === 'success') {
+                    let list = this.state.caseList;
+                    list.splice(index, 1);
+                    this.setState({caseList: list});
+                }
             }
         }
         else if(action === 'cancel') {
