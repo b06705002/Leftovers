@@ -125,6 +125,8 @@ def store_add_goods():
     goods = db.Goods
     new_goods = {
         'store': request.json['store'],
+        'address': request.json['address'],
+        'phone': request.json['phone'],
         'item': request.json['item'],
         'amount': request.json['amount'],
         'price': request.json['price'],
