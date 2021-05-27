@@ -275,6 +275,8 @@ def user_order():
             try:
                 db.Case.insert_one({'mail': request.json['mail'],
                                     'item': post['item'],
+                                    'address': post['address'],
+                                    'phone': post['phone'],
                                     'amount': int(request.json['amount']),
                                     'price': post['price'],
                                     'apid': request.json['apid'],
@@ -314,11 +316,9 @@ def user_show_case():
         all_list = list()
         for document in case.find({'mail': request.json['mail']}):
             if document['history'] == False:
-                store = db.Store
-                post = store.find_one({'apid': document['apid']})
                 all_list.append({'id': str(document.get('_id')),
-                                'store': post['store'],
-                                'address': post['address'],
+                                'store': document['store'],
+                                'address': document['address'],
                                 'mail': document['mail'],
                                 'item': document['item'],
                                 'amount': document['amount'],
