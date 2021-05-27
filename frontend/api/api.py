@@ -105,9 +105,9 @@ def store_password():
     try:
         # Succeed to Change Password
         post = store.find_one({'mail': request.json['mail']})
-        if post['password'] == request.json['old_pwd']:
+        if post['pwd'] == request.json['old_pwd']:
             query = {'mail': request.json['mail']}
-            new_pwd = {'$set': {'password': request.json['new_pwd']}}
+            new_pwd = {'$set': {'pwd': request.json['new_pwd']}}
             try:
                 store.update_one(query, new_pwd)
                 return jsonify({'msg': 'success'})
@@ -191,10 +191,7 @@ def user_settings():
     db = client.get_database(db_name)
     user = db.User
     query = {'mail': request.json['mail']}
-    new_user = {'$set': {'name': request.json['name'],
-                            'address': request.json['address'],
-                            'phone': request.json['phone'],
-                            'apid': request.json['apid']}}
+    new_user = {'$set': {'phone': request.json['phone']}}
     try:
         # Succeed to Change Settings
         user.update_one(query, new_user)
@@ -211,9 +208,9 @@ def user_password():
     try:
         # Succeed to Change Password
         post = user.find_one({'mail': request.json['mail']})
-        if post['password'] == request.json['old_pwd']:
+        if post['pwd'] == request.json['old_pwd']:
             query = {'mail': request.json['mail']}
-            new_pwd = {'$set': {'password': request.json['new_pwd']}}
+            new_pwd = {'$set': {'pwd': request.json['new_pwd']}}
             try:
                 user.update_one(query, new_pwd)
                 return jsonify({'msg': 'success'})

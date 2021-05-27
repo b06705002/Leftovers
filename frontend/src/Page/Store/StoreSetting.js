@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import { serverConn } from '../../utils';
 import "../../Styles/StoreSetting.css";
+import Modal from 'react-modal';
 
 class StoreSetting extends Component {
     /*
@@ -17,22 +18,38 @@ class StoreSetting extends Component {
                     , mail: this.allCookies['mail']
                     , phone: this.allCookies['phone']
                     , address: this.allCookies['address']
-                    , pwd: this.allCookies['pwd']
-                    , errMsg: ''};
+                    , old_pwd: ''
+                    , new_pwd: ''
+                    , con_pwd: ''
+                    , errMsg: ''
+                    , changePwd: false};
     }
     handleSubmit = async() => {
-        let data = {mail: this.state.mail, pwd: this.state.pwd, phone: this.state.phone};
-        let response = await serverConn('api/store/settings', data);
+        let data = {mail: this.state.mail, phone: this.state.phone};
+        let response = await serverConn('/api/store/settings', data);
+        this.props.setCookies({phone: this.state.phone});
         if(response.msg === 'success') {
             console.log('success');
-            this.props.setCookies({phone: this.state.phone, pwd: this.state.pwd, errMsg: ''});
+            alert("更改成功");
         }
         else {
             console.log('fail');
-            let cookies = new Cookies();
-            let allCookies = cookies.getAll();
-            this.setState({pwd: allCookies['pwd'], phone: allCookies['phone'], errMsg: 'Something wrong happened, please try again'});
+            alert("更改失敗");
         }
+    }
+    handleChangePwd = async() => {
+        if(this.state.new_pwd !== this.state.con_pwd) {
+            return;
+        }
+        let data = {mail: this.state.mail, old_pwd: this.state.old_pwd, new_pwd: this.state.new_pwd};
+        let response = await serverConn('/api/store/password', data);
+        if(response.msg === 'success') {
+            alert("更改密碼成功");
+        }
+        else {
+            alert("更改密碼失敗");
+        }
+        this.setState({changePwd: false})
     }
     render() {
         return (
@@ -56,12 +73,34 @@ class StoreSetting extends Component {
                             <label>地址</label>
                             <input type="text" value={this.state.address} onChange={(event) => this.setState({address: event.target.value})} disabled/>
                         </div>
-                        <div className="formBlock">
-                            <label>密碼</label>
-                            <input type="text" value={this.state.pwd} onChange={(event) => this.setState({pwd: event.target.value})}/>
-                        </div>
                         <button type="button" onClick={this.handleSubmit}>送出</button>
+                        <button type="button" onClick={() => this.setState({changePwd: true})}>修改密碼</button>
                     </form>
+                    <Modal 
+                        isOpen={this.state.changePwd}
+                        ariaHideApp={false}
+                        onRequestClose={() => this.setState({changePwd: false})}
+                        onAfterClose={() => this.setState({old_pwd: '', new_pwd: '', con_pwd: ''})}
+                        >
+                            <form>
+                                <div className="formBlock">
+                                    <label>原密碼</label>
+                                    <input type="password" value={this.state.old_pwd} onChange={(event) => this.setState({old_pwd: event.target.value})} />
+                                </div>
+                                <div className="formBlock">
+                                    <label>新密碼</label>
+                                    <input type="password" value={this.state.new_pwd} onChange={(event) => this.setState({new_pwd: event.target.value})} />
+                                </div>
+                                <div className="formBlock">
+                                    <label>確認密碼</label>
+                                    <input type="password" value={this.state.con_pwd} onChange={(event) => this.setState({con_pwd: event.target.value})} />
+                                </div>
+                                <div>
+                                    {this.state.new_pwd === this.state.con_pwd ? "" : "密碼不一致"}
+                                </div>
+                                <button type="button" onClick={this.handleChangePwd}>送出</button>
+                            </form>
+                    </Modal>
                 </div>
                 <div>{this.state.errMsg}</div>
             </div>
