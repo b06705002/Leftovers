@@ -233,13 +233,11 @@ def user_show_goods():
         # Succeed to Show Goods
         all_list = list()
         for document in goods.find():
-            store = db.Store
-            post = store.find_one({'apid': document['apid']})
             all_list.append({'id': str(document.get('_id')),
                             'time': (document.get('_id').generation_time + time_range).strftime("%m/%d/%Y%H:%M:%S"),
                             'store': document['store'],
-                            'address': post['address'],
-                            'phone': post['phone'],
+                            'address': document['address'],
+                            'phone': document['phone'],
                             'item': document['item'],
                             'amount': document['amount'],
                             'price': document['price'],
