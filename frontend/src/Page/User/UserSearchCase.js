@@ -6,6 +6,7 @@ import { serverConn } from '../../utils';
 import GPS from "../../assets/icon/gps.png";
 import Modal from 'react-modal';
 import Cookies from 'universal-cookie';
+import {Redirect} from 'react-router-dom';
 
 const libraries = ['places'];
 

@@ -54,13 +54,14 @@ class UserBrowseCase extends Component {
         var cookies = new Cookies();
         let mail = cookies.get('mail');
         let response = await serverConn('/api/user/showCase', {mail: mail});
+        console.log(response);
         if(response.msg === 'success') {
+            console.log(response.data);
             this.setState({caseList: response.data}, function() {
                 let list = this.state.caseList;
                 for(let i=0; i<list.length; i++) {
                     list.onClick = this.handleClick();
                 }
-                // console.log(list);
                 this.setState({caseList: list})
             })
         }

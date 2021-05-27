@@ -1,5 +1,5 @@
 import React, { Component, useRef } from 'react';
-import { GoogleMap, LoadScript, StandaloneSearchBox, Marker } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, StandaloneSearchBox, Marker, InfoWindow } from '@react-google-maps/api';
 import "../../Styles/UserSearchCase.css";
 import CaseItem from "../../Component/CaseItem";
 import { serverConn } from '../../utils';
@@ -23,6 +23,7 @@ class BrowseCase extends Component {
                     , clicked: -1
                     , modalOpen: false
                     , selectedCase: {}
+                    , selectedMarker: null
                     , errMsg: ""};
         this.onLoad = ref => this.searchBox = ref;
         this.containerStyle = {
@@ -73,9 +74,7 @@ class BrowseCase extends Component {
     // when a case's marker is click, move the center of the map to the marker
     // and scroll the list on the right to the specific case
     handleClickMarker(index) {
-        this.state.caseList[index].ref.current.scrollIntoView();
-        this.handleClick(index);
-        this.setState({center_lat: this.state.caseList[index].LaL.lat, center_lng: this.state.caseList[index].LaL.lng})
+        this.setState({selectedMarker: this.state.caseList[index], center_lng: this.state.caseList[index].LaL.lat, center_lng: this.state.caseList[index].LaL.lng});
     }
 
     // retrieve all current cases from server
@@ -90,7 +89,7 @@ class BrowseCase extends Component {
                     list[i].ref = React.createRef();
                 }
                 this.setState({caseList: list}, function() {
-                    console.log('caseList', this.state.caseList);
+                    // console.log('caseList', this.state.caseList);
                 });
             });
         }
@@ -108,22 +107,6 @@ class BrowseCase extends Component {
         }
         else {
             console.log('failed to retrievead store information')
-        }
-    }
-    submitOrderForm = async() => {
-        let cookies = new Cookies();
-        let amount = document.getElementById('order_amount').value;
-        let gid = this.state.selectedCase.id;
-        let mail = cookies.get('mail');
-        let apid = this.state.selectedCase.apid;
-        // console.log(amount, gid, mail, apid);
-        let response = await serverConn("/api/user/order", {amount: amount, gid: gid, mail: mail, apid: apid});
-        if(response.msg === 'success') {
-            this.setState({errMsg: "送出成功"});
-        }
-        else {
-            console.log(response.msg);
-            this.setState({errMsg: "送出失敗"})
         }
     }
 
@@ -166,12 +149,25 @@ class BrowseCase extends Component {
                             {
                                 this.state.caseList.length ?
                                 this.state.caseList.map((item, index) => {
-                                    console.log(item.LaL);
+                                    // console.log(item.LaL);
                                     return <Marker position={{lat: item.LaL.lat, lng: item.LaL.lng}} onClick={() => this.handleClickMarker(index)} key={index}/>
                                 })
                                 :
                                 <></>
                             }
+                            {this.state.selectedMarker ?
+                            <InfoWindow 
+                                position={{lat: this.state.selectedMarker.LaL.lat, lng: this.state.selectedMarker.LaL.lng}}
+                                onCloseClick={() => this.setState({selectedMarker: null})}
+                            >
+                                <>
+                                    <p>{this.state.selectedMarker.store}</p>
+                                    <p>電話：{this.state.selectedMarker.phone}</p>
+                                    <p>地址：{this.state.selectedMarker.address}</p>
+                                </>
+                            </InfoWindow>
+                            :
+                            <></>}
                         </GoogleMap>
                     </LoadScript>
                 </div>

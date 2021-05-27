@@ -13,7 +13,7 @@ class StoreAddCase extends Component {
     */
     constructor(props) {
         super(props);
-        this.state = {formCaseItems: [], errMsg: "", redirect: false};
+        this.state = {formCaseItems: [], errMsg: "", redirect: false, loading: false};
         // this.handleAdd = this.handleAdd.bind(this);
     }
     componentDidMount() {
@@ -49,12 +49,15 @@ class StoreAddCase extends Component {
                     amount: parseInt(amout), 
                     price: parseInt(price),
                     due: due,
+                    pic: pic,
                     store: cookies.get('store'),
-                    LaL: cookies.get('LaL'), 
                     apid: cookies.get('apid'),
-                    pic: pic};
+                    LaL: cookies.get('LaL'), 
+                    phone: cookies.get('phone'),
+                    address: cookies.get('address')};
+        this.setState({loading: true});
         let response = await serverConn('/api/store/addGoods', data);
-        // console.log('submit response', response);
+        this.setState({loading: false});
         
         if(response.msg === "success") {
             alert('成功送出');
@@ -80,7 +83,7 @@ class StoreAddCase extends Component {
                         <div className="errMsg">
                             {this.state.errMsg}
                         </div>
-                        <button type="button" onClick={this.handleSubmit}>送出</button>
+                        <button type="button" onClick={this.handleSubmit} disabled={this.state.loading}>送出</button>
                     </form>
                 </div>
             </div>
