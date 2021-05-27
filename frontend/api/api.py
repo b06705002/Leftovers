@@ -257,6 +257,7 @@ def user_order():
             try:
                 db.Case.insert_one({'mail': request.json['mail'],
                                     'item': post['item'],
+                                    'store': post['store'],
                                     'address': post['address'],
                                     'phone': post['phone'],
                                     'amount': int(request.json['amount']),
