@@ -16,7 +16,7 @@ db_name = 'SDM_project'
 cron = Scheduler(daemon=True)
 cron.start()
 
-@cron.interval_schedule(minutes=0.2)
+@cron.interval_schedule(minutes=1)
 def job_function():
     
     db = client.get_database(db_name)
@@ -88,11 +88,32 @@ def store_settings():
     db = client.get_database(db_name)
     store = db.Store
     query = {'mail': request.json['mail']}
-    new_store = {'$set': {'pwd': request.json['pwd'], 'phone': request.json['phone']}}
+    new_store = {'$set': {'phone': request.json['phone']}}
     try:
         # Succeed to Change Settings
         store.update_one(query, new_store)
         return jsonify({'msg': 'success'})
+    except: 
+        # Failed to Change Settings
+        return jsonify({'msg': 'fail'})
+
+@app.route('/api/store/password', methods=['POST'])
+def store_password():
+
+    db = client.get_database(db_name)
+    store = db.Store
+    try:
+        # Succeed to Change Password
+        post = store.find_one({'mail': request.json['mail']})
+        if post['password'] == request.json['old_pwd']:
+            query = {'mail': request.json['mail']}
+            new_pwd = {'$set': {'password': request.json['new_pwd']}}
+            try:
+                store.update_one(query, new_pwd)
+                return jsonify({'msg': 'success'})
+            except:
+                return jsonify({'msg': 'fail'})
+        return jsonify({'msg': 'fail'})
     except: 
         # Failed to Change Settings
         return jsonify({'msg': 'fail'})
@@ -170,8 +191,7 @@ def user_settings():
     db = client.get_database(db_name)
     user = db.User
     query = {'mail': request.json['mail']}
-    new_user = {'$set': {'pwd': request.json['pwd'],
-                            'name': request.json['name'],
+    new_user = {'$set': {'name': request.json['name'],
                             'address': request.json['address'],
                             'phone': request.json['phone'],
                             'apid': request.json['apid']}}
@@ -179,6 +199,27 @@ def user_settings():
         # Succeed to Change Settings
         user.update_one(query, new_user)
         return jsonify({'msg': 'success'})
+    except: 
+        # Failed to Change Settings
+        return jsonify({'msg': 'fail'})
+
+@app.route('/api/user/password', methods=['POST'])
+def user_password():
+
+    db = client.get_database(db_name)
+    user = db.User
+    try:
+        # Succeed to Change Password
+        post = user.find_one({'mail': request.json['mail']})
+        if post['password'] == request.json['old_pwd']:
+            query = {'mail': request.json['mail']}
+            new_pwd = {'$set': {'password': request.json['new_pwd']}}
+            try:
+                user.update_one(query, new_pwd)
+                return jsonify({'msg': 'success'})
+            except:
+                return jsonify({'msg': 'fail'})
+        return jsonify({'msg': 'fail'})
     except: 
         # Failed to Change Settings
         return jsonify({'msg': 'fail'})
