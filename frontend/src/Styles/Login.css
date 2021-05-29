@@ -13,6 +13,18 @@ body {
 .login input {
     font-size: 12px;
 }
+.user_login_page{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
+.store_login_page{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+}
 
 #username_user,
 #password_user,
@@ -58,8 +70,8 @@ h6:hover {
 #container2-user {
     /* margin: 50px; */
     padding: 10px;
-    width: 450px;
-    height: 400px;
+    width: 60vh;
+    height: 55vh;
     background-color: white;
     border-radius: 5px;
     border-top: 10px solid #a0d9da;
@@ -80,8 +92,8 @@ h6:hover {
 #container2-store {
     /* margin: 50px; */
     padding: 10px;
-    width: 450px;
-    height: 400px;
+    width: 60vh;
+    height: 55vh;
     background-color: white;
     border-radius: 5px;
     border-top: 10px solid #ff6e6e;
@@ -169,6 +181,9 @@ h6:hover {
 #container2-store {
     visibility: hidden; /*剛開始消失*/
     display: none;
+    position: absolute;
+    top: 20%;
+    right: 60%;
     height: 500px;
     text-align: center;
 }
@@ -207,6 +222,15 @@ h6:hover {
     margin: auto;
     font-size: 18px;
     line-height: 1.9;
+}
+
+.carousel-item img {
+    width:auto;
+    height:100%;
+    /* max-height:100%; */
+    /* width: 100vw;
+    height: auto; */
+    /* object-fit: cover; */
 }
 
 .navbar {

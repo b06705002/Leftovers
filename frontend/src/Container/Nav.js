@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import "../Styles/Nav.css";
+import "../Styles/StoreNav.css";
 import NavItem from "../Component/NavItem";
+
 
 /*
 This is a fixed navigation bar located at the left of the website.
@@ -13,15 +14,32 @@ class Nav extends Component {
         super(props);
         this.state = {clicked: 0};
     }
+
+    // navSlide() {
+    //     const burger = document.querySelector('.burger');
+    //     const nav =  document.querySelector('.nav-links');
+
+    // }
+
     render() {
         return (
-            <div className="navContainer">
-                <NavItem path={"/"} text="主畫面"/>
-                <NavItem path={"/store-setting"} text="基本資料設定"/>
-                <NavItem path={"/store-history"} text="過去媒合資訊"/>
-                <NavItem path={"/store-browse-case"} text="公開媒合資訊"/>
-                <NavItem path={"/store-add-case"} text="新增媒合資訊"/>
-            </div>
+            <nav className="navContainer">
+                <div className="leftover">
+                    <a href="/">
+                        <h3>剩杰食堂</h3>
+                    </a>
+                </div>
+                <ul className="nav-links">
+                    {/* <NavItem path={"/"} text="看剩食"/> */}
+                    <NavItem path={"/logout"} text="Eng" />
+                    <NavItem path={"/login"} text="登入"/>
+                </ul>
+                <div className="burger">
+                    <div className="line1"></div>
+                    <div className="line2"></div>
+                    <div className="line3"></div>
+                </div>
+            </nav>
         );
     }
 }
