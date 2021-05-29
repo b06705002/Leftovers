@@ -32,42 +32,42 @@ class StoreHome extends Component {
     render() {
         return (
             <div className="Container home">
-                <img class="main-store" src={Main} alt="main"></img>
+                <img className="main-store" src={Main} alt="main"></img>
                 {/* <h1>主畫面</h1> */}
                 
-                <div class="square_container-store">
-                    <div class="square-store">
-                        <a class="square_link" href="/store-add-case">
-                            <img class="food" src={Food} alt="food"></img>
+                <div className="square_container-store">
+                    <div className="square-store">
+                        <a className="square_link" href="/store-add-case">
+                            <img className="food" src={Food} alt="food"></img>
                             <h3>新增即期品</h3>
                         </a>
                     </div>
 
-                    <div class="square-store">
-                        <a class="square_link" href="/store-browse-good"> 
+                    <div className="square-store">
+                        <a className="square_link" href="/store-browse-good"> 
                         {/* href to be modified  */}
-                            <img class="product" src={Product} alt="product"></img>
+                            <img className="product" src={Product} alt="product"></img>
                             <h3>現有即期品</h3>
                         </a>
                     </div>
 
-                    <div class="square-store">
-                        <a class="square_link" href="/store-browse-case"> 
-                            <img class="order" src={Order_now} alt="order"></img>
+                    <div className="square-store">
+                        <a className="square_link" href="/store-browse-case"> 
+                            <img className="order" src={Order_now} alt="order"></img>
                             <h3>現有媒合資訊</h3>
                         </a>
                     </div>
 
-                    <div class="square-store">
-                        <a class="square_link" href="/store-history"> 
-                            <img class="order" src={Order} alt="order"></img>
+                    <div className="square-store">
+                        <a className="square_link" href="/store-history"> 
+                            <img className="order" src={Order} alt="order"></img>
                             <h3>歷史媒合紀錄</h3>
                         </a>
                     </div>
 
-                    <div class="square-store">
-                        <a class="square_link" href="/store-setting">
-                            <img class="person" src={Person} alt="person"></img>
+                    <div className="square-store">
+                        <a className="square_link" href="/store-setting">
+                            <img className="person" src={Person} alt="person"></img>
                             <h3>{this.store ? this.store : this.name} 資料設定</h3>
                         </a>
                     </div>

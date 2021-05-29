@@ -33,35 +33,35 @@ class UserHome extends Component {
         return (
             <div className="Container home">
                 
-                <img class="main-user" src={Main} alt="main"></img>
+                <img className="main-user" src={Main} alt="main"></img>
                 {/* <h1>主畫面</h1> */}
                 
-                <div class="square_container-user">
-                    <div class="square-user">
-                        <a class="square_link" href="/user-search-case">
-                            <img class="plate" src={Plate} alt="plate"></img>
+                <div className="square_container-user">
+                    <div className="square-user">
+                        <a className="square_link" href="/user-search-case">
+                            <img className="plate" src={Plate} alt="plate"></img>
                             <h3>查詢即期品</h3>
                         </a>
                     </div>
 
-                    <div class="square-user">
-                        <a class="square_link" href="/user-browse-case"> 
+                    <div className="square-user">
+                        <a className="square_link" href="/user-browse-case"> 
                         {/* href to be modified  */}
-                            <img class="product" src={Product} alt="product"></img>
+                            <img className="product" src={Product} alt="product"></img>
                             <h3>預定/追蹤的即期品</h3>
                         </a>
                     </div>
 
-                    <div class="square-user">
-                        <a class="square_link" href="/user-history"> 
-                            <img class="order" src={Order} alt="order"></img>
+                    <div className="square-user">
+                        <a className="square_link" href="/user-history"> 
+                            <img className="order" src={Order} alt="order"></img>
                             <h3>歷史訂單紀錄</h3>
                         </a>
                     </div>
 
-                    <div class="square-user">
-                        <a class="square_link" href="/user-setting">
-                            <img class="person" src={Person} alt="person"></img>
+                    <div className="square-user">
+                        <a className="square_link" href="/user-setting">
+                            <img className="person" src={Person} alt="person"></img>
                             <h3>{this.store ? this.store : this.name} 資料設定</h3>
                         </a>
                     </div>
