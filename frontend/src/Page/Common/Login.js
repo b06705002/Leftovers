@@ -3,6 +3,7 @@ import Cookies from 'universal-cookie';
 import "../../Styles/Login.css";
 import { serverConn } from '../../utils';
 import { GoogleMap, LoadScript, StandaloneSearchBox, InfoWindow } from '@react-google-maps/api';
+import Home from "../Picture/Home.jpg";
 
 const libraries = ['places'];
 
@@ -27,11 +28,17 @@ class Login extends Component {
                     , placeID: null
                     , LaL: null};
         this.containerStyle = {
-            width: '100%',
-            height: '800px',
+            width: '75vh',
+            height: '75vh',
+            position: 'absolute',
+            left: '110vh',
+            top: '18vh',
+            'box-shadow': '0 10px 16px 0 rgb(0,0,0,0.4)'
+            // left: 50vh;
         }
+        // this.id = "Map";
         this.show_hide_store = this.show_hide_store.bind(this);
-        this.show_hide_user = this.show_hide_user.bind(this);
+        // this.show_hide_user = this.show_hide_user.bind(this);
     }
     storeRegister = async() => {
         console.log('press!!!');
@@ -129,7 +136,7 @@ class Login extends Component {
             document.getElementById("password_user").value="";
             signup_user.style.display = "none";  //signup消失
             signup_store.style.display = "none";  //signup消失
-            this.setState({mapVisible: false});
+            // this.setState({mapVisible: false});
         } 
 
         // 登入切換到註冊
@@ -142,7 +149,7 @@ class Login extends Component {
             document.getElementById("fullname_user").value="";
             document.getElementById("password2_user").value="";
             document.getElementById("comfirm_password_user").value="";
-            this.setState({mapVisible: true});
+            // this.setState({mapVisible: true});
         }
     }
 
@@ -221,12 +228,12 @@ class Login extends Component {
                                 <li className="nav-item">
                                     <a className="nav-link" href="/#">About</a>
                                 </li>
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <a className="nav-link" href="/#">Portfolio</a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="/#">Services</a>
-                                </li>
+                                </li> */}
                                 <li className="nav-item">
                                     <a className="nav-link" href="/#">Contact</a>
                                 </li>
@@ -245,19 +252,18 @@ class Login extends Component {
                         {/* <div className="system_name">
                             <h2>蝦米碗糕 <br /> 剩杰食堂老師居然很愛</h2>
                         </div> */}
-
                         <div className="carousel-item active">
+                            <img className="d-block w-100" src={Home} alt="Home" />
+                        </div>
+                        {/* <div className="carousel-item active">
                             <img className="d-block w-100" src="https://i.postimg.cc/CL1SMd7L/1.jpg" alt="First slide" />
-                            {/* <div className="carousel-caption d-none d-md-block"></div> */}
                         </div>
                         <div className="carousel-item">
                             <img className="d-block w-100" src="https://i.postimg.cc/HLth79sG/2.jpg" alt="Second slide" />
-                            {/* <div className="carousel-caption d-none d-md-block"></div> */}
                         </div>
                         <div className="carousel-item">
                             <img className="d-block w-100" src="https://i.postimg.cc/XJmmV7YX/3.jpg" alt="Third slide" />
-                            {/* <div className="carousel-caption d-none d-md-block"></div> */}
-                        </div>
+                        </div> */}
 
                         <div className="user_login_page">
                             <div id="container1-user">
@@ -267,7 +273,7 @@ class Login extends Component {
                                     <form>
                                         <input type="text" id="username_user" name="username" placeholder="信箱帳號" required />
                                         <div className="tab"></div>
-                                        <input type="text" id="password_user" name="password" placeholder="密碼" required />
+                                        <input type="password" id="password_user" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
                                         <input type="button" value="登入" className="submit-user" onClick={() => this.userLogin()} />
                                     </form>  
@@ -283,7 +289,7 @@ class Login extends Component {
                                     <form action="用戶管理.php">
                                         <input type="text" id="username_store" name="username" placeholder="信箱帳號" required />
                                         <div className="tab"></div>
-                                        <input type="text" id="password_store" name="password" placeholder="密碼" required />
+                                        <input type="password" id="password_store" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
                                         <input type="button" value="登入" className="submit-store" onClick={() => this.storeLogin()} />
                                     </form>  
@@ -299,9 +305,9 @@ class Login extends Component {
                                     <form action="用戶管理.php">
                                         <input type="text" id="fullname_user" name="fullname" placeholder="使用者全名" required />
                                         <div className="tab"></div>
-                                        <input type="text" id="password2_user" name="password" placeholder="密碼" required />
+                                        <input type="password" id="password2_user" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
-                                        <input type="text" id="comfirm_password_user" name="comfirm_password" placeholder="確認密碼" required />
+                                        <input type="password" id="comfirm_password_user" name="comfirm_password" placeholder="確認密碼" required />
                                         <div className="tab"></div>
                                         <input type="tel" id="phoneNo_user" name="phone_number" placeholder="手機號碼" required />
                                         <div className="tab"></div>
@@ -321,9 +327,9 @@ class Login extends Component {
                                     <form action="用戶管理.php">
                                         <input type="text" id="fullname_store" name="fullname" placeholder="店家全名" value={this.state.store} required disabled/>
                                         <div className="tab"></div>
-                                        <input type="text" id="password2_store" name="password" placeholder="密碼" required />
+                                        <input type="password" id="password2_store" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
-                                        <input type="text" id="comfirm_password_store" name="comfirm_password" placeholder="確認密碼" required />
+                                        <input type="password" id="comfirm_password_store" name="comfirm_password" placeholder="確認密碼" required />
                                         <div className="tab"></div>
                                         <input type="text" id="address_store" name="address" placeholder="店家地址" value={this.state.address} required disabled/>
                                         <div className="tab"></div>

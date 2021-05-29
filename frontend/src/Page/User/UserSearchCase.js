@@ -1,4 +1,3 @@
-
 import React, { Component, useRef } from 'react';
 import { GoogleMap, LoadScript, StandaloneSearchBox, Marker, InfoWindow } from '@react-google-maps/api';
 import "../../Styles/UserSearchCase.css";
@@ -26,7 +25,8 @@ class UserBrowseCase extends Component {
                     , modalOpen: false
                     , selectedCase: {}
                     , selectedMarker: null
-                    , errMsg: ""};
+                    , errMsg: ""
+                    , redirect: false};
         this.onLoad = ref => this.searchBox = ref;
         this.containerStyle = {
             width: '100%',
@@ -120,11 +120,15 @@ class UserBrowseCase extends Component {
         // console.log(amount, gid, mail, apid);
         let response = await serverConn("/api/user/order", {amount: amount, gid: gid, mail: mail, apid: apid});
         if(response.msg === 'success') {
-            this.setState({errMsg: "送出成功"});
+            // this.setState({errMsg: "送出成功"});
+            alert("成功送出");
+            window.location.reload();
         }
         else {
             // console.log(response.msg);
-            this.setState({errMsg: "送出失敗"})
+            // this.setState({errMsg: "送出失敗"})
+            alert("送出失敗");
+            window.location.reload();
         }
     }
 
@@ -147,7 +151,8 @@ class UserBrowseCase extends Component {
                                 onAfterOpen={this.retrieveStoreInfo}
                                 ariaHideApp={false}
                                 onRequestClose={() => this.setState({modalOpen: false})}
-                                style={{content: {height: '80%', width: '80%', margin: 'auto'}}}>
+                                style={{content: {height: '80%', width: '80%', margin: 'auto'}}}
+                            >
                                 <h2>店家 ： {this.state.selectedCase.store}</h2>
                                 <h2>地址 ： {this.state.selectedCase.address}</h2>
                                 <h2>食品 ： {this.state.selectedCase.item}</h2>
@@ -196,8 +201,8 @@ class UserBrowseCase extends Component {
                         </GoogleMap>
                     </LoadScript>
                 </div>
-                <div class="store-title">
-                    <p class="title-name"> 剩食一覽表 </p>
+                <div className="store-title">
+                    <p className="title-name"> 剩食一覽表 </p>
                     {/* <button onclick={this.showMap} class= "map-button" >
                         地圖呈現店家位置
                     </button>

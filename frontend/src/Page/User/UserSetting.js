@@ -3,6 +3,7 @@ import Cookies from 'universal-cookie';
 import { serverConn } from '../../utils';
 import "../../Styles/StoreSetting.css";
 import Modal from 'react-modal';
+import {Redirect} from 'react-router-dom';
 
 class UserSetting extends Component {
     /*
@@ -22,7 +23,8 @@ class UserSetting extends Component {
                     , new_pwd: ''
                     , con_pwd: ''
                     , errMsg: ''
-                    , changePwd: false};
+                    , changePwd: false
+                    , redirect: false};
     }
     handleSubmit = async() => {
         let data = {mail: this.state.mail, phone: this.state.phone, name: this.state.name};
@@ -30,10 +32,12 @@ class UserSetting extends Component {
         if(response.msg === 'success') {
             alert("更改成功");
             this.props.setCookies({phone: this.state.phone});
+            this.setState({redirect: true});
         }
         else {
             console.log('fail');
             alert("更改失敗");
+            this.setState({redirect: true});
         }
     }
     handleChangePwd = async() => {
@@ -49,9 +53,12 @@ class UserSetting extends Component {
         else {
             alert("更改密碼失敗");
         }
-        this.setState({changePwd: false})
+        this.setState({changePwd: false, redirect: true})
     }
     render() {
+        if(this.state.redirect) {
+            return <Redirect to="/"/>
+        }
         return (
             <div className="Container setting">
                 <h1>使用者基本資料設定</h1>
