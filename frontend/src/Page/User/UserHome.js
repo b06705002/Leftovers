@@ -9,7 +9,8 @@ import Person from "../Picture/person.png";
 import Main from "../Picture/main.jpg";
 
 
-class Home extends Component {
+
+class UserHome extends Component {
     /*
     This is Home Page, should implement:
         1. Purpose (text)
@@ -73,6 +74,4 @@ class Home extends Component {
     }
 }
 
-
-
-export default Home;
+export default UserHome;

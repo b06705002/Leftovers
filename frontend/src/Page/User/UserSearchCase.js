@@ -1,4 +1,3 @@
-
 import React, { Component, useRef } from 'react';
 import { GoogleMap, LoadScript, StandaloneSearchBox, Marker, InfoWindow } from '@react-google-maps/api';
 import "../../Styles/UserSearchCase.css";

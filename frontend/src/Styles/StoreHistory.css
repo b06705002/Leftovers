@@ -47,6 +47,21 @@ body::-webkit-scrollbar {
     background:linear-gradient(transparent, rgb(231, 195, 154));
     border-radius: 5px;
 }
+::-webkit-scrollbar
+{
+    width: 12px;
+}
+::-webkit-scrollbar-thumb
+{
+    background:linear-gradient(transparent, rgb(231, 195, 154));
+    border-radius: 5px;
+}
+
+.cases-View li{
+    border-color: rgb(231, 195, 154);
+    cursor: pointer;
+}
+
 
 .cases-View li{
     border-color: rgb(231, 195, 154);

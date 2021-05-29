@@ -96,6 +96,10 @@
     margin-top: 50px;
 }
 
+.formCaseItem div {
+    margin-top: 50px;
+}
+
 .addCase button,
 .addCase input[type="submit"] {
     /* width: 15vh;
