@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import "../../Styles/StoreHome.css";
+import Plate from "../Picture/plate.png";
+// import Store from "../Picture/store.png";
+import Product from "../Picture/product.png";
+import Order from "../Picture/order.png";
+import Person from "../Picture/person.png";
+import Main from "../Picture/main.jpg";
 
 
 
@@ -26,9 +32,44 @@ class UserHome extends Component {
     render() {
         return (
             <div className="Container home">
-                <h1>使用者主畫面</h1>
-                <h2>歡迎回來 {this.store ? this.store : this.name}</h2>
+                
+                <img class="main-user" src={Main} alt="main"></img>
+                {/* <h1>主畫面</h1> */}
+                
+                <div class="square_container-user">
+                    <div class="square-user">
+                        <a class="square_link" href="/user-search-case">
+                            <img class="plate" src={Plate} alt="plate"></img>
+                            <h3>查詢即期品</h3>
+                        </a>
+                    </div>
+
+                    <div class="square-user">
+                        <a class="square_link" href="/user-browse-case"> 
+                        {/* href to be modified  */}
+                            <img class="product" src={Product} alt="product"></img>
+                            <h3>預定/追蹤的即期品</h3>
+                        </a>
+                    </div>
+
+                    <div class="square-user">
+                        <a class="square_link" href="/user-history"> 
+                            <img class="order" src={Order} alt="order"></img>
+                            <h3>歷史訂單紀錄</h3>
+                        </a>
+                    </div>
+
+                    <div class="square-user">
+                        <a class="square_link" href="/user-setting">
+                            <img class="person" src={Person} alt="person"></img>
+                            <h3>{this.store ? this.store : this.name} 資料設定</h3>
+                        </a>
+                    </div>
+                </div>
+                
             </div>
+
+            
         );
     }
 }

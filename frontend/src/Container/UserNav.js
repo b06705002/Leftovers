@@ -17,20 +17,13 @@ class UserNav extends Component {
         return (
             <nav className="navContainer">
                 <div className="leftover">
-                    <h3>剩杰食堂</h3>
+                    <a href="/">
+                        <h3>剩杰食堂</h3>
+                    </a>
                 </div>
                 <ul className="nav-links">
-                    <NavItem path={"/"} text="主畫面"/>
-                    <NavItem path={"/user-setting"} text="基本資料設定"/>
-                    <NavItem path={"/user-search-case"} text="搜尋媒合店家"/>
-                    <NavItem path={"/user-history"} text="過去媒合資訊"/>
-                    <NavItem path={"/user-browse-case"} text="目前媒合資訊" />
-                    {/* <NavItem path={"/user-add-case"} text="新增媒合資訊"/> */}
-                    {/* <button className="navItem" onClick={this.props.handleLogout}>
-                        <div>
-                            <div>登出</div>
-                        </div>
-                    </button> */}
+                    {/* <button>English|</button> */}
+                    <NavItem path={"/logout"} text="Eng" />
                     <NavItem path={"/logout"} text="登出" handleLogout={this.props.handleLogout} />
                 </ul>
                 {/* <button onClick={this.props.handleLogout}>登出</button> */}

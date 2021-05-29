@@ -69,9 +69,9 @@ class UserBrowseCase extends Component {
     render() {
         return (
             <div className="Container browseCase">
-                <div className="View cases-View">
+                <div className="View cases-View-browse">
                     <div className="title">
-                        <h2><br />Current Order</h2>
+                        <h2>Current Order</h2>
                     </div>
                     <ul>
                         {this.state.caseList.map((item, index) => {

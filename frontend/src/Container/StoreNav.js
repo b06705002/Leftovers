@@ -25,20 +25,12 @@ class StoreNav extends Component {
         return (
             <nav className="navContainer">
                 <div className="leftover">
-                    <h3>剩杰食堂</h3>
+                    <a href="/">
+                        <h3>剩杰食堂</h3>
+                    </a>
                 </div>
                 <ul className="nav-links">
-                    <NavItem path={"/"} text="主畫面"/>
-                    <NavItem path={"/store-setting"} text="基本資料設定"/>
-                    <NavItem path={"/store-history"} text="過去媒合資訊"/>
-                    <NavItem path={"/store-browse-case"} text="當前媒合資訊"/>
-                    <NavItem path={"/store-browse-good"} text="現有剩食資訊"/>
-                    <NavItem path={"/store-add-case"} text="新增媒合資訊"/>
-                    {/* <button className="navItem" onClick={this.props.handleLogout}>
-                        <div>
-                            <div>登出</div>
-                        </div>
-                    </button> */}
+                    <NavItem path={"/logout"} id="change" text="Eng" />
                     <NavItem path={"/logout"} text="登出" handleLogout={this.props.handleLogout} />
                 </ul>
                 <div className="burger">

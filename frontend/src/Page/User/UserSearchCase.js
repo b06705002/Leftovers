@@ -153,9 +153,9 @@ class UserBrowseCase extends Component {
                                 <h2>數量 ： {this.state.selectedCase.amount}</h2>
                                 <h2>單位價格 ： {this.state.selectedCase.price}</h2>
                                 <h2>截止時間 ： {this.state.selectedCase.due}</h2>
-                                <div>店家評價 ： {(this.state.selectedCase.comment && this.state.selectedCase.comment.length) ? this.state.selectedCase.comment.map((item, index) => {
+                                {/* <div>店家評價 ： {(this.state.selectedCase.comment && this.state.selectedCase.comment.length) ? this.state.selectedCase.comment.map((item, index) => {
                                     return <p key={index}>{item.stars}{item.text}</p>
-                                }) : <p>no comment</p>}</div>
+                                }) : <p>no comment</p>}</div> */}
                                 <form>
                                     <label>數量</label>
                                     <input type="number" min="1" max={this.state.selectedCase.amount} id="order_amount"></input>
@@ -195,7 +195,19 @@ class UserBrowseCase extends Component {
                         </GoogleMap>
                     </LoadScript>
                 </div>
-                <div className="View cases-View">
+                <div class="store-title">
+                    <p class="title-name"> 剩食一覽表 </p>
+                    {/* <button onclick={this.showMap} class= "map-button" >
+                        地圖呈現店家位置
+                    </button>
+                    <button class= "leftover-button" >
+                        有即期品的店家
+                    </button>
+                    <button class= "allStore-button" >
+                        全部店家
+                    </button> */}
+                </div>    
+                <div className="View cases-View-search">
                     <ul>
                         {this.state.caseList.map((item, index) => {
                             return <CaseItem caseInfo={item} onClick={item.onClick} class={item.class} key={index} index={index}/>;

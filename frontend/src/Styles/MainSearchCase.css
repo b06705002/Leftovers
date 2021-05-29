@@ -4,19 +4,23 @@
     overflow:hidden;
 }
 
+.navItem a{
+    font-size: 10vh;
+}
+
 .View.map-View{
     height: 100%;
     width: 69.5%;
     display:inline-block;
 }
-.View.cases-View-search{
+.View.cases-View-MainSearch{
     height: 100%;
     width: 30%;
     display:inline-block;
     position: relative;
-    top: -84vh;
-    left: 73vh;
-    overflow:auto;
+    /* top: -84vh;
+    left: 73vh; */
+    overflow-x:hidden;
 }
 .store-title{
     /* margin-top: 5vh; */
@@ -31,7 +35,7 @@
     /* width: 100%; */
 }
 
-.View.cases-View-search li img{
+.View.cases-View-MainSearch li img{
     width: 25vh;
     height: 25vh;
 }
@@ -51,26 +55,7 @@ h2{
     visibility: hidden;
 } */
 
-.ReactModal__Content--after-open form {
-    /* display: flex;
-    
-    justify-content: center;
-    align-items: center;
-    text-align: center;
 
-    font-size: 24px; */
-    /* min-height: 100vh; */
-    /* flex-direction: column; */
-    /* text-align: center; */
-}
-
-/* .ReactModal__Content--after-open form button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: auto;
-} */
 
 .ReactModal__Content h2{
     /* overflow: hidden; */
@@ -111,12 +96,6 @@ h2{
     background-color: white;
     border-radius: 3vh;
 }
-.ReactModal__Content--after-open p {
-    text-align: center;
-    font-size: 4vh;
-    margin-top: 1vh;
-}
-
 
 /* .cases-View-search{
     display: inline;
@@ -134,7 +113,7 @@ h2{
     padding-left:0;
 } */
 
-.cases-View-search li{
+.cases-View-MainSearch li{
     display: inline-block;
     width: 61.5vh;
     height: 65vh;
@@ -169,39 +148,6 @@ h2{
     font-size: 6vh;
     font-weight: bold;
 }
-/* .store-title .map-button{
-    margin-left: 20vh;
-    width: 30vh;
-    height: 10vh;
-    border: none;
-    background-color:#b3dd9b;
-    border-radius: 35px;
-    font-size: 22px;
-    font-weight: bold; 
-    color: black;
-}
-.store-title .leftover-button{
-    margin-left: 15vh;
-    width: 25vh;
-    height: 7vh;
-    border: solid red 2px;
-    background-color:white;
-    border-radius: 7px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.store-title .allStore-button{
-    margin-left: 2vh;
-    width: 20vh;
-    height: 7vh;
-    border: solid #eb7947 2px;
-    background-color:white;
-    border-radius: 7px;
-    font-size: 18px;
-    font-weight: bold;
-    
-} */
 
 .photo{
     /* left: 3vh; */
@@ -246,6 +192,7 @@ h2{
     /* height: 150px; */
     /* border: 3px solid black; */
     box-shadow: 0 10px 16px 0 rgb(0,0,0,0.4);
+    background-color: white;
     /* margin-left: 20vh; */
     /* float: left; */
     /* position:relative; */

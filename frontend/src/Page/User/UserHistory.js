@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CaseItem from "../../Component/CaseItem";
-import "../../Styles/StoreHistory.css";
+import "../../Styles/StoreBrowseCase.css";
 import Cookies from 'universal-cookie';
 import { serverConn } from '../../utils';
 
@@ -60,10 +60,10 @@ class UserHistory extends Component {
     }
     render() {
         return (
-            <div className="Container history">
-                <div className="View cases-View">
+            <div className="Container browseCase">
+                <div className="View cases-View-browse">
                     <div>
-                        <h2>過去媒合資訊</h2>
+                        <h2>History Order</h2> 
                     </div>
                     <ul>
                         {this.state.caseList.map((item, index) => {

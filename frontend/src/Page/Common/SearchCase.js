@@ -1,6 +1,6 @@
 import React, { Component, useRef } from 'react';
 import { GoogleMap, LoadScript, StandaloneSearchBox, Marker, InfoWindow } from '@react-google-maps/api';
-import "../../Styles/UserSearchCase.css";
+import "../../Styles/MainSearchCase.css";
 import CaseItem from "../../Component/CaseItem";
 import { serverConn } from '../../utils';
 import GPS from "../../assets/icon/gps.png";
@@ -135,9 +135,9 @@ class BrowseCase extends Component {
                                 <h2>數量 ： {this.state.selectedCase.amount}</h2>
                                 <h2>單位價格 ： {this.state.selectedCase.price}</h2>
                                 <h2>截止時間 ： {this.state.selectedCase.due}</h2>
-                                <div>店家評價 ： {(this.state.selectedCase.comment && this.state.selectedCase.comment.length) ? this.state.selectedCase.comment.map((item, index) => {
+                                {/* <div>店家評價 ： {(this.state.selectedCase.comment && this.state.selectedCase.comment.length) ? this.state.selectedCase.comment.map((item, index) => {
                                     return <p key={index}>{item.stars}{item.text}</p>
-                                }) : <p>no comment</p>}</div>
+                                }) : <p>no comment</p>}</div> */}
                                 <button onClick={() => this.setState({modalOpen: false, errMsg: ""})}>close</button>
                             </Modal>
                             {
@@ -171,7 +171,7 @@ class BrowseCase extends Component {
                         </GoogleMap>
                     </LoadScript>
                 </div>
-                <div className="View cases-View">
+                <div className="View cases-View-MainSearch">
                     <ul>
                         {this.state.caseList.map((item, index) => {
                             return <CaseItem caseInfo={item} onClick={item.onClick} class={item.class} key={index} index={index}/>;

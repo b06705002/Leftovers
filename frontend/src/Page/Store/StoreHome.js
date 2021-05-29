@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import "../../Styles/StoreHome.css";
-
+import Food from "../Picture/food.png";
+// import Store from "../Picture/store.png";
+import Product from "../Picture/product.png";
+import Order from "../Picture/order.png";
+import Order_now from "../Picture/order_now.png";
+import Person from "../Picture/store.png";
+import Main from "../Picture/store.jpg";
 
 
 class StoreHome extends Component {
@@ -26,8 +32,48 @@ class StoreHome extends Component {
     render() {
         return (
             <div className="Container home">
-                <h1>店家主畫面</h1>
-                <h2>歡迎回來 {this.store ? this.store : this.name}</h2>
+                <img class="main-store" src={Main} alt="main"></img>
+                {/* <h1>主畫面</h1> */}
+                
+                <div class="square_container-store">
+                    <div class="square-store">
+                        <a class="square_link" href="/store-add-case">
+                            <img class="food" src={Food} alt="food"></img>
+                            <h3>新增即期品</h3>
+                        </a>
+                    </div>
+
+                    <div class="square-store">
+                        <a class="square_link" href="/store-browse-good"> 
+                        {/* href to be modified  */}
+                            <img class="product" src={Product} alt="product"></img>
+                            <h3>現有即期品</h3>
+                        </a>
+                    </div>
+
+                    <div class="square-store">
+                        <a class="square_link" href="/store-browse-case"> 
+                            <img class="order" src={Order_now} alt="order"></img>
+                            <h3>現有媒合資訊</h3>
+                        </a>
+                    </div>
+
+                    <div class="square-store">
+                        <a class="square_link" href="/store-history"> 
+                            <img class="order" src={Order} alt="order"></img>
+                            <h3>歷史媒合紀錄</h3>
+                        </a>
+                    </div>
+
+                    <div class="square-store">
+                        <a class="square_link" href="/store-setting">
+                            <img class="person" src={Person} alt="person"></img>
+                            <h3>{this.store ? this.store : this.name} 資料設定</h3>
+                        </a>
+                    </div>
+                </div>
+                {/* <h1>店家主畫面</h1>
+                <h2>歡迎回來 {this.store ? this.store : this.name}</h2> */}
             </div>
         );
     }

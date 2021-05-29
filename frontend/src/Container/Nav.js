@@ -25,10 +25,13 @@ class Nav extends Component {
         return (
             <nav className="navContainer">
                 <div className="leftover">
-                    <h3>剩杰食堂</h3>
+                    <a href="/">
+                        <h3>剩杰食堂</h3>
+                    </a>
                 </div>
                 <ul className="nav-links">
-                    <NavItem path={"/"} text="看剩食"/>
+                    {/* <NavItem path={"/"} text="看剩食"/> */}
+                    <NavItem path={"/logout"} text="Eng" />
                     <NavItem path={"/login"} text="登入"/>
                 </ul>
                 <div className="burger">

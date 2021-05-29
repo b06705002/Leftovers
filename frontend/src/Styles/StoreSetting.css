@@ -1,7 +1,12 @@
+/* body{
+    overflow: visible;
+} */
+
 .Container {
     height: 100%;
-    width: 90%;
+    width: 100%;
 }
+
 
 .setting {
     display: flex;
@@ -29,15 +34,61 @@
     /* background-color: red; */
 }
 
-.setting input[type="text"] {
-    align-self: center;
-    width: 80%;
+.ReactModal__Content--after-open form{
+    visibility: visible;
+}
+/* .ReactModal__Content--after-open div{
+    visibility: visible;
+} */
+
+.ReactModal__Content--after-open input{
+    width: 50%;
+    /* margin-top: 10vh; */
+    height: 6vh;
+    border-radius: 0.3vh;
+    /* color: black; */
+    border: 0.3vh solid black;
+}
+
+.ReactModal__Content--after-open button{
+    width: 50%;
+    margin-top: 10vh;
+    height: 6vh;
+    border-radius: 3vh;
+    /* color: black; */
+    border: 0.3vh solid black;
+}
+
+
+.setting input[type="text"]:disabled {
+    /* align-self: center; */
+    height: 50px;
+    width: 70%;
     font-size: 24px;
     padding: 10px 20px;
-    border: none;
-    border-bottom: 2px solid rgb(210, 210, 210);
+    /* border: none; */
+    border: 2px solid rgb(210, 210, 210);
     box-sizing: border-box;
     margin: 10px 0px;
+    /* float: left; */
+    position: relative;
+    left: 20vh;
+    border-radius: 15px;
+}
+.setting input[type="text"] {
+    /* align-self: center; */
+    height: 50px;
+    width: 70%;
+    font-size: 24px;
+    padding: 10px 20px;
+    /* border: none; */
+    border: 2px solid black;
+    box-sizing: border-box;
+    margin: 10px 0px;
+    /* float: left; */
+    position: relative;
+    left: 20vh;
+    border-radius: 15px;
 }
 
 .setting input[type="text"]:focus {
@@ -54,10 +105,32 @@
 
 .setting button {
     background-color: white;
-    margin-top: 10vh;
-    width: 100px;
-    height: 50px;
-    border: solid 1px rgb(240, 240, 240);
+    /* align-items: center; */
+    margin-right: 15vh;
+    margin-top: 3vh;
+    width: 15vh;
+    height: 6vh;
+    border: solid 2px black;
+    /* position: relative;
+    left: 20vh; */
+    /* float: left; */
+    border-radius: 8px;
+}
+
+.big-square-setting{
+    /* left: 3vh; */
+    /* margin-top: 3vh; */
+    border: 2.5px solid black;
+    width: 60vh;
+    height: 60vh;
+    background-color: white;
+    /* padding: 30px; */
+    margin: 2.8vh;
+    position: absolute;
+    right:40vh;
+    top: 30vh;
+    
+    /* font-size: 3.5vh; */
 }
 
 .setting button:hover {
@@ -67,6 +140,7 @@
 .setting button:active {
     background-color: rgb(231, 231, 231);
 }
+
 
 @keyframes textFocus {
     from {

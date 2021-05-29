@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import CaseItem from "../../Component/CaseItem";
-import "../../Styles/StoreHistory.css";
+import "../../Styles/StoreBrowseCase.css";
 import { serverConn } from '../../utils';
 
 class StoryHistory extends Component {
@@ -62,10 +62,10 @@ class StoryHistory extends Component {
 
     render() {
         return (
-            <div className="Container history">
-                <div className="View cases-View">
+            <div className="Container browseCase">
+                <div className="View cases-View-browse">
                     <div>
-                        <h2><br />History Info</h2>
+                        <h2>History Info</h2>
                     </div>
                     <ul>
                         {this.state.caseList.map((item, index) => {
