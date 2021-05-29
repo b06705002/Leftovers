@@ -267,7 +267,7 @@ class Login extends Component {
                                     <form>
                                         <input type="text" id="username_user" name="username" placeholder="信箱帳號" required />
                                         <div className="tab"></div>
-                                        <input type="text" id="password_user" name="password" placeholder="密碼" required />
+                                        <input type="password" id="password_user" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
                                         <input type="button" value="登入" className="submit-user" onClick={() => this.userLogin()} />
                                     </form>  
@@ -283,7 +283,7 @@ class Login extends Component {
                                     <form action="用戶管理.php">
                                         <input type="text" id="username_store" name="username" placeholder="信箱帳號" required />
                                         <div className="tab"></div>
-                                        <input type="text" id="password_store" name="password" placeholder="密碼" required />
+                                        <input type="password" id="password_store" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
                                         <input type="button" value="登入" className="submit-store" onClick={() => this.storeLogin()} />
                                     </form>  
@@ -299,9 +299,9 @@ class Login extends Component {
                                     <form action="用戶管理.php">
                                         <input type="text" id="fullname_user" name="fullname" placeholder="使用者全名" required />
                                         <div className="tab"></div>
-                                        <input type="text" id="password2_user" name="password" placeholder="密碼" required />
+                                        <input type="password" id="password2_user" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
-                                        <input type="text" id="comfirm_password_user" name="comfirm_password" placeholder="確認密碼" required />
+                                        <input type="password" id="comfirm_password_user" name="comfirm_password" placeholder="確認密碼" required />
                                         <div className="tab"></div>
                                         <input type="tel" id="phoneNo_user" name="phone_number" placeholder="手機號碼" required />
                                         <div className="tab"></div>
@@ -321,9 +321,9 @@ class Login extends Component {
                                     <form action="用戶管理.php">
                                         <input type="text" id="fullname_store" name="fullname" placeholder="店家全名" value={this.state.store} required disabled/>
                                         <div className="tab"></div>
-                                        <input type="text" id="password2_store" name="password" placeholder="密碼" required />
+                                        <input type="password" id="password2_store" name="password" placeholder="密碼" required />
                                         <div className="tab"></div>
-                                        <input type="text" id="comfirm_password_store" name="comfirm_password" placeholder="確認密碼" required />
+                                        <input type="password" id="comfirm_password_store" name="comfirm_password" placeholder="確認密碼" required />
                                         <div className="tab"></div>
                                         <input type="text" id="address_store" name="address" placeholder="店家地址" value={this.state.address} required disabled/>
                                         <div className="tab"></div>
