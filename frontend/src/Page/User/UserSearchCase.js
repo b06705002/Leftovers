@@ -26,7 +26,8 @@ class UserBrowseCase extends Component {
                     , selectedCase: {}
                     , selectedMarker: null
                     , errMsg: ""
-                    , redirect: false};
+                    , redirect: false
+                    , loading: false};
         this.onLoad = ref => this.searchBox = ref;
         this.containerStyle = {
             width: '100%',
@@ -117,7 +118,7 @@ class UserBrowseCase extends Component {
         let gid = this.state.selectedCase.id;
         let mail = cookies.get('mail');
         let apid = this.state.selectedCase.apid;
-        // console.log(amount, gid, mail, apid);
+        this.setState({loading: true});
         let response = await serverConn("/api/user/order", {amount: amount, gid: gid, mail: mail, apid: apid});
         if(response.msg === 'success') {
             // this.setState({errMsg: "送出成功"});
@@ -166,9 +167,9 @@ class UserBrowseCase extends Component {
                                     <label>數量</label>
                                     <input type="number" min="1" max={this.state.selectedCase.amount} id="order_amount"></input>
                                     <p>{this.state.errMsg}</p>
-                                    <button type="button" onClick={this.submitOrderForm}>送出</button>
+                                    <button type="button" onClick={this.submitOrderForm} disabled={this.state.loading}>送出</button>
                                 </form>
-                                <button onClick={() => this.setState({modalOpen: false, errMsg: ""})}>close</button>
+                                <button onClick={() => this.setState({modalOpen: false, errMsg: ""})} disabled={this.state.loading}>close</button>
                             </Modal>
                             {
                                 this.state.center_lat ?
