@@ -18,7 +18,7 @@ class CaseItem extends Component {
                     <></>
                 }
                 {/* address is not null mean it's user browsing */}
-                {!this.props.caseInfo.address ?
+                {!this.props.caseInfo.address && this.props.caseInfo.mail ?
                     <p>電子郵件 {this.props.caseInfo.mail}</p>
                     :
                     <></>
