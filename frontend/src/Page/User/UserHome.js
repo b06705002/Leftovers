@@ -7,7 +7,7 @@ import Product from "../Picture/product.png";
 import Order from "../Picture/order.png";
 import Person from "../Picture/person.png";
 import Main from "../Picture/main.jpg";
-
+import {NavLink} from "react-router-dom";
 
 
 class UserHome extends Component {
@@ -27,7 +27,7 @@ class UserHome extends Component {
         this.cookies = new Cookies();
         this.store = this.cookies.get('store');
         this.name = this.cookies.get('name');
-        console.log('at home', this.cookies.getAll());
+        // console.log('at home', this.cookies.getAll());
     }
     render() {
         return (
@@ -38,32 +38,31 @@ class UserHome extends Component {
                 
                 <div className="square_container-user">
                     <div className="square-user">
-                        <a className="square_link" href="/user-search-case">
+                        <NavLink to="/user-search-case" className="square_link" exact strict>
                             <img className="plate" src={Plate} alt="plate"></img>
                             <h3>查詢即期品</h3>
-                        </a>
+                        </NavLink>
                     </div>
 
                     <div className="square-user">
-                        <a className="square_link" href="/user-browse-case"> 
-                        {/* href to be modified  */}
+                        <NavLink to="/user-browse-case" className="square_link" exact strict>
                             <img className="product" src={Product} alt="product"></img>
                             <h3>預定/追蹤的即期品</h3>
-                        </a>
+                        </NavLink>
                     </div>
 
                     <div className="square-user">
-                        <a className="square_link" href="/user-history"> 
+                        <NavLink to="/user-history" className="square_link" exact strict>
                             <img className="order" src={Order} alt="order"></img>
                             <h3>歷史訂單紀錄</h3>
-                        </a>
+                        </NavLink>
                     </div>
 
                     <div className="square-user">
-                        <a className="square_link" href="/user-setting">
+                        <NavLink to="/user-setting" className="square_link" exact strict>
                             <img className="person" src={Person} alt="person"></img>
                             <h3>{this.store ? this.store : this.name} 資料設定</h3>
-                        </a>
+                        </NavLink>
                     </div>
                 </div>
                 
