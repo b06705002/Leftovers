@@ -38,7 +38,6 @@ class Nav extends Component {
                     <FormattedMessage id = "nav.t1" defaultMessage = "登入">
                         {msg => <NavItem path={"/login"} text={msg}/>}
                     </FormattedMessage>
-                    
                 </ul>
                 <div className="burger">
                     <div className="line1"></div>

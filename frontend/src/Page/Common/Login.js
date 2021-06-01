@@ -240,15 +240,16 @@ class Login extends Component {
                                     <a className="nav-link" href="/#">Contact</a>
                                 </li>
                                 <li className="nav-item">
-                                    <button onClick={() => this.props.handleLanguages('en')} className="trans-btn">English</button>
+                                    <a className="nav-link" href="/#" onClick={()=>this.props.handleLanguages('en')}>English</a>
                                 </li>
                                 <li className="nav-item">
-                                    <button onClick={() => this.props.handleLanguages('zh')} className="trans-btn">Chinese</button>
+                                    <a className="nav-link" href="/#" onClick={()=>this.props.handleLanguages('zh')}>Chinese</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
+                
                 <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
                     <ol className="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
