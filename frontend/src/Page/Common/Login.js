@@ -278,18 +278,18 @@ class Login extends Component {
                                 <li className="nav-item active">
                                     <a className="nav-link" href="/#">Home</a>
                                 </li>
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <a className="nav-link" href="/#">About</a>
-                                </li>
+                                </li> */}
                                 {/* <li className="nav-item">
                                     <a className="nav-link" href="/#">Portfolio</a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="/#">Services</a>
                                 </li> */}
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <a className="nav-link" href="/#">Contact</a>
-                                </li>
+                                </li> */}
                                 <li className="nav-item">
                                     <a className="nav-link" href="/#" onClick={()=>this.props.handleLanguages('en')}>English</a>
                                 </li>
