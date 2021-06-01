@@ -4,6 +4,7 @@ import { serverConn } from '../../utils';
 import "../../Styles/StoreSetting.css";
 import Modal from 'react-modal';
 import {Redirect} from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 class StoreSetting extends Component {
     /*
@@ -61,27 +62,33 @@ class StoreSetting extends Component {
         }
         return (
             <div className="Container setting">
-                <h1>店家基本資料設定</h1>
+                <h1>
+                    <FormattedMessage id="sSet.title" defaultMessage="店家基本資料設定"/>
+                </h1>
                 <div className="formContainer">
                     <form>
                         <div className="formBlock">
-                            <label>店名</label>
+                            <label><FormattedMessage id="sSet.name" defaultMessage="店名"/></label>
                             <input type="text" value={this.state.store} onChange={(event) => this.setState({store: event.target.value})} disabled/>
                         </div>
                         <div className="formBlock">
-                            <label>電子郵件</label>
+                            <label><FormattedMessage id="sSet.email" defaultMessage="電子郵件"/></label>
                             <input type="text" value={this.state.mail} onChange={(event) => this.setState({mail: event.target.value})} disabled/>
                         </div>
                         <div className="formBlock">
-                            <label>連絡電話</label>
+                            <label><FormattedMessage id="sSet.phone" defaultMessage="聯絡電話"/></label>
                             <input type="text" value={this.state.phone} onChange={(event) => this.setState({phone: event.target.value})}/>
                         </div>
                         <div className="formBlock">
-                            <label>地址</label>
+                            <label><FormattedMessage id="sSet.addr" defaultMessage="地址"/></label>
                             <input type="text" value={this.state.address} onChange={(event) => this.setState({address: event.target.value})} disabled/>
                         </div>
-                        <button type="button" onClick={this.handleSubmit}>送出</button>
-                        <button type="button" onClick={() => this.setState({changePwd: true})}>修改密碼</button>
+                        <button type="button" onClick={this.handleSubmit}>
+                            <FormattedMessage id="sSet.submit" defaultMessage="送出"/>
+                        </button>
+                        <button type="button" onClick={() => this.setState({changePwd: true})}>
+                            <FormattedMessage id="sSet.set-pwd" defaultMessage="修改密碼"/>
+                        </button>
                     </form>
                     <Modal 
                         isOpen={this.state.changePwd}
@@ -91,21 +98,23 @@ class StoreSetting extends Component {
                         >
                             <form>
                                 <div className="formBlock">
-                                    <label>原密碼</label>
+                                    <label><FormattedMessage id="sSet.old-pwd" defaultMessage="原密碼"/></label>
                                     <input type="password" value={this.state.old_pwd} onChange={(event) => this.setState({old_pwd: event.target.value})} />
                                 </div>
                                 <div className="formBlock">
-                                    <label>新密碼</label>
+                                    <label><FormattedMessage id="sSet.new-pwd" defaultMessage="新密碼"/></label>
                                     <input type="password" value={this.state.new_pwd} onChange={(event) => this.setState({new_pwd: event.target.value})} />
                                 </div>
                                 <div className="formBlock">
-                                    <label>確認密碼</label>
+                                    <label><FormattedMessage id="sSet.con-pwd" defaultMessage="確認密碼"/></label>
                                     <input type="password" value={this.state.con_pwd} onChange={(event) => this.setState({con_pwd: event.target.value})} />
                                 </div>
                                 <div>
-                                    {this.state.new_pwd === this.state.con_pwd ? "" : "密碼不一致"}
+                                    {this.state.new_pwd === this.state.con_pwd ? "" : <FormattedMessage id="sSet.pwd-not-same" defaultMessage="密碼不一致"/>}
                                 </div>
-                                <button type="button" onClick={this.handleChangePwd}>送出</button>
+                                <button type="button" onClick={this.handleChangePwd}>
+                                <FormattedMessage id="sSet.submit-pwd" defaultMessage="送出"/>
+                                </button>
                             </form>
                     </Modal>
                 </div>

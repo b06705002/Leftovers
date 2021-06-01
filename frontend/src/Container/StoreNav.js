@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../Styles/StoreNav.css";
 import NavItem from "../Component/NavItem";
+import { FormattedMessage } from "react-intl";
 
 
 /*
@@ -30,8 +31,13 @@ class StoreNav extends Component {
                     </a>
                 </div>
                 <ul className="nav-links">
-                    <NavItem path={"/logout"} id="change" text="Eng" />
-                    <NavItem path={"/logout"} text="登出" handleLogout={this.props.handleLogout} />
+                    <button onClick={() => this.props.handleLanguages('en')}>EN&nbsp;</button>
+                    <button onClick={() => this.props.handleLanguages('zh')}>TW</button>
+                    {/* <NavItem path={"/logout"} id="change" text="Eng" /> */}
+                    <FormattedMessage id = "nav.t3" defaultMessage="登出">
+                        {msg => <NavItem path={"/logout"} text={msg} handleLogout={this.props.handleLogout} />}
+                    </FormattedMessage>
+                    
                 </ul>
                 <div className="burger">
                     <div className="line1"></div>

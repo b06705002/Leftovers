@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from "react-intl";
 
 class UserCase extends Component {
     /*
@@ -13,7 +14,7 @@ class UserCase extends Component {
     render() {
         return (
             <div>
-                <h1>User Case</h1>
+                <h1><FormattedMessage id="uCase.case" defaultMessage="User Case"/></h1>
             </div>
         );
     }

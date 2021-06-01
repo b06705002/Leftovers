@@ -3,6 +3,7 @@ import Cookies from 'universal-cookie';
 import CaseItem from "../../Component/CaseItem";
 import "../../Styles/StoreBrowseCase.css";
 import { serverConn } from '../../utils';
+import { FormattedMessage } from "react-intl";
 
 class StoryHistory extends Component {
     /*
@@ -65,7 +66,9 @@ class StoryHistory extends Component {
             <div className="Container browseCase">
                 <div className="View cases-View-browse">
                     <div>
-                        <h2>History Info</h2>
+                        <h2>
+                            <FormattedMessage id="sHist.info" defaultMessage="歷史記錄"/>
+                        </h2>
                     </div>
                     <ul>
                         {this.state.caseList.map((item, index) => {

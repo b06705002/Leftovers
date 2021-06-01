@@ -3,7 +3,7 @@ import "../../Styles/StoreBrowseCase.css";
 import CaseItem from "../../Component/CaseItem";
 import Cookies from 'universal-cookie';
 import { serverConn } from '../../utils';
-
+import { FormattedMessage } from "react-intl";
 
 class UserBrowseCase extends Component {
     /*
@@ -71,7 +71,7 @@ class UserBrowseCase extends Component {
             <div className="Container browseCase">
                 <div className="View cases-View-browse">
                     <div className="title">
-                        <h2>Current Order</h2>
+                        <h2><FormattedMessage id="current-order" default_message="Current Order"/></h2>
                     </div>
                     <ul>
                         {this.state.caseList.map((item, index) => {

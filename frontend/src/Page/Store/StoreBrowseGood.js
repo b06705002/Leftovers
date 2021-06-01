@@ -3,7 +3,7 @@ import "../../Styles/StoreBrowseCase.css";
 import CaseItem from "../../Component/CaseItem";
 import { serverConn } from '../../utils';
 import Cookies from 'universal-cookie';
-
+import { FormattedMessage } from "react-intl";
 
 class StoreBrowseGood extends Component {
     /*
@@ -60,7 +60,9 @@ class StoreBrowseGood extends Component {
             <div className="Container browseCase">
                 <div className="View cases-View-browse">
                     <div className="title">
-                        <h2>Current Good</h2>
+                        <h2>
+                            <FormattedMessage id="sBrowseGood.cur" defaultMessage="目前剩食"/>
+                        </h2>
                     </div>
                     <ul>
                         {this.state.caseList.map((item, index) => {

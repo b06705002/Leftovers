@@ -25,12 +25,17 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 import { Component } from 'react';
 import Cookies from 'universal-cookie';
 
+import { IntlProvider } from "react-intl";
+import zh_tw from './i18n/zh_tw.js';
+import en_us from './i18n/en_us.js';
+
 class App extends Component {
     constructor(props) {
         super(props);
         this.authenticated = 0;
         this.handleLogin = this.handleLogin.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
+        this.handleLanguages = this.handleLanguages.bind(this);
         this.cookies = new Cookies();
         console.log('inside APP', this.cookies.get('mail'));
         if(this.cookies.get('mail') !== undefined) {
@@ -41,7 +46,10 @@ class App extends Component {
                 this.authenticated = 2;
             }
         }
-        this.state = {authenticated: this.authenticated};
+        this.state = {
+            authenticated: this.authenticated,
+            locale: JSON.parse(localStorage.getItem('locale')) || navigator.language
+        };
     }
 
     handleLogin(type) {
@@ -85,73 +93,90 @@ class App extends Component {
         }
     }
 
+    handleLanguages(lang){
+        this.setState({locale: lang},() => {
+            localStorage.setItem('locale', JSON.stringify(this.state.locale))
+        });
+    }
+
+
     render() {
+        console.log(this.state.locale);
+        let messages;
+        if (this.state.locale.includes('zh')) {
+            messages = zh_tw;
+        } 
+        else {
+            messages = en_us;
+        }
         return (
-            <Router>
-                <div className="App">
-                    {!this.state.authenticated ? 
-                    <>
-                        <Nav />
-                        <Switch>
-                            <Route path="/" exact>
-                                <SearchCase />
-                            </Route>
-                            <Route path="/login">
-                                <Login handleLogin={this.handleLogin} setCookies={this.setCookies}/>
-                            </Route>
-                        </Switch>
-                        <Redirect from="/logout" to="/"/>
-                    </>
-                    :
-                    <>
-                        {this.state.authenticated === 1 ?
-                            <>
-                                <StoreNav handleLogout={this.handleLogout}/>
-                                <Switch>
-                                    {/* <Route path="/" exact foo={this.handleLogout} component={Home}/> */}
-                                    <Route path="/" exact>
-                                        <StoreHome/>
-                                    </Route>
-                                    <Route path="/store-history" component={StoreHistory}/>
-                                    <Route path="/store-setting">
-                                        <StoreSetting setCookies={this.setCookies}/>
-                                    </Route>
-                                    <Route path="/store-add-case" component={StoreAddCase}/>
-                                    <Route path="/store-browse-case" component={StoreBrowseCase}/>
-                                    <Route path="/store-browse-good" component={StoreBrowseGood} />
-                                    <Redirect from="/logout" to="/"/>
-                                    <Redirect from="/login" to="/" />
-                                </Switch>
-                            </>
-                            :
-                            <>
-                                <UserNav handleLogout={this.handleLogout} />
-                                <Switch>
-                                    <Route path="/" exact>
-                                        <UserHome />
-                                    </Route>
-                                    <Route path="/user-history" component={UserHistory}/>
-                                    <Route path="/user-setting">
-                                        <UserSetting setCookies={this.setCookies}/>
-                                    </Route>
-                                    <Route path="/user-browse-case" component={UserBrowseCase}/>
-                                    <Route path="/user-search-case" component={UserSearchCase} exact/>
-                                    <Route path="/user-search-case/:id?" component={UserMatchCase}/>
-                                    <Redirect from="/logout" to="/"/>
-                                    <Redirect from="/login" to="/" />
-                                </Switch>
-                            </>
-                        }
-                    </>
-                    }
-                    {
-                        this.authenticated ?
-                        <></>
+            <IntlProvider locale={this.state.locale} key={this.state.locale} messages={messages}>
+                <Router>
+                    <div className="App">
+                        {!this.state.authenticated ? 
+                        <>
+                            <Nav handleLanguages={this.handleLanguages}/>
+                            <Switch>
+                                <Route path="/" exact>
+                                    <SearchCase />
+                                </Route>
+                                <Route path="/login">
+                                    <Login handleLogin={this.handleLogin} setCookies={this.setCookies} handleLanguages={this.handleLanguages}/>
+                                </Route>
+                            </Switch>
+                            <Redirect from="/logout" to="/"/>
+                        </>
                         :
-                        <Redirect to="/" />
-                    }
-                </div>
-            </Router>
+                        <>
+                            {this.state.authenticated === 1 ?
+                                <>
+                                    <StoreNav handleLogout={this.handleLogout} handleLanguages={this.handleLanguages}/>
+                                    <Switch>
+                                        {/* <Route path="/" exact foo={this.handleLogout} component={Home}/> */}
+                                        <Route path="/" exact>
+                                            <StoreHome/>
+                                        </Route>
+                                        <Route path="/store-history" component={StoreHistory}/>
+                                        <Route path="/store-setting">
+                                            <StoreSetting setCookies={this.setCookies}/>
+                                        </Route>
+                                        <Route path="/store-add-case" component={StoreAddCase}/>
+                                        <Route path="/store-browse-case" component={StoreBrowseCase}/>
+                                        <Route path="/store-browse-good" component={StoreBrowseGood} />
+                                        <Redirect from="/logout" to="/"/>
+                                        <Redirect from="/login" to="/" />
+                                    </Switch>
+                                </>
+                                :
+                                <>
+                                    <UserNav handleLogout={this.handleLogout} handleLanguages={this.handleLanguages}/>
+                                    <Switch>
+                                        <Route path="/" exact>
+                                            <UserHome />
+                                        </Route>
+                                        <Route path="/user-history" component={UserHistory}/>
+                                        <Route path="/user-setting">
+                                            <UserSetting setCookies={this.setCookies}/>
+                                        </Route>
+                                        <Route path="/user-browse-case" component={UserBrowseCase}/>
+                                        <Route path="/user-search-case" component={UserSearchCase} exact/>
+                                        <Route path="/user-search-case/:id?" component={UserMatchCase}/>
+                                        <Redirect from="/logout" to="/"/>
+                                        <Redirect from="/login" to="/" />
+                                    </Switch>
+                                </>
+                            }
+                        </>
+                        }
+                        {
+                            this.authenticated ?
+                            <></>
+                            :
+                            <Redirect to="/" />
+                        }
+                    </div>
+                </Router>
+            </IntlProvider>
         );
     }
 }

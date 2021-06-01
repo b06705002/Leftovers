@@ -5,6 +5,7 @@ import FormCaseItem from "../../Component/FormCaseItem";
 import { serverConn } from '../../utils';
 import Cookies from 'universal-cookie';
 import {Redirect} from 'react-router-dom';
+import { FormattedMessage } from "react-intl";
 
 class StoreAddCase extends Component {
     /*
@@ -75,7 +76,7 @@ class StoreAddCase extends Component {
         }
         return (
             <div className="Container addCase">
-                <h1>新增一筆媒合資訊</h1>
+                <h1><FormattedMessage id="sAdd.add" defaultMessage="新增一筆媒合資訊"/></h1>
                 <div className="formContainer">
                     <form>
                         <FormCaseItem />
@@ -83,7 +84,9 @@ class StoreAddCase extends Component {
                         <div className="errMsg">
                             {this.state.errMsg}
                         </div>
-                        <button type="button" onClick={this.handleSubmit} disabled={this.state.loading}>送出</button>
+                        <button type="button" onClick={this.handleSubmit} disabled={this.state.loading}>
+                            <FormattedMessage id="sAdd.submit" defaultMessage="送出"/> 
+                        </button>
                     </form>
                 </div>
             </div>

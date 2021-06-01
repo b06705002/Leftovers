@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "../../Styles/StoreAddCase.css";
 import FormCaseItem from "../../Component/FormCaseItem";
+import { FormattedMessage } from "react-intl";
 
 class UserAddCase extends Component {
     /*
@@ -25,13 +26,15 @@ class UserAddCase extends Component {
     render() {
         return (
             <div className="Container addCase">
-                <h1>新增一筆媒合資訊</h1>
+                <h1><FormattedMessage id="uAdd.add-case" defaultMessage="新增一筆媒合資訊"/></h1>
                 <div className="formContainer">
                     <form>
                         {this.state.formCaseItems.map((item, index) => {
                             return item;
                         })}
-                        <button type="button" onClick={this.handleAdd}>新增食物</button>
+                        <button type="button" onClick={this.handleAdd}>
+                            <FormattedMessage id="uAdd.add-food" defaultMessage="新增食物"/>
+                        </button>
                         <input type="submit"/>
                     </form>
                 </div>

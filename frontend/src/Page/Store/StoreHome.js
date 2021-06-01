@@ -8,6 +8,7 @@ import Order from "../Picture/order.png";
 import Order_now from "../Picture/order_now.png";
 import Person from "../Picture/store.png";
 import Main from "../Picture/store.jpg";
+import { FormattedMessage } from 'react-intl';
 
 
 class StoreHome extends Component {
@@ -39,7 +40,7 @@ class StoreHome extends Component {
                     <div className="square-store">
                         <a className="square_link" href="/store-add-case">
                             <img className="food" src={Food} alt="food"></img>
-                            <h3>新增即期品</h3>
+                            <h3><FormattedMessage id="sHome.add-case" defaultMessage="新增即期品"/></h3>
                         </a>
                     </div>
 
@@ -47,28 +48,30 @@ class StoreHome extends Component {
                         <a className="square_link" href="/store-browse-good"> 
                         {/* href to be modified  */}
                             <img className="product" src={Product} alt="product"></img>
-                            <h3>現有即期品</h3>
+                            <h3><FormattedMessage id="sHome.browse-good" defaultMessage="現有即期品"/></h3>
                         </a>
                     </div>
 
                     <div className="square-store">
                         <a className="square_link" href="/store-browse-case"> 
                             <img className="order" src={Order_now} alt="order"></img>
-                            <h3>現有媒合資訊</h3>
+                            <h3><FormattedMessage id="sHome.browse-case" defaultMessage="現有媒合資訊"/></h3>
                         </a>
                     </div>
 
                     <div className="square-store">
                         <a className="square_link" href="/store-history"> 
                             <img className="order" src={Order} alt="order"></img>
-                            <h3>歷史媒合紀錄</h3>
+                            <h3><FormattedMessage id="sHome.history" defaultMessage="歷史媒合紀錄"/></h3>
                         </a>
                     </div>
 
                     <div className="square-store">
                         <a className="square_link" href="/store-setting">
                             <img className="person" src={Person} alt="person"></img>
-                            <h3>{this.store ? this.store : this.name} 資料設定</h3>
+                            <h3>{this.store ? this.store : this.name} 
+                                <FormattedMessage id="sHome.setting" defaultMessage="資料設定"/>
+                            </h3>
                         </a>
                     </div>
                 </div>

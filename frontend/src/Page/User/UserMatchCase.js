@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 class UserMatchCase extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ class UserMatchCase extends Component {
     render() {
         return (
             <div>
-                this is matching page with case id {this.id}
+                <FormattedMessage id="uMatch.title" defaultMessage="this is matching page with case id"/>  {this.id}
             </div>
         );
     }

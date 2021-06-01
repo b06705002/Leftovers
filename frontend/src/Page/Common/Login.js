@@ -4,6 +4,8 @@ import "../../Styles/Login.css";
 import { serverConn } from '../../utils';
 import { GoogleMap, LoadScript, StandaloneSearchBox, InfoWindow } from '@react-google-maps/api';
 import Home from "../Picture/Home.jpg";
+import { FormattedMessage } from 'react-intl';
+
 
 const libraries = ['places'];
 
@@ -237,6 +239,12 @@ class Login extends Component {
                                 <li className="nav-item">
                                     <a className="nav-link" href="/#">Contact</a>
                                 </li>
+                                <li className="nav-item">
+                                    <button onClick={() => this.props.handleLanguages('en')} className="trans-btn">English</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button onClick={() => this.props.handleLanguages('zh')} className="trans-btn">Chinese</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -268,16 +276,25 @@ class Login extends Component {
                         <div className="user_login_page">
                             <div id="container1-user">
                                 <div className="login">  
-                                    <h3 className="user_login_color">一般使用者 登入 Login</h3>
+                                    <h3 className="user_login_color">
+                                        <FormattedMessage id="login.u-title" defaultMessage="一般使用者 登入"/>
+                                    </h3>
 
                                     <form>
-                                        <input type="text" id="username_user" name="username" placeholder="信箱帳號" required />
+                                        <FormattedMessage id="login.u-email" defaultMessage="信箱帳號">
+                                            {msg => <input type="text" id="username_user" name="username" placeholder={msg} required />}</FormattedMessage>
                                         <div className="tab"></div>
-                                        <input type="password" id="password_user" name="password" placeholder="密碼" required />
+                                        <FormattedMessage id ="login.u-pwd" defaultMessage="密碼">
+                                            {msg => <input type="password" id="password_user" name="password" placeholder={msg} required />}</FormattedMessage>
                                         <div className="tab"></div>
-                                        <input type="button" value="登入" className="submit-user" onClick={() => this.userLogin()} />
+                                        <FormattedMessage id = "login.u-log-btn" defaultMessage="登入">
+                                            {msg => <input type="button" value={msg} className="submit-user" onClick={() => this.userLogin()} />}</FormattedMessage>
                                     </form>  
-                                    <h6 onClick={this.show_hide_user}>註冊帳號 <br/> 來成為一般使用者吧❤</h6>
+                                    <h6 onClick={this.show_hide_user}>
+                                        <FormattedMessage id="login.u-regi" defaultMessage="註冊帳號"/>
+                                        <br/>
+                                        <FormattedMessage id="login.u-slogan" defaultMessage="來成為一般使用者吧❤"/>
+                                    </h6>
                                 </div>
                             </div>
                         </div>
@@ -285,37 +302,66 @@ class Login extends Component {
                         <div className="store_login_page">
                             <div id="container1-store">
                                 <div className="login">  
-                                    <h3 className="store_login_color">合作店家 登入 Login</h3>
+                                    <h3 className="store_login_color">
+                                        <FormattedMessage id="login.s-title" defaultMessage="合作店家 登入"/>
+                                    </h3>
                                     <form action="用戶管理.php">
-                                        <input type="text" id="username_store" name="username" placeholder="信箱帳號" required />
+                                        <FormattedMessage id="login.s-email" defaultMessage="信箱帳號">
+                                            {msg => <input type="text" id="username_store" name="username" placeholder={msg} required />}</FormattedMessage>
                                         <div className="tab"></div>
-                                        <input type="password" id="password_store" name="password" placeholder="密碼" required />
+                                        <FormattedMessage id="login.s-pwd" defaultMessage="密碼">
+                                            {msg => <input type="password" id="password_store" name="password" placeholder={msg} required />}</FormattedMessage>
                                         <div className="tab"></div>
-                                        <input type="button" value="登入" className="submit-store" onClick={() => this.storeLogin()} />
+                                        <FormattedMessage id="login.s-log-btn" defaultMessage="登入">
+                                            {msg => <input type="button" value={msg} className="submit-store" onClick={() => this.storeLogin()} />}</FormattedMessage>
                                     </form>  
-                                    <h6 onClick={this.show_hide_store}>註冊帳號 <br/> 來成為合作店家吧❤</h6>
+                                    <h6 onClick={this.show_hide_store}>
+                                        <FormattedMessage id="login.s-regi" defaultMessage="註冊帳號"/>
+                                        <br/>
+                                        <FormattedMessage id="login.s-slogan" defaultMessage="來成為合作店家吧❤"/>
+                                        <br/>
+                                        
+                                    </h6>
+
+                                
                                 </div>
                             </div>
                         </div>
 
+                        
+
                         <div className="user_signup_page">
                             <div id="container2-user">
                                 <div className="signup">  
-                                    <h3 className="user_signup_color">註冊成為一般使用者</h3>
+                                    <h3 className="user_signup_color">
+                                        <FormattedMessage id="regi.u-title" defaultMessage="註冊成為一般使用者"/>
+                                    </h3>
                                     <form action="用戶管理.php">
-                                        <input type="text" id="fullname_user" name="fullname" placeholder="使用者全名" required />
-                                        <div className="tab"></div>
-                                        <input type="password" id="password2_user" name="password" placeholder="密碼" required />
-                                        <div className="tab"></div>
-                                        <input type="password" id="comfirm_password_user" name="comfirm_password" placeholder="確認密碼" required />
-                                        <div className="tab"></div>
-                                        <input type="tel" id="phoneNo_user" name="phone_number" placeholder="手機號碼" required />
-                                        <div className="tab"></div>
-                                        <input type="email" id="email_user" name="email" placeholder="信箱帳號" required />
-                                        <div className="tab"></div>
-                                        <input type="button" value="註冊" className="submit-user" onClick={() => this.userRegister()}/>
-                                    </form>  
-                                    <h6 onClick={this.show_hide_user}>登入 <u>一般使用者/合作店家</u> 帳號</h6>
+                                        <FormattedMessage id="regi.u-name" defaultMessage="用戶全名">{msg => 
+                                            <input type="text" id="fullname_user" name="fullname" placeholder={msg} required />}</FormattedMessage>
+                                            <div className="tab"></div>
+                                        <FormattedMessage id="regi.u-pwd" defaultMessage="密碼">{msg => 
+                                            <input type="password" id="password2_user" name="password" placeholder={msg} required />}</FormattedMessage>
+                                            <div className="tab"></div>
+                                        <FormattedMessage id="regi.u-con-pwd" defaultMessage="確認密碼">{msg => 
+                                            <input type="password" id="comfirm_password_user" name="comfirm_password" placeholder={msg} required />}</FormattedMessage>
+                                            <div className="tab"></div>
+                                        <FormattedMessage id="regi.u-phone" defaultMessage="手機號碼">{msg => 
+                                            <input type="tel" id="phoneNo_user" name="phone_number" placeholder={msg} required />}</FormattedMessage>
+                                            <div className="tab"></div>
+                                        <FormattedMessage id="regi.u-email" defaultMessage="信箱帳號">{msg => 
+                                            <input type="email" id="email_user" name="email" placeholder={msg} required />}</FormattedMessage>
+                                            <div className="tab"></div>
+                                        <FormattedMessage id="regi.u-btn" defaultMessage="註冊">{msg => 
+                                            <input type="button" value={msg} className="submit-user" onClick={() => this.userRegister()}/>}</FormattedMessage>
+                                    </form> 
+                                    <h6 onClick={this.show_hide_user}>
+                                        <FormattedMessage id="regi.u1" defaultMessage="登入 "/>
+                                        <u>
+                                        <FormattedMessage id="regi.u2" defaultMessage="一般使用者/合作店家 "/>
+                                        </u> 
+                                        <FormattedMessage id="regi.u3" defaultMessage="帳號"/>
+                                    </h6>
                                 </div>
                             </div>
                         </div>
@@ -323,23 +369,38 @@ class Login extends Component {
                         <div className="store_signup_page">
                             <div id="container2-store">
                                 <div className="signup">  
-                                    <h3 className="store_signup_color">註冊成為合作店家</h3>
+                                    <h3 className="store_signup_color">
+                                        <FormattedMessage id="regi.s-title" defaultMessage="註冊成為合作店家"/>
+                                    </h3>
                                     <form action="用戶管理.php">
-                                        <input type="text" id="fullname_store" name="fullname" placeholder="店家全名" value={this.state.store} required disabled/>
-                                        <div className="tab"></div>
-                                        <input type="password" id="password2_store" name="password" placeholder="密碼" required />
-                                        <div className="tab"></div>
-                                        <input type="password" id="comfirm_password_store" name="comfirm_password" placeholder="確認密碼" required />
-                                        <div className="tab"></div>
-                                        <input type="text" id="address_store" name="address" placeholder="店家地址" value={this.state.address} required disabled/>
-                                        <div className="tab"></div>
-                                        <input type="tel" id="phoneNo_store" name="phone_number" placeholder="手機號碼" required />
-                                        <div className="tab"></div>
-                                        <input type="email" id="email_store" name="email" placeholder="信箱帳號" required />
-                                        <div className="tab"></div>          
-                                        <input type="button" value="註冊" className="submit-store" onClick={() => this.storeRegister()}/>
+                                        <FormattedMessage id="regi.s-name" defaultMessage="店家全名">{msg => 
+                                            <input type="text" id="fullname_store" name="fullname" placeholder={msg} value={this.state.store} required disabled/>}</FormattedMessage>
+                                            <div className="tab"></div>
+                                        <FormattedMessage id="regi.s-pwd" defaultMessage="密碼">{msg => 
+                                            <input type="password" id="password2_store" name="password" placeholder={msg} required />}</FormattedMessage>
+                                            <div className="tab"></div>
+                                        <FormattedMessage id="regi.s-con-pwd" defaultMessage="確認密碼">{msg => 
+                                            <input type="password" id="comfirm_password_store" name="comfirm_password" placeholder={msg} required />}</FormattedMessage>
+                                            <div className="tab"></div>
+                                        <FormattedMessage id="regi.s-addr" defaultMessage="店家地址">{msg => 
+                                            <input type="text" id="address_store" name="address" placeholder={msg} value={this.state.address} required disabled/>}</FormattedMessage>
+                                            <div className="tab"></div>
+                                        <FormattedMessage id="regi.s-phone" defaultMessage="手機號碼">{msg => 
+                                            <input type="tel" id="phoneNo_store" name="phone_number" placeholder={msg} required />}</FormattedMessage>
+                                            <div className="tab"></div>
+                                        <FormattedMessage id="regi.s-email" defaultMessage="信箱帳號">{msg => 
+                                            <input type="email" id="email_store" name="email" placeholder={msg} required />}</FormattedMessage>
+                                            <div className="tab"></div>
+                                        <FormattedMessage id="regi.s-btn" defaultMessage="註冊">{msg => 
+                                            <input type="button" value={msg} className="submit-store" onClick={() => this.storeRegister()}/>}</FormattedMessage>    
                                     </form>  
-                                    <h6 onClick={this.show_hide_store}>登入 <u>一般使用者/合作店家</u> 帳號</h6>
+                                    <h6 onClick={this.show_hide_store}>
+                                        <FormattedMessage id="regi.s1" defaultMessage="登入 "/>
+                                        <u>
+                                        <FormattedMessage id="regi.s2" defaultMessage="一般使用者/合作店家 "/>
+                                        </u> 
+                                        <FormattedMessage id="regi.s3" defaultMessage="帳號"/>
+                                    </h6>
                                 </div>
                             </div>
                         </div>

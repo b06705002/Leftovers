@@ -6,6 +6,7 @@ import { serverConn } from '../../utils';
 import GPS from "../../assets/icon/gps.png";
 import Modal from 'react-modal';
 import Cookies from 'universal-cookie';
+import { FormattedMessage } from 'react-intl';
 
 const libraries = ['places'];
 
@@ -130,15 +131,18 @@ class BrowseCase extends Component {
                                 ariaHideApp={false}
                                 onRequestClose={() => this.setState({modalOpen: false})}
                                 style={{content: {height: '80%', width: '80%', margin: 'auto'}}}>
-                                <h2>店家 ： {this.state.selectedCase.store}</h2>
-                                <h2>食品 ： {this.state.selectedCase.item}</h2>
-                                <h2>數量 ： {this.state.selectedCase.amount}</h2>
-                                <h2>單位價格 ： {this.state.selectedCase.price}</h2>
-                                <h2>截止時間 ： {this.state.selectedCase.due}</h2>
+                                <h2><FormattedMessage id="cSearch.name" defaultMessage="店家 ： "/>{this.state.selectedCase.store}</h2>
+                                <h2><FormattedMessage id="cSearch.addr" defaultMessage="地址 ： "/>{this.state.selectedCase.address}</h2>
+                                <h2><FormattedMessage id="cSearch.food" defaultMessage="食品 ： "/>{this.state.selectedCase.item}</h2>
+                                <h2><FormattedMessage id="cSearch.qty" defaultMessage="數量 ： "/>{this.state.selectedCase.amount}</h2>
+                                <h2><FormattedMessage id="cSearch.price" defaultMessage="單位價格 ： "/>{this.state.selectedCase.price}</h2>
+                                <h2><FormattedMessage id="cSearch.deadline" defaultMessage="截止時間 ： "/>{this.state.selectedCase.due}</h2>
                                 {/* <div>店家評價 ： {(this.state.selectedCase.comment && this.state.selectedCase.comment.length) ? this.state.selectedCase.comment.map((item, index) => {
                                     return <p key={index}>{item.stars}{item.text}</p>
                                 }) : <p>no comment</p>}</div> */}
-                                <button onClick={() => this.setState({modalOpen: false, errMsg: ""})}>close</button>
+                                <button onClick={() => this.setState({modalOpen: false, errMsg: ""})}>
+                                    <FormattedMessage id="cSearch.close" defaultMessage="關閉"/>
+                                </button>
                             </Modal>
                             {
                                 this.state.center_lat ?
@@ -162,8 +166,8 @@ class BrowseCase extends Component {
                             >
                                 <>
                                     <p>{this.state.selectedMarker.store}</p>
-                                    <p>電話：{this.state.selectedMarker.phone}</p>
-                                    <p>地址：{this.state.selectedMarker.address}</p>
+                                    <p><FormattedMessage id = "cSearch.phone" defaultMessage="電話："/>{this.state.selectedMarker.phone}</p>
+                                    <p><FormattedMessage id = "cSearch.addr2" defaultMessage="地址："/>{this.state.selectedMarker.address}</p>                                    
                                 </>
                             </InfoWindow>
                             :

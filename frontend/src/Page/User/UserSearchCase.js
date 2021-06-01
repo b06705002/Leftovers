@@ -7,6 +7,7 @@ import GPS from "../../assets/icon/gps.png";
 import Modal from 'react-modal';
 import Cookies from 'universal-cookie';
 import {Redirect} from 'react-router-dom';
+import { FormattedMessage } from "react-intl";
 
 const libraries = ['places'];
 
@@ -154,22 +155,28 @@ class UserBrowseCase extends Component {
                                 onRequestClose={() => this.setState({modalOpen: false})}
                                 style={{content: {height: '80%', width: '80%', margin: 'auto'}}}
                             >
-                                <h2>店家 ： {this.state.selectedCase.store}</h2>
-                                <h2>地址 ： {this.state.selectedCase.address}</h2>
-                                <h2>食品 ： {this.state.selectedCase.item}</h2>
-                                <h2>數量 ： {this.state.selectedCase.amount}</h2>
-                                <h2>單位價格 ： {this.state.selectedCase.price}</h2>
-                                <h2>截止時間 ： {this.state.selectedCase.due}</h2>
+                                <h2><FormattedMessage id="uSearch.name" defaultMessage="店家 ： "/>{this.state.selectedCase.store}</h2>
+                                <h2><FormattedMessage id="uSearch.addr" defaultMessage="地址 ： "/>{this.state.selectedCase.address}</h2>
+                                <h2><FormattedMessage id="uSearch.food" defaultMessage="食品 ： "/>{this.state.selectedCase.item}</h2>
+                                <h2><FormattedMessage id="uSearch.qty" defaultMessage="數量 ： "/>{this.state.selectedCase.amount}</h2>
+                                <h2><FormattedMessage id="uSearch.price" defaultMessage="單位價格 ： "/>{this.state.selectedCase.price}</h2>
+                                <h2><FormattedMessage id="uSearch.deadline" defaultMessage="截止時間 ： "/>{this.state.selectedCase.due}</h2>
                                 {/* <div>店家評價 ： {(this.state.selectedCase.comment && this.state.selectedCase.comment.length) ? this.state.selectedCase.comment.map((item, index) => {
                                     return <p key={index}>{item.stars}{item.text}</p>
                                 }) : <p>no comment</p>}</div> */}
                                 <form>
-                                    <label>數量</label>
+                                    <label>
+                                        <FormattedMessage id="uSearch.qty2" defaultMessage="數量"/>
+                                    </label>
                                     <input type="number" min="1" max={this.state.selectedCase.amount} id="order_amount"></input>
                                     <p>{this.state.errMsg}</p>
-                                    <button type="button" onClick={this.submitOrderForm} disabled={this.state.loading}>送出</button>
+                                    <button type="button" onClick={this.submitOrderForm} disabled={this.state.loading}>
+                                        <FormattedMessage id="uSearch.submit" defaultMessage="送出"/>
+                                    </button>
                                 </form>
-                                <button onClick={() => this.setState({modalOpen: false, errMsg: ""})} disabled={this.state.loading}>close</button>
+                                <button onClick={() => this.setState({modalOpen: false, errMsg: ""})} disabled={this.state.loading}>
+                                    <FormattedMessage id="uSearch.close" defaultMessage="關閉"/>
+                                </button>
                             </Modal>
                             {
                                 this.state.center_lat ?
@@ -193,8 +200,8 @@ class UserBrowseCase extends Component {
                             >
                                 <>
                                     <p>{this.state.selectedMarker.store}</p>
-                                    <p>電話：{this.state.selectedMarker.phone}</p>
-                                    <p>地址：{this.state.selectedMarker.address}</p>
+                                    <p><FormattedMessage id = "uSearch.phone" defaultMessage="電話："/>{this.state.selectedMarker.phone}</p>
+                                    <p><FormattedMessage id = "uSearch.addr2" defaultMessage="地址："/>{this.state.selectedMarker.address}</p>
                                 </>
                             </InfoWindow>
                             :
@@ -203,7 +210,7 @@ class UserBrowseCase extends Component {
                     </LoadScript>
                 </div>
                 <div className="store-title">
-                    <p className="title-name"> 剩食一覽表 </p>
+                    <p className="title-name"><FormattedMessage id="uSearch.title" defaultMessage="剩食一覽表"/></p>
                     {/* <button onclick={this.showMap} class= "map-button" >
                         地圖呈現店家位置
                     </button>

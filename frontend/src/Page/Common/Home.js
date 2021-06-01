@@ -7,6 +7,7 @@ import Product from "../Picture/product.png";
 import Order from "../Picture/order.png";
 import Person from "../Picture/person.png";
 import Main from "../Picture/main.jpg";
+import { FormattedMessage } from 'react-intl';
 
 
 class Home extends Component {
@@ -39,7 +40,9 @@ class Home extends Component {
                     <div class="square">
                         <a class="square_link" href="/user-browse-case">
                             <img class="plate" src={Plate} alt="plate"></img>
-                            <h3>查詢即期品</h3>
+                            <h3>
+                                查詢即期品
+                            </h3>
                         </a>
                     </div>
 
