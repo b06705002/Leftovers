@@ -18,11 +18,6 @@ class UserBrowseCase extends Component {
         this.handleChangeStatus = this.handleChangeStatus.bind(this);
     }
     componentDidMount() {
-        // var list = this.state.caseList;
-        // for(let i=0; i<10; i++) {
-        //     list.push({store: `資訊${i}`, item: `食物${i}`, time: `時間${i}`, onClick: this.handleClick, class: ""});
-        // }
-        // this.setState({caseList: list});
         this.retrieveCases();
     }
     handleClick(index) {
@@ -42,7 +37,12 @@ class UserBrowseCase extends Component {
     handleChangeStatus = async(index) => {
         let result = window.confirm('要確認訂單嗎');
         if(result) {
-            let response = await serverConn('/api/user/caseToHistory', {id: this.state.caseList[index].id});
+            let response;
+            try {
+                response = await serverConn('/api/user/caseToHistory', {id: this.state.caseList[index].id});
+            } catch(error) {
+                console.log('error has occurred when sending status change to server', error);
+            }
             if(response.msg === 'success') {
                 let list = this.state.caseList;
                 list.splice(index, 1);
@@ -53,7 +53,12 @@ class UserBrowseCase extends Component {
     retrieveCases = async() => {
         var cookies = new Cookies();
         let mail = cookies.get('mail');
-        let response = await serverConn('/api/user/showCase', {mail: mail});
+        let response;
+        try {
+            response = await serverConn('/api/user/showCase', {mail: mail});
+        } catch(error) {
+            console.log('error has occurred when retrieving case from server', error);
+        }
         console.log(response);
         if(response.msg === 'success') {
             console.log(response.data);

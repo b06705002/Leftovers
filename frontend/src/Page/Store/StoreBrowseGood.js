@@ -17,11 +17,6 @@ class StoreBrowseGood extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount() {
-        // var list = this.state.caseList;
-        // for(let i=0; i<10; i++) {
-        //     list.push({store: `資訊${i}`, item: `食物${i}`, time: `時間${i}`, onClick: this.handleClick, class: ""});
-        // }
-        // this.setState({caseList: list});
         this.retrieveGoods();
     }
     handleClick(index) {
@@ -42,10 +37,13 @@ class StoreBrowseGood extends Component {
     retrieveGoods = async() => {
         let cookies = new Cookies();
         let apid = cookies.get('apid');
-        let response = await serverConn('/api/store/showGoods', {apid: apid});
-        console.log(response);
+        let response;
+        try {
+            response = await serverConn('/api/store/showGoods', {apid: apid});
+        } catch(error) {
+            console.log('error has occurred when retrieving good from server', error);
+        }
         if(response.msg === 'success') {
-            console.log(response.data);
             this.setState({caseList: response.data}, function() {
                 let list = this.state.caseList;
                 for(let i=0; i<list.length; i++) {

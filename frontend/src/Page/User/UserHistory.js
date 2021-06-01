@@ -23,11 +23,6 @@ class UserHistory extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount() {
-        // var list = this.state.caseList;
-        // for(let i=0; i<10; i++) {
-        //     list.push({store: `資訊${i}`, item: `食物${i}`, time: `時間${i}`, onClick: this.handleClick, class: ""});
-        // }
-        // this.setState({caseList: list});
         this.retrieveHistory();
     }
     handleClick(index) {
@@ -48,7 +43,12 @@ class UserHistory extends Component {
     retrieveHistory = async() => {
         var cookies = new Cookies();
         let mail = cookies.get('mail');
-        let response = await serverConn('/api/user/showHistoryCase', {mail: mail});
+        let response;
+        try {
+            response = await serverConn('/api/user/showHistoryCase', {mail: mail});
+        } catch(error) {
+            console.log('error has occurred when retrieving history from server', error);
+        }
         if(response.msg === 'success') {
             this.setState({caseList: response.data}, function() {
                 let list = this.state.caseList;

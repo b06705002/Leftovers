@@ -83,7 +83,12 @@ class UserBrowseCase extends Component {
 
     // retrieve all current cases from server
     retrieveCases = async() => {
-        let response = await serverConn("/api/user/showGoods", {});
+        let response;
+        try {
+            response = await serverConn("/api/user/showGoods", {});
+        } catch(error) {
+            console.log('error has occurred when retriving case form server', error);
+        }
         if(response.msg === 'success') {
             this.setState({caseList: response.data}, function() {
                 let list = this.state.caseList;
@@ -103,7 +108,12 @@ class UserBrowseCase extends Component {
     }
 
     retrieveStoreInfo = async() => {
-        let response = await serverConn("/api/user/checkStore", {apid: this.state.selectedCase.apid});
+        let response;
+        try {
+            response = await serverConn("/api/user/checkStore", {apid: this.state.selectedCase.apid});
+        } catch(error) {
+            console.log('error has occurred when retrieving store info from server', error);
+        }
         if(response.msg === 'success') {
             let store = this.state.selectedCase;
             store['comment'] = response.comment;
@@ -120,7 +130,12 @@ class UserBrowseCase extends Component {
         let mail = cookies.get('mail');
         let apid = this.state.selectedCase.apid;
         this.setState({loading: true});
-        let response = await serverConn("/api/user/order", {amount: amount, gid: gid, mail: mail, apid: apid});
+        let response;
+        try {
+            response = await serverConn("/api/user/order", {amount: amount, gid: gid, mail: mail, apid: apid});
+        } catch(error) {
+            console.log('error has occurred when sending order to server', error);
+        }
         if(response.msg === 'success') {
             // this.setState({errMsg: "送出成功"});
             alert("成功送出");

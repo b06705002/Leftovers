@@ -62,7 +62,12 @@ class Login extends Component {
         var mail = document.getElementById("email_store").value;
         if (pwd === conpwd && this.validatePwd(pwd) && this.validateMail(mail) && this.state.address && this.state.store && phone){
             let data = {store: this.state.store, mail: mail, pwd: pwd, address: this.state.address, phone: phone, apid: this.state.placeID, LaL: this.state.LaL};
-            let response = await serverConn('/api/store/register', data);
+            let response;
+            try {
+                response = await serverConn('/api/store/register', data);
+            } catch(error) {
+                console.log('error has occurred when connecting to server', error);
+            }
             if(response.msg === 'duplicated') {
                 alert("此帳號已被註冊過");
             }
@@ -95,15 +100,19 @@ class Login extends Component {
         var mail = document.getElementById("username_store").value;
         var pwd = document.getElementById("password_store").value;
         let data = {mail: mail, pwd: pwd};
-
-        let response = await serverConn('api/store/login', data);
+        let response;
+        try {
+            response = await serverConn('api/store/login', data);
+        } catch(error) {
+            console.log('error has occurred when connecting to server', error);
+        }
         if(response.msg === 'success') {
-            console.log('success');
+            // console.log('success');
             this.props.setCookies(response);
             this.props.handleLogin("store");
         }
         else {
-            console.log('fail');
+            alert("登入失敗");
         }
     }
 
@@ -115,7 +124,12 @@ class Login extends Component {
         var mail = document.getElementById("email_user").value;
         if (pwd === conpwd && this.validateMail(mail) && this.validatePwd(pwd) && fullname && phone){
             let data = {mail: mail, pwd: pwd, phone: phone, name: fullname};
-            let response = await serverConn('/api/user/register', data);
+            let response;
+            try {
+                response = await serverConn('/api/user/register', data);
+            } catch(error) {
+                console.log('error has occurred when connecting to server', error);
+            }
             if(response.msg === 'duplicated') {
                 alert("此帳號已被註冊過");
             }
@@ -145,20 +159,23 @@ class Login extends Component {
         var mail = document.getElementById("username_user").value;
         var pwd = document.getElementById("password_user").value;
         let data = {mail: mail, pwd: pwd};
-
-        let response = await serverConn('api/user/login', data);
+        let response;
+        try {
+            response = await serverConn('api/user/login', data);
+        } catch(error) {
+            console.log('error has occurred when connecting to server', error);
+        }
         if(response.msg === 'success') {
-            console.log('success');
             this.props.setCookies(response);
             this.props.handleLogin("user");
         }
         else {
-            console.log('fail');
+            alert("登入失敗");
         }
     }
 
     show_hide_user() {
-        console.log("user");
+        // console.log("user");
         var login_user = document.getElementById("container1-user");
         var signup_user = document.getElementById("container2-user");
         var login_store = document.getElementById("container1-store");
@@ -190,7 +207,7 @@ class Login extends Component {
     }
 
     show_hide_store() {
-        console.log("store");
+        // console.log("store");
         var login_user = document.getElementById("container1-user");
         var signup_user = document.getElementById("container2-user");
         var login_store = document.getElementById("container1-store");
@@ -234,10 +251,10 @@ class Login extends Component {
     }
 
     onPlacesChanged = () => {
-        console.log(this.searchBox.getPlaces());
+        // console.log(this.searchBox.getPlaces());
         var place = this.searchBox.getPlaces()[0];
-        console.log(place.geometry.location.lng());
-        console.log(place.geometry.location.lat());
+        // console.log(place.geometry.location.lng());
+        // console.log(place.geometry.location.lat());
         this.setState({API_lng: place.geometry.location.lng(), API_lat: place.geometry.location.lat(), API_name: place.name, API_placeID: place.place_id, API_address: place.formatted_address});
     }
 
@@ -453,7 +470,7 @@ class Login extends Component {
                     <div style={{display: 'none'}}>
                         <input
                             id="pac-input"
-                            class="controls"
+                            className="controls"
                             type="text"
                             placeholder="Enter a location"
                         />

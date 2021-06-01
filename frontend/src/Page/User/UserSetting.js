@@ -38,7 +38,12 @@ class UserSetting extends Component {
 
     handleSubmit = async() => {
         let data = {mail: this.state.mail, phone: this.state.phone, name: this.state.name};
-        let response = await serverConn('api/user/settings', data);
+        let response;
+        try {
+            response = await serverConn('api/user/settings', data);
+        } catch(error) {
+            console.log('error has occurred when submitting form to server', error);
+        }
         if(response.msg === 'success') {
             alert('更改成功')
             this.props.setCookies({phone: this.state.phone});
@@ -55,7 +60,12 @@ class UserSetting extends Component {
             return;
         }
         let data = {mail: this.state.mail, old_pwd: this.state.old_pwd, new_pwd: this.state.new_pwd};
-        let response = await serverConn('/api/user/password', data);
+        let response;
+        try {
+            response = await serverConn('/api/user/password', data);
+        } catch(error) {
+            console.log('error has occurred when changing new passowrd', error);
+        }
         console.log(response.msg);
         if(response.msg === 'success') {
             alert('更改密碼成功')

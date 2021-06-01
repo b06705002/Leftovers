@@ -25,16 +25,19 @@ class StoreAddCase extends Component {
     load_pic = async() => {
         const reader = new FileReader();
         const file = document.getElementById('AC_pic').files[0];
-        return new Promise((resolve, reject) => {
-            reader.onload = () => {
-                resolve(reader.result);
-            }
-            reader.onerror = () => {
-                reader.abort();
-                reject(new Error('Error when loading file'));
-            }
-            reader.readAsDataURL(file);
-        })
+        if(file) {
+            return new Promise((resolve, reject) => {
+                reader.onload = () => {
+                    resolve(reader.result);
+                }
+                reader.onerror = () => {
+                    reader.abort();
+                    reject(new Error('Error when loading file'));
+                }
+                reader.readAsDataURL(file);
+            })
+        }
+        return;
     }
 
     // submit form data to server
@@ -57,7 +60,12 @@ class StoreAddCase extends Component {
                     phone: cookies.get('phone'),
                     address: cookies.get('address')};
         this.setState({loading: true});
-        let response = await serverConn('/api/store/addGoods', data);
+        let response;
+        try {
+            response = await serverConn('/api/store/addGoods', data);
+        } catch(error) {
+            console.log('error has occurred when submitting form to server', error);
+        }
         this.setState({loading: false});
         
         if(response.msg === "success") {

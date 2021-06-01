@@ -29,15 +29,20 @@ class StoreSetting extends Component {
     }
     handleSubmit = async() => {
         let data = {mail: this.state.mail, phone: this.state.phone};
-        let response = await serverConn('/api/store/settings', data);
+        let response;
+        try {
+            response = await serverConn('/api/store/settings', data);
+        } catch(error) {
+            console.log('error has occurred when submitting form to server', error);
+        }
         if(response.msg === 'success') {
-            console.log('success');
+            // console.log('success');
             alert("更改成功");
             this.props.setCookies({phone: this.state.phone});
             this.setState({redirect: true})
         }
         else {
-            console.log('fail');
+            // console.log('fail');
             alert("更改失敗");
             this.setState({redirect: true});
         }
@@ -47,7 +52,12 @@ class StoreSetting extends Component {
             return;
         }
         let data = {mail: this.state.mail, old_pwd: this.state.old_pwd, new_pwd: this.state.new_pwd};
-        let response = await serverConn('/api/store/password', data);
+        let response;
+        try {
+            response = await serverConn('/api/store/password', data);
+        } catch(error) {
+            console.log('error has occurred when changing password', error);
+        }
         if(response.msg === 'success') {
             alert("更改密碼成功");
         }

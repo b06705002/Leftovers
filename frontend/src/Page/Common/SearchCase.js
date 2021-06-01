@@ -80,7 +80,12 @@ class BrowseCase extends Component {
 
     // retrieve all current cases from server
     retrieveCases = async() => {
-        let response = await serverConn("/api/user/showGoods", {});
+        let response;
+        try {
+            response = await serverConn("/api/user/showGoods", {});
+        } catch(error) {
+            console.log('error has occurred when retrieveing case fron server', error);
+        }
         if(response.msg === 'success') {
             this.setState({caseList: response.data}, function() {
                 let list = this.state.caseList;
@@ -100,7 +105,12 @@ class BrowseCase extends Component {
     }
 
     retrieveStoreInfo = async() => {
-        let response = await serverConn("/api/user/checkStore", {apid: this.state.selectedCase.apid});
+        let response;
+        try {
+            response = await serverConn("/api/user/checkStore", {apid: this.state.selectedCase.apid});
+        } catch(error) {
+            console.log('error has occurred when retrieving store info', error);
+        }
         if(response.msg === 'success') {
             let store = this.state.selectedCase;
             store['comment'] = response.comment;

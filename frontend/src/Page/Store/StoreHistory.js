@@ -31,7 +31,7 @@ class StoryHistory extends Component {
         this.retrieveCases();
     }
     handleClick(index) {
-        console.log('trigger on click');
+        // console.log('trigger on click');
         var list = this.state.caseList;
         var selected;
         for(let i=0; i<list.length; i++) {
@@ -49,7 +49,12 @@ class StoryHistory extends Component {
     retrieveCases = async() => {
         let cookies = new Cookies();
         let apid = cookies.get('apid');
-        let response = await serverConn('/api/store/showHistoryCase', {apid: apid});
+        let response;
+        try {
+            response = await serverConn('/api/store/showHistoryCase', {apid: apid});
+        } catch(error) {
+            console.log('error has occurred when retrieving case from server', error);
+        }
         if(response.msg === 'success') {
             this.setState({caseList: response.data}, function() {
                 let list = this.state.caseList;

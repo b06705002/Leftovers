@@ -37,7 +37,7 @@ class App extends Component {
         this.handleLogout = this.handleLogout.bind(this);
         this.handleLanguages = this.handleLanguages.bind(this);
         this.cookies = new Cookies();
-        console.log('inside APP', this.cookies.get('mail'));
+        // console.log('inside APP', this.cookies.get('mail'));
         if(this.cookies.get('mail') !== undefined) {
             if(this.cookies.get('type') === 'store') {
                 this.authenticated = 1
@@ -57,13 +57,13 @@ class App extends Component {
         if(type === 'store') {
             cookies.set('type', 'store');
             this.setState({authenticated: 1}, function() {
-                console.log('authenticated now is ', this.state.authenticated);
+                // console.log('authenticated now is ', this.state.authenticated);
             });
         }
         else {
             cookies.set('type', 'user');
             this.setState({authenticated: 2}, function() {
-                console.log('authenticated now is ', this.state.authenticated);
+                // console.log('authenticated now is ', this.state.authenticated);
             });
         }
     }
@@ -101,7 +101,7 @@ class App extends Component {
 
 
     render() {
-        console.log(this.state.locale);
+        // console.log(this.state.locale);
         let messages;
         if (this.state.locale.includes('zh')) {
             messages = zh_tw;
