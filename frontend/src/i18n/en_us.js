@@ -1,4 +1,4 @@
-const zh_tw ={
+const en_us ={
     //navbar
     "nav.t1" : "Login",
     "nav.t2" : "Logout",
@@ -149,4 +149,4 @@ const zh_tw ={
     "sSet.pwd-not-same" : "Passwords do not match.",
     "sSet.submit-pwd" : "Submit",
 }
-export default zh_tw;
+export default en_us;
