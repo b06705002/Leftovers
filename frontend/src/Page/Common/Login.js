@@ -42,28 +42,51 @@ class Login extends Component {
         this.show_hide_store = this.show_hide_store.bind(this);
         // this.show_hide_user = this.show_hide_user.bind(this);
     }
+    validatePwd = (pwd) => {
+        var valid =  /^(?=.*\d)(?=.*[a-z]).{8,20}$/;;
+        if(pwd.match(valid)) {
+            return true;
+        }
+        return false;
+    }
+    validateMail = (mail) => {
+        if(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail)) {
+            return true;
+        }
+        return false;
+    }
     storeRegister = async() => {
-        console.log('press!!!');
-        // var store = document.getElementById("fullname_store").value;
         var pwd = document.getElementById("password2_store").value;
         var conpwd = document.getElementById("comfirm_password_store").value;
-        // var address = document.getElementById("address_store").value;
         var phone = document.getElementById("phoneNo_store").value;
         var mail = document.getElementById("email_store").value;
-        if (pwd === conpwd){
+        if (pwd === conpwd && this.validatePwd(pwd) && this.validateMail(mail) && this.state.address && this.state.store && phone){
             let data = {store: this.state.store, mail: mail, pwd: pwd, address: this.state.address, phone: phone, apid: this.state.placeID, LaL: this.state.LaL};
             let response = await serverConn('/api/store/register', data);
-            console.log('response', response);
             if(response.msg === 'duplicated') {
-                console.log('duplicated');
+                alert("此帳號已被註冊過");
             }
             else if(response.msg === 'fail') {
-                console.log('fail');
+                alert("註冊失敗");
             }
             else {
-                console.log('success');
+                alert("註冊成功");
                 this.props.setCookies(response);
                 this.props.handleLogin('store');
+            }
+        }
+        else {
+            if(!this.validateMail(mail)) {
+                alert("請確認您的電子郵件格式");
+            }
+            else if(!this.validatePwd(pwd)) {
+                alert("密碼長度須為8到20個字元並至少包含一英文字母或數字");
+            }
+            if(!this.state.address || !this.state.store) {
+                alert("請從地圖中搜尋並選擇您的店家");
+            }
+            else {
+                alert("請確認你的輸入正確無誤");
             }
         }
     }
@@ -90,19 +113,30 @@ class Login extends Component {
         var conpwd = document.getElementById("comfirm_password_user").value;
         var phone = document.getElementById("phoneNo_user").value;
         var mail = document.getElementById("email_user").value;
-        if (pwd === conpwd){
+        if (pwd === conpwd && this.validateMail(mail) && this.validatePwd(pwd) && fullname && phone){
             let data = {mail: mail, pwd: pwd, phone: phone, name: fullname};
             let response = await serverConn('/api/user/register', data);
             if(response.msg === 'duplicated') {
-                console.log('duplicated');
+                alert("此帳號已被註冊過");
             }
             else if(response.msg === 'fail') {
-                console.log('fail');
+                alert("註冊失敗");
             }
             else {
-                console.log('success');
+                alert("註冊成功");
                 this.props.setCookies(response);
                 this.props.handleLogin('user');
+            }
+        }
+        else {
+            if(!this.validateMail(mail)) {
+                alert("請確認您的電子郵件格式");
+            }
+            else if(!this.validatePwd(pwd)) {
+                alert("密碼長度須為8到20個字元並至少包含一英文字母或數字");
+            }
+            else {
+                alert("請確認你的輸入正確無誤");
             }
         }
     }
