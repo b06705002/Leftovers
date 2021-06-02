@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import LZString from 'lz-string';
 
 class CaseItem extends Component {
     constructor(props) {

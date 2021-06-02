@@ -7,7 +7,9 @@ from bson import ObjectId
 app = Flask(__name__)
 
 # DB config
-client = MongoClient('mongodb+srv://SDMproject:SDMGROUP2@cluster0.w0fzh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+# client = MongoClient('mongodb+srv://dbUser:Arkreact3@cluster0.cgrca.mongodb.net/SDM_project?retryWrites=true&w=majority')
+# client = MongoClient('mongodb+srv://SDMproject:SDMGROUP2@cluster0.w0fzh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://SDMproject:SDMGROUP2@cluster0.cgrca.mongodb.net/SDM_project?retryWrites=true&w=majority')
 db_name = 'SDM_project'
 
 # store

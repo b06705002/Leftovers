@@ -6,6 +6,7 @@ import { serverConn } from '../../utils';
 import Cookies from 'universal-cookie';
 import {Redirect} from 'react-router-dom';
 import { FormattedMessage } from "react-intl";
+import LZString from "lz-string";
 
 class StoreAddCase extends Component {
     /*
@@ -40,20 +41,38 @@ class StoreAddCase extends Component {
         return;
     }
 
+    downScale = async(url, new_width, type, args) => {
+        let image = new Image();
+        image.src = url;
+        let old_width = image.width;
+        let old_height = image.height;
+        let new_height = Math.floor(old_height / old_width * new_width);
+        let canvas = document.createElement("canvas");
+        canvas.height = new_height;
+        canvas.width = new_width;
+        let ctx = canvas.getContext("2d");
+        ctx.drawImage(image, 0, 0, new_width, new_height);
+        let new_url = canvas.toDataURL(type, args);
+        return new_url;
+    }
+
     // submit form data to server
     handleSubmit = async() => {
         let item = document.getElementById('AC_item').value;
         let amout = document.getElementById('AC_amount').value;
         let price = document.getElementById('AC_price').value;
         let due = document.getElementById('AC_due').value;
-        // let pic = document.getElementById('AC_pic').files[0];
+        let url = document.getElementById('AC_pic').files[0];
         let pic = await this.load_pic();
+        let compressed = await this.downScale(pic, 200, url.type, 0.5);
+        // console.log(pic.length)
+        // console.log(compressed.length);
         let cookies = new Cookies();
         let data = {item: item, 
                     amount: parseInt(amout), 
                     price: parseInt(price),
                     due: due,
-                    pic: pic,
+                    pic: compressed,
                     store: cookies.get('store'),
                     apid: cookies.get('apid'),
                     LaL: cookies.get('LaL'), 
