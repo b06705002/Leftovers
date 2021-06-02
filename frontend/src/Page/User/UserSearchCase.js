@@ -224,18 +224,10 @@ class UserBrowseCase extends Component {
                         </GoogleMap>
                     </LoadScript>
                 </div>
+                
                 <div className="store-title">
                     <p className="title-name"><FormattedMessage id="uSearch.title" defaultMessage="剩食一覽表"/></p>
-                    {/* <button onclick={this.showMap} class= "map-button" >
-                        地圖呈現店家位置
-                    </button>
-                    <button class= "leftover-button" >
-                        有即期品的店家
-                    </button>
-                    <button class= "allStore-button" >
-                        全部店家
-                    </button> */}
-                </div>    
+                </div>
                 <div className="View cases-View-search">
                     <ul>
                         {this.state.caseList.map((item, index) => {

@@ -141,12 +141,12 @@ class BrowseCase extends Component {
                                 ariaHideApp={false}
                                 onRequestClose={() => this.setState({modalOpen: false})}
                                 style={{content: {height: '80%', width: '80%', margin: 'auto'}}}>
-                                <h2><FormattedMessage id="cSearch.name" defaultMessage="店家 ： "/>{this.state.selectedCase.store}</h2>
-                                <h2><FormattedMessage id="cSearch.addr" defaultMessage="地址 ： "/>{this.state.selectedCase.address}</h2>
-                                <h2><FormattedMessage id="cSearch.food" defaultMessage="食品 ： "/>{this.state.selectedCase.item}</h2>
-                                <h2><FormattedMessage id="cSearch.qty" defaultMessage="數量 ： "/>{this.state.selectedCase.amount}</h2>
-                                <h2><FormattedMessage id="cSearch.price" defaultMessage="單位價格 ： "/>{this.state.selectedCase.price}</h2>
-                                <h2><FormattedMessage id="cSearch.deadline" defaultMessage="截止時間 ： "/>{this.state.selectedCase.due}</h2>
+                                <p><FormattedMessage id="cSearch.name" defaultMessage="店家 ： "/>{this.state.selectedCase.store}</p>
+                                <p><FormattedMessage id="cSearch.addr" defaultMessage="地址 ： "/>{this.state.selectedCase.address}</p>
+                                <p><FormattedMessage id="cSearch.food" defaultMessage="食品 ： "/>{this.state.selectedCase.item}</p>
+                                <p><FormattedMessage id="cSearch.qty" defaultMessage="數量 ： "/>{this.state.selectedCase.amount}</p>
+                                <p><FormattedMessage id="cSearch.price" defaultMessage="單位價格 ： "/>{this.state.selectedCase.price}</p>
+                                <p><FormattedMessage id="cSearch.deadline" defaultMessage="截止時間 ： "/>{this.state.selectedCase.due}</p>
                                 {/* <div>店家評價 ： {(this.state.selectedCase.comment && this.state.selectedCase.comment.length) ? this.state.selectedCase.comment.map((item, index) => {
                                     return <p key={index}>{item.stars}{item.text}</p>
                                 }) : <p>no comment</p>}</div> */}
@@ -186,9 +186,9 @@ class BrowseCase extends Component {
                     </LoadScript>
                 </div>
                 <div className="store-title">
-                    <p className="title-name"><FormattedMessage id="uSearch.title" defaultMessage="剩食一覽表"/></p>                   
+                    <p className="title-name"><FormattedMessage id="cSearch.title" defaultMessage="剩食一覽表"/></p>                   
                 </div>     
-                <div className="View cases-View-MainSearch">
+                <div className="View cases-View-search">
                     <ul>
                         {this.state.caseList.map((item, index) => {
                             return <CaseItem caseInfo={item} onClick={item.onClick} class={item.class} key={index} index={index}/>;

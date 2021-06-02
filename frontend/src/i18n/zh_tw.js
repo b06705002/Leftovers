@@ -49,6 +49,7 @@ const zh_tw ={
 
 
     //SearchCase.js
+    "cSearch.title" : "剩食一覽表",
     "cSearch.name" : "店家 ： ",
     "cSearch.addr" : "地址 ： ",
     "cSearch.food" : "食品 ： ",

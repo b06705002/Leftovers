@@ -45,6 +45,7 @@ const en_us ={
 
 
     //SearchCase.js
+    "cSearch.title" : "Leftovers",
     "cSearch.name" : "Store: ",
     "cSearch.addr" : "Address: ",
     "cSearch.food" : "Leftovers: ",
