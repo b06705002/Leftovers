@@ -1,6 +1,6 @@
 import React, { Component, useRef } from 'react';
 import { GoogleMap, LoadScript, StandaloneSearchBox, Marker, InfoWindow } from '@react-google-maps/api';
-import "../../Styles/UserSearchCase.css";
+import "../../Styles/MainSearchCase.css";
 import CaseItem from "../../Component/CaseItem";
 import { serverConn } from '../../utils';
 import GPS from "../../assets/icon/gps.png";
@@ -224,19 +224,8 @@ class UserBrowseCase extends Component {
                         </GoogleMap>
                     </LoadScript>
                 </div>
-                <div className="store-title">
-                    <p className="title-name"><FormattedMessage id="uSearch.title" defaultMessage="剩食一覽表"/></p>
-                    {/* <button onclick={this.showMap} class= "map-button" >
-                        地圖呈現店家位置
-                    </button>
-                    <button class= "leftover-button" >
-                        有即期品的店家
-                    </button>
-                    <button class= "allStore-button" >
-                        全部店家
-                    </button> */}
-                </div>    
-                <div className="View cases-View-search">
+                   
+                <div className="View cases-View-MainSearch">
                     <ul>
                         {this.state.caseList.map((item, index) => {
                             return <CaseItem caseInfo={item} onClick={item.onClick} class={item.class} key={index} index={index}/>;
