@@ -185,9 +185,6 @@ class BrowseCase extends Component {
                         </GoogleMap>
                     </LoadScript>
                 </div>
-                <div className="store-title">
-                    <p className="title-name"><FormattedMessage id="uSearch.title" defaultMessage="剩食一覽表"/></p>                   
-                </div>     
                 <div className="View cases-View-MainSearch">
                     <ul>
                         {this.state.caseList.map((item, index) => {
