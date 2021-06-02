@@ -64,7 +64,7 @@ class UserHistory extends Component {
             <div className="Container browseCase">
                 <div className="View cases-View-browse">
                     <div>
-                        <p><FormattedMessage id="uHist.history" default_message="歷史訂單記錄"/></p> 
+                        <h2><FormattedMessage id="uHist.history" default_message="歷史訂單記錄"/></h2> 
                     </div>
                     <ul>
                         {this.state.caseList.map((item, index) => {
