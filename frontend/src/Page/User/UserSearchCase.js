@@ -40,7 +40,7 @@ class UserBrowseCase extends Component {
         this.retrieveCases = this.retrieveCases.bind(this);
     }
     componentDidMount() {
-        console.log('try to get location');
+        // console.log('try to get location');
         this.retrieveCases();
         navigator.geolocation.getCurrentPosition(this.setPosition, this.positionError, {enableHighAccuracy: true, maximumAge: 0});
     }

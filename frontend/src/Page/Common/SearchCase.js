@@ -37,14 +37,14 @@ class BrowseCase extends Component {
         this.retrieveCases = this.retrieveCases.bind(this);
     }
     componentDidMount() {
-        console.log('try to get location');
+        // console.log('try to get location');
         this.retrieveCases();
         navigator.geolocation.getCurrentPosition(this.setPosition, this.positionError, {enableHighAccuracy: true, maximumAge: 0});
     }
 
     // if user's position is successfully retrieved
     setPosition(pos) {
-        console.log('position', parseFloat(pos.coords.latitude), parseFloat(pos.coords.longitude));
+        // console.log('position', parseFloat(pos.coords.latitude), parseFloat(pos.coords.longitude));
         this.user_lat = parseFloat(pos.coords.latitude);
         this.user_lng = parseFloat(pos.coords.longitude);
         this.setState({center_lat: parseFloat(pos.coords.latitude), center_lng: parseFloat(pos.coords.longitude)});

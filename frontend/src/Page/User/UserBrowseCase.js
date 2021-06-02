@@ -59,9 +59,9 @@ class UserBrowseCase extends Component {
         } catch(error) {
             console.log('error has occurred when retrieving case from server', error);
         }
-        console.log(response);
+        // console.log(response);
         if(response.msg === 'success') {
-            console.log(response.data);
+            // console.log(response.data);
             this.setState({caseList: response.data}, function() {
                 let list = this.state.caseList;
                 for(let i=0; i<list.length; i++) {
