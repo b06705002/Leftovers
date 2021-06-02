@@ -170,12 +170,12 @@ class UserBrowseCase extends Component {
                                 onRequestClose={() => this.setState({modalOpen: false})}
                                 style={{content: {height: '80%', width: '80%', margin: 'auto'}}}
                             >
-                                <h2><FormattedMessage id="uSearch.name" defaultMessage="店家 ： "/>{this.state.selectedCase.store}</h2>
-                                <h2><FormattedMessage id="uSearch.addr" defaultMessage="地址 ： "/>{this.state.selectedCase.address}</h2>
-                                <h2><FormattedMessage id="uSearch.food" defaultMessage="食品 ： "/>{this.state.selectedCase.item}</h2>
-                                <h2><FormattedMessage id="uSearch.qty" defaultMessage="數量 ： "/>{this.state.selectedCase.amount}</h2>
-                                <h2><FormattedMessage id="uSearch.price" defaultMessage="單位價格 ： "/>{this.state.selectedCase.price}</h2>
-                                <h2><FormattedMessage id="uSearch.deadline" defaultMessage="截止時間 ： "/>{this.state.selectedCase.due}</h2>
+                                <p><FormattedMessage id="uSearch.name" defaultMessage="店家 ： "/>{this.state.selectedCase.store}</p>
+                                <p><FormattedMessage id="uSearch.addr" defaultMessage="地址 ： "/>{this.state.selectedCase.address}</p>
+                                <p><FormattedMessage id="uSearch.food" defaultMessage="食品 ： "/>{this.state.selectedCase.item}</p>
+                                <p><FormattedMessage id="uSearch.qty" defaultMessage="數量 ： "/>{this.state.selectedCase.amount}</p>
+                                <p><FormattedMessage id="uSearch.price" defaultMessage="單位價格 ： "/>{this.state.selectedCase.price}</p>
+                                <p><FormattedMessage id="uSearch.deadline" defaultMessage="截止時間 ： "/>{this.state.selectedCase.due}</p>
                                 {/* <div>店家評價 ： {(this.state.selectedCase.comment && this.state.selectedCase.comment.length) ? this.state.selectedCase.comment.map((item, index) => {
                                     return <p key={index}>{item.stars}{item.text}</p>
                                 }) : <p>no comment</p>}</div> */}
